@@ -78,7 +78,7 @@ License: GPL2++
                                         <p class="status tw_status">'.parseTweets($tweet->text).'</p>
                                     </div>
                                     <div class="bloc_caption">
-                                        <a href="http://twitter.com/'.$tweet->user->screen_name.'">
+                                        <a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
                                             <img src="'.$tweet->user->profile_image_url.'" alt="@'.$tweet->user->name.'" class="userimg tw_userimg"/>
                                             <span class="username tw_username">@'.$tweet->user->screen_name.'</span>
                                         </a>
