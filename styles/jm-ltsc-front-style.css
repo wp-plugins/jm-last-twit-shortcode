@@ -1,0 +1,26 @@
+/*
+ Styles for JM Last Twit Shortcode(front end)
+*/
+
+.twitter_status{
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 5px;
+	float:left;
+	width:auto;
+	max-width:100%;
+}
+.userimg{
+	float:left;
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+}
+.userimg img{
+    width: 100%;
+    height: auto;
+}
+.tw_timestamp{
+    float:right;
+}
