@@ -60,6 +60,16 @@ msgstr ""
 
 #. Text in echo
 #: jm-ltsc.php
+msgid "Set expired time for transient (min:1800s)"
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "*This is the time in the course of which your tweet will be stored. This allows us to limit server requests."
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
 msgid "Really easy, just put <strong>[jmlt]</strong> in your posts"
 msgstr ""
 

@@ -64,6 +64,10 @@ none.
 
 == Changelog ==
 
+= 1.1.4 =
+* 25 jan 2013
+* Adds transient (thanks for the comment Juliobox)
+
 = 1.1.3 =
 * 22 jan 2013
 * Initial release

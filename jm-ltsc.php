@@ -65,9 +65,14 @@ License: GPL2++
                     $connection = new TwitterOAuth($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
 
                 
-                    $query = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.$opts['twitAccount'].'&count=1'; //Our query                   
-                    $tweets = $connection->get($query);
+                    $query = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.$opts['twitAccount'].'&count=1'; //Our query     
                     
+                    // Get any existing copy of our transient data
+                    if ( false === ( $tweets = get_transient( 'last_twit' ) ) ) {
+                    // It wasn't there, so regenerate the data and save the transient              
+                    $tweets = $connection->get($query);
+                    set_transient( 'last_twit', $tweets, $opts['time'] );
+                    }
                     
                  //output
                 if(!empty($consumer_key) && !empty($consumer_secret) && !empty($oauth_token) && !empty($oauth_token_secret)) {
@@ -200,6 +205,12 @@ License: GPL2++
 				               <label for="tokenSecret"><?php _e('Provide your oAuth Token Secret', 'jm-ltsc'); ?> :</label>
 				               <input id="tokenSecret" type="text" name="jm_ltsc[tokenSecret]" class="regular-text" value="<?php echo $opts['tokenSecret']; ?>" />
 			               </p>
+			                <p>
+				               <label for="time"><?php _e('Set expired time for transient (min:1800s)', 'jm-ltsc'); ?> :</label>
+				               <input id="time" type="number" min="1800" name="jm_ltsc[time]" class="regular-text" value="<?php echo $opts['time']; ?>" />
+				              </p> 
+				              <p><em><?php _e('*This is the time in the course of which your tweet will be stored. This allows us to limit server requests.', 'jm-ltsc'); ?></em>
+			               </p>
 
 			                      <?php submit_button(null, 'primary', 'JM_submit'); ?>
 			          
@@ -247,6 +258,8 @@ License: GPL2++
 			$new['oauthToken']		         = esc_attr(strip_tags( $options['oauthToken'] ));
 						if ( isset($options['tokenSecret']) )
 			$new['tokenSecret']		         = esc_attr(strip_tags( $options['tokenSecret'] ));
+						if ( isset($options['time']) )
+			$new['time']		         = esc_attr(strip_tags( $options['time'] ));
 			return $new;
 			}
 
@@ -257,7 +270,8 @@ License: GPL2++
  		'consumerKey'              => __('replace with your keys - required', 'jm-ltsc'),
 			'consumerSecret'		         => __('replace with your keys - required', 'jm-ltsc'),
 			'oauthToken'               => __('replace with your keys - required', 'jm-ltsc'),
-			'tokenSecret'              => __('replace with your keys - required', 'jm-ltsc')
+			'tokenSecret'              => __('replace with your keys - required', 'jm-ltsc'),
+			'time'                     => 1800
 			);
 			}
 
