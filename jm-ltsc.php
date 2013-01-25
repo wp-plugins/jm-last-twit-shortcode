@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 1.1.3
+Version: 1.1.4
 License: GPL2++
 */
 
