@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 1.1.4
+Version: 1.1.5
 License: GPL2++
 */
 
@@ -63,7 +63,7 @@ License: GPL2++
                     
                     //query
                     $connection = new TwitterOAuth($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
-
+                    $connection->host = "https://api.twitter.com/1.1/";
                 
                     $query = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.$opts['twitAccount'].'&count=1'; //Our query     
                     
