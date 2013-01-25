@@ -64,6 +64,10 @@ none.
 
 == Changelog ==
 
+= 1.1.5 =
+* 25 jan 2013
+* Updates public host URL  (really important!)
+
 = 1.1.4 =
 * 25 jan 2013
 * Adds transient (thanks for the comment Juliobox)
