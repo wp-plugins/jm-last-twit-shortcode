@@ -70,7 +70,17 @@ msgstr ""
 
 #. Text in echo
 #: jm-ltsc.php
-msgid "Really easy, just put <strong>[jmlt]</strong> in your posts"
+msgid "Really easy, just put <strong>[jmlt]</strong> in your posts."
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "You can even change timeline, e.g <strong>[jmlt timeline=\"mentions_timeline\"]</strong> will display last mention of your Twitter account. Default is user_timeline. Other options are retweets_of_me and home_timeline."
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "To use the shortcode in templates, just use echo <em>apply_filters(\"the_content\",\"[jmlt]\")</em>"
 msgstr ""
 
 #. Text in echo

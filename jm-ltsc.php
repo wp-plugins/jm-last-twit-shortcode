@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 1.1.5
+Version: 1.1.6
 License: GPL2++
 */
 
@@ -50,7 +50,11 @@ License: GPL2++
 
 		 		 if(!function_exists('jm_ltsc_output')) {
 		     function jm_ltsc_output( $atts ) {
-            $opts = jm_ltsc_get_options(); 
+					extract(shortcode_atts(array(
+						'timeline' => 'user_timeline'				
+					), $atts));
+					 
+					$opts = jm_ltsc_get_options(); 
                 
                     /* required parameters for our query */
                     $consumer_key = $opts['consumerKey']; // application consumer key
@@ -65,14 +69,14 @@ License: GPL2++
                     $connection = new TwitterOAuth($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
                     $connection->host = "https://api.twitter.com/1.1/";
                 
-                    $query = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.$opts['twitAccount'].'&count=1'; //Our query     
+                    $query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query     
                     
                     // Get any existing copy of our transient data
                     if ( false === ( $tweets = get_transient( 'last_twit' ) ) ) {
-                    // It wasn't there, so regenerate the data and save the transient              
+                    //It wasn't there, so regenerate the data and save the transient              
                     $tweets = $connection->get($query);
                     set_transient( 'last_twit', $tweets, $opts['time'] );
-                    }
+                   }
                     
                  //output
                 if(!empty($consumer_key) && !empty($consumer_secret) && !empty($oauth_token) && !empty($oauth_token_secret)) {
@@ -80,7 +84,7 @@ License: GPL2++
                                 $output ='
                                 <div class="twitter_status" id="'.$tweet->id_str.'">
                                     <div class="bloc_content">
-                                        <p class="status tw_status">'.parseTweets($tweet->text).'</p>
+                                        <p class="status tw_status">'.parseTweets($tweet->text).'
                                     </div>
                                     <div class="bloc_caption">
                                         <a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
@@ -93,17 +97,16 @@ License: GPL2++
                               }
                             }
                                 $output .='
-                            </p>
-                            <div style="clear:both;"></div>
-                        </div>';
+							<div style="clear:both;"></div>
+						</div>';
                     } else { ?>
                         <p> <?php _e('Please update your settings to provide valid credentials','jm-ltsc'); ?></p> <?php
                     }
                     return $output;
-   } 
-  add_shortcode( 'jmlt', 'jm_ltsc_output' );
-}//end of output
-
+			   } 
+			  add_shortcode( 'jmlt', 'jm_ltsc_output' );
+			}//end of output
+			
 
          //styles 
          
@@ -175,9 +178,9 @@ License: GPL2++
 		          <h2><?php _e('JM Last Twit Shortcode Options', 'jm-ltsc'); ?></h2>
 		          
 		          <p><?php _e('This plugin allows you to get your last Tweet with the last Twitter API (1.1). Pretty useful because <strong>Twitter API 1.0 is to cease functioning in march 2013</strong>.', 'jm-ltsc'); ?></p>
-		<h3><?php _e('Before', 'jm-ltsc'); ?></h3>
-       <p><?php _e('Do not forget to go to', 'jm-ltsc'); ?> <a href="https://dev.twitter.com/apps/" target="_blank">dev.twitter.com</a> <?php _e('to create your application <strong>before anything</strong> cause you might forget get it after. In any case you will need token to proceed.','jm-ltsc'); ?></p>
- 
+				  <h3><?php _e('Before', 'jm-ltsc'); ?></h3>
+				  <p><?php _e('Do not forget to go to', 'jm-ltsc'); ?> <a href="https://dev.twitter.com/apps/" target="_blank">dev.twitter.com</a> <?php _e('to create your application <strong>before anything</strong> cause you might forget get it after. In any case you will need token to proceed.','jm-ltsc'); ?></p>
+			 
 		          
 		          <form id="jm-ltsc-form" method="post" action="options.php">
 			          <?php settings_fields('jm-ltsc'); ?>
@@ -215,12 +218,16 @@ License: GPL2++
 			                      <?php submit_button(null, 'primary', 'JM_submit'); ?>
 			          
 			      
-      </form>
+				  </form>
 
 		        
 		             <h3><?php _e('How to', 'jm-ltsc') ?></h3>
-		          <p><?php _e('Really easy, just put <strong>[jmlt]</strong> in your posts','jm-ltsc');?></p>
-		          
+					 <ol>
+		          <li><?php _e('Really easy, just put <strong>[jmlt]</strong> in your posts.','jm-ltsc');?></li>
+		          <li><?php _e('You can even change timeline, e.g <strong>[jmlt timeline="mentions_timeline"]</strong> will display last mention of your Twitter account. Default is user_timeline. Other options are retweets_of_me and home_timeline.','jm-ltsc');?></li>
+				 <li> <?php _e('To use the shortcode in templates, just use <em>echo apply_filters("the_content","[jmlt]")</em>','jm-ltsc'); ?></li>	
+					</ol>
+					
 		          <h3><?php _e('Useful links', 'jm-ltsc') ?></h3>
 		          			  <ul class="jm-other-links">
 					<li><a class="jm-rating" target="_blank" href="http://wordpress.org/support/view/plugin-reviews/jm-last-twit-shortcode"><?php _e('Rate the plugin on WordPress.org', 'jm-tc') ?></a></li>
@@ -248,18 +255,18 @@ License: GPL2++
 			if ( !is_array($options) )
 			return $new;
 			
-					if ( isset($options['twitAccount']) )
+						if ( isset($options['twitAccount']) )
 			$new['twitAccount']		         = esc_attr(strip_tags( $options['twitAccount'] ));
-		   if ( isset($options['consumerKey']) )
+						if ( isset($options['consumerKey']) )
 			$new['consumerKey']		         = esc_attr(strip_tags( $options['consumerKey'] ));
-   			if ( isset($options['consumerSecret']) )
-			$new['consumerSecret']		         = esc_attr(strip_tags( $options['consumerSecret'] ));
+						if ( isset($options['consumerSecret']) )
+			$new['consumerSecret']		      = esc_attr(strip_tags( $options['consumerSecret'] ));
 						if ( isset($options['oauthToken']) )
-			$new['oauthToken']		         = esc_attr(strip_tags( $options['oauthToken'] ));
+			$new['oauthToken']		          = esc_attr(strip_tags( $options['oauthToken'] ));
 						if ( isset($options['tokenSecret']) )
 			$new['tokenSecret']		         = esc_attr(strip_tags( $options['tokenSecret'] ));
 						if ( isset($options['time']) )
-			$new['time']		         = esc_attr(strip_tags( $options['time'] ));
+			$new['time']		                =  $options['time'];
 			return $new;
 			}
 
@@ -267,8 +274,8 @@ License: GPL2++
 			function jm_ltsc_get_default_options() {
 			return array(
 			'twitAccount'              => 'TweetPressFr',
- 		'consumerKey'              => __('replace with your keys - required', 'jm-ltsc'),
-			'consumerSecret'		         => __('replace with your keys - required', 'jm-ltsc'),
+			'consumerKey'              => __('replace with your keys - required', 'jm-ltsc'),
+			'consumerSecret'		   => __('replace with your keys - required', 'jm-ltsc'),
 			'oauthToken'               => __('replace with your keys - required', 'jm-ltsc'),
 			'tokenSecret'              => __('replace with your keys - required', 'jm-ltsc'),
 			'time'                     => 1800

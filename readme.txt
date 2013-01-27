@@ -12,6 +12,7 @@ A plugin meant to add your last tweet with the lattest API way :
 == Description ==
 
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
+1.1.6 allows you to change user_timeline for mentions_timeline, home_timeline or retweets_of_me.
 
 
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
@@ -21,6 +22,7 @@ En Français
 –––––––––––––––––––––––––––––––––––
 
 Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une connexion authentifiée et grâce à un shortcode. 
+1.1.6 vous permet de changer user_timeline pour mentions_timeline, home_timeline ou retweets_of_me.
 
 <a href="http://twitter.com/tweetpressfr">Me suivre sur Twitter</a>
 
@@ -45,8 +47,7 @@ En Français
 
 = I get an error message = 
 1. If it's `Please update your settings to provide valid credentials` then your credentials (token, keys) are missing or not valid so please check it again.
-2. If it's ` Call to undefined function curl_init()` then the curl extension is not active on your server. 
-3. Developers who use WampServer might activate curl extension in PHP > PHP Extension > curl
+2. If it's `Call to undefined function curl_init()` then the curl extension is not active on your server. Developers who use WampServer might activate curl extension in PHP > PHP Extension > curl
 
 ----
 En Français
@@ -54,8 +55,7 @@ En Français
 
 = J'ai un message d'erreur = 
 1. S'il s'agit de `Please update your settings to provide valid credentials` vos identifiants (token, clés) sont manquants ou ne sont pas valides vérifiez-les à nouveau SVP.
-2. S'il s'agit de ` Call to undefined function curl_init()` alors l'extension curl est désactivée sur votre serveur. 
-3. Les développeurs sous WampServer peuvent activer cette extension dans PHP > PHP Extension > curl
+2. S'il s'agit de `Call to undefined function curl_init()` alors l'extension curl est désactivée sur votre serveur. Les développeurs sous WampServer peuvent activer cette extension dans PHP > PHP Extension > curl
 
 
 
@@ -63,6 +63,10 @@ En Français
 none.
 
 == Changelog ==
+
+= 1.1.6 =
+* 27 jan 2013
+* Includes timeline parameter for shortcode, enjoy...
 
 = 1.1.5 =
 * 25 jan 2013
