@@ -48,6 +48,7 @@ En Français
 = I get an error message = 
 1. If it's `Please update your settings to provide valid credentials` then your credentials (token, keys) are missing or not valid so please check it again.
 2. If it's `Call to undefined function curl_init()` then the curl extension is not active on your server. Developers who use WampServer might activate curl extension in PHP > PHP Extension > curl
+3. If there are no message but you do not get your Tweet it's probably to Twitter itself so please <a href="http://dev.twitter.com/status/" title="Twitter API Status health">check this link </a>
 
 ----
 En Français
@@ -56,13 +57,18 @@ En Français
 = J'ai un message d'erreur = 
 1. S'il s'agit de `Please update your settings to provide valid credentials` vos identifiants (token, clés) sont manquants ou ne sont pas valides vérifiez-les à nouveau SVP.
 2. S'il s'agit de `Call to undefined function curl_init()` alors l'extension curl est désactivée sur votre serveur. Les développeurs sous WampServer peuvent activer cette extension dans PHP > PHP Extension > curl
-
+3. Si vous n'avez pas de message d'erreur mais n'obtenez toujours pas vos Tweet c'est probablement du à Twitter lui-même donc SVP <a href="http://dev.twitter.com/status/" title="Twitter API Status health">utilisez ce lien </a>
 
 
 == Screenshots ==
 none.
 
 == Changelog ==
+
+= 1.1.7 =
+* 31 jan 2013
+* Adds some warning in case Twitter Api Status is down
+
 
 = 1.1.6 =
 * 27 jan 2013

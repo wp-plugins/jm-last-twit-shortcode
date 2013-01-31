@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 1.1.6
+Version: 1.1.7
 License: GPL2++
 */
 
@@ -94,8 +94,16 @@ License: GPL2++
                                         <span class="timestamp tw_timestamp">'.date('d M / H:i',strtotime($tweet->created_at)).'</span>
                                     </div>
                                 </div>';
-                              }
-                            }
+								}
+							  }
+							  else {
+							 delete_transient( 'last_twit' );//to avoid waiting for 30'
+								$output ='
+								<div class="twitter_status">
+									<p><a href="http://dev.twitter.com/status/" title="Twitter API Status health">'.__('API Twitter is down... sorry, this should be fixed!','jm-ltsc').'</a>'.__('Please wait or try to reload page.','jm-ltsc').'
+								<p></div>';
+							  }
+                            
                                 $output .='
 							<div style="clear:both;"></div>
 						</div>';

@@ -97,3 +97,13 @@ msgstr ""
 #: jm-ltsc.php
 msgid "to create your application <strong>before anything</strong> cause you might forget get it after. In any case you will need token to proceed."
 msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "API Twitter is down... sorry, this should be fixed!"
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Please wait or try to reload page."
+msgstr ""
