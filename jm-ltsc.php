@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 1.1.8
+Version: 1.1.9
 License: GPL2++
 */
 
@@ -85,7 +85,7 @@ License: GPL2++
                                 <div class="twitter_status" id="'.$tweet->id_str.'">
                                     <div class="bloc_content">
                                         <p class="status tw_status">'.parseTweets($tweet->text).'
-                                    </div>
+                                    </p></div>
                                     <div class="bloc_caption">
                                         <a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
                                             <img src="'.$tweet->user->profile_image_url.'" alt="@'.$tweet->user->name.'" class="userimg tw_userimg"/>

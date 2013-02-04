@@ -65,11 +65,13 @@ none.
 
 == Changelog ==
 
+= 1.1.9 =
+* 04 fev 2013
+* Add missing </p> 
+
 = 1.1.8 =
 * 04 fev 2013
 * Remove undefined </div> that breaks design
-
-
 
 = 1.1.7 =
 * 31 jan 2013
