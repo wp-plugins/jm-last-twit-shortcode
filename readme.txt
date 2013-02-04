@@ -12,7 +12,7 @@ A plugin meant to add your last tweet with the lattest API way :
 == Description ==
 
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
-1.1.6 allows you to change user_timeline for mentions_timeline, home_timeline or retweets_of_me.
+1.1.8 allows you to change user_timeline for mentions_timeline, home_timeline or retweets_of_me.
 
 
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
@@ -22,7 +22,7 @@ En Français
 –––––––––––––––––––––––––––––––––––
 
 Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une connexion authentifiée et grâce à un shortcode. 
-1.1.6 vous permet de changer user_timeline pour mentions_timeline, home_timeline ou retweets_of_me.
+1.1.8 vous permet de changer user_timeline pour mentions_timeline, home_timeline ou retweets_of_me.
 
 <a href="http://twitter.com/tweetpressfr">Me suivre sur Twitter</a>
 
@@ -64,6 +64,12 @@ En Français
 none.
 
 == Changelog ==
+
+= 1.1.8 =
+* 04 fev 2013
+* Remove undefined </div> that breaks design
+
+
 
 = 1.1.7 =
 * 31 jan 2013
