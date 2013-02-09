@@ -3,14 +3,13 @@
 */
 
 .twitter_status{
-    background: white;
+    background:white;
     padding: 20px;
     border-radius:.4em;
 	   float:left;
-	   width:auto;
 }
 .userimg{
-	float:left;
+	   float:left;
     margin-right: 10px;
     width: 24px;
     height: 24px;
@@ -19,6 +18,33 @@
     width: 100%;
     height: auto;
 }
-.tw_timestamp{
+.bloc_caption {
     float:right;
+}
+
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU DO (SPRITES CSS)*/
+
+.intent-meta a {
+   display: inline-block;
+    height: 16px;
+    text-indent: -9999px;
+    width: 16px;
+}
+.intent-meta a.in-reply-to {
+    background-position: 0 center;
+}
+.intent-meta a:hover.in-reply-to {
+    background-position: -16px center;
+}
+.intent-meta a.favorite {
+    background-position: -32px center;
+}
+.intent-meta a:hover.favorite {
+    background-position: -48px center;
+}
+.intent-meta a.retweet {
+    background-position: -80px center;
+}
+.intent-meta a:hover.retweet {
+    background-position: -96px center;
 }

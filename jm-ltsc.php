@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 2.0
+Version: 2.1
 License: GPL2++
 */
 
@@ -83,14 +83,18 @@ License: GPL2++
                             if(!empty($tweets)){ foreach($tweets as $tweet){
                                 $output ='
                                 <div class="twitter_status" id="'.$tweet->id_str.'">
-                                    <div class="bloc_content">
-                                        <p class="status tw_status">'.parseTweets($tweet->text).'
-                                    </p></div>
-                                    <div class="bloc_caption">
-                                        <a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
+                                <div class="bloc_content">
+                                    <a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
                                             <img src="'.$tweet->user->profile_image_url.'" alt="@'.$tweet->user->name.'" class="userimg tw_userimg"/>
                                             <span class="username tw_username">@'.$tweet->user->screen_name.'</span>
                                         </a>
+                                        <p class="status tw_status">'.parseTweets($tweet->text).'
+                                    </p></div>
+                                    <div class="bloc_caption"> 
+                                        <span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="in-reply-to" href="http://twitter.com/intent/tweet?in_reply_to='.$tweet->id_str.'">'.__('Reply','jm-ltsc').'</a></span>
+                                        <span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="retweet" href="http://twitter.com/intent/retweet?tweet_id='.$tweet->id_str.'">'.__('Retweet','jm-ltsc').'</a></span>
+                                        <span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="favorite" href="http://twitter.com/intent/favorite?tweet_id='.$tweet->id_str.'">'.__('Favorite','jm-ltsc').'</a></span>
+                                        </span>
                                         <span class="timestamp tw_timestamp">'.date('d M / H:i',strtotime($tweet->created_at)).'</span>
                                     </div>
                                 </div>';

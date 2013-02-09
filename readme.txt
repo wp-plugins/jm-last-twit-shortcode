@@ -65,6 +65,10 @@ none.
 
 == Changelog ==
 
+= 2.1 =
+* 09 fev 2013
+* Add intents (reply, favorite, retweet) with sprites CSS
+
 = 2.0 =
 * 09 fev 2013
 * Minor Update (minor security fix)
