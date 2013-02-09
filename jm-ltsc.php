@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 1.1.9
+Version: 2.0
 License: GPL2++
 */
 
@@ -274,7 +274,7 @@ License: GPL2++
 						if ( isset($options['tokenSecret']) )
 			$new['tokenSecret']		         = esc_attr(strip_tags( $options['tokenSecret'] ));
 						if ( isset($options['time']) )
-			$new['time']		                =  $options['time'];
+			$new['time']		                =  (int) $options['time'];// because it comes from an input type number
 			return $new;
 			}
 

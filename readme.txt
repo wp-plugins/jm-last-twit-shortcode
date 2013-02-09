@@ -65,6 +65,10 @@ none.
 
 == Changelog ==
 
+= 2.0 =
+* 09 fev 2013
+* Minor Update (minor security fix)
+
 = 1.1.9 =
 * 04 fev 2013
 * Add missing </p> 
