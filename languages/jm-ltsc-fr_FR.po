@@ -111,8 +111,8 @@ msgstr "https://twitter.com/intent/tweet?source=webclient&amp;hastags=WordPress,
 
 #. Text in echo
 #: jm-ltsc.php
-msgid "API Twitter is down... sorry, this should be fixed!"
-msgstr "L'API Twitter est HS... désolé pour la gêne occasionnée, cela devrait être réparé!"
+msgid "API Twitter is down... or you received an error 200."
+msgstr "L'API Twitter est HS... ou vous avez reçu une erreur 200."
 
 #. Text in echo
 #: jm-ltsc.php

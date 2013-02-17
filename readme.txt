@@ -59,11 +59,14 @@ En Français
 2. S'il s'agit de `Call to undefined function curl_init()` alors l'extension curl est désactivée sur votre serveur. Les développeurs sous WampServer peuvent activer cette extension dans PHP > PHP Extension > curl
 3. Si vous n'avez pas de message d'erreur mais n'obtenez toujours pas vos Tweet c'est probablement du à Twitter lui-même donc SVP <a href="http://dev.twitter.com/status/" title="Twitter API Status health">utilisez ce lien </a>
 
-
 == Screenshots ==
 none.
 
 == Changelog ==
+
+= 2.2 =
+* 17 fev 2013
+* Replace get_transient with get_site_transient thanks to great comment by sethmatics
 
 = 2.1 =
 * 09 fev 2013

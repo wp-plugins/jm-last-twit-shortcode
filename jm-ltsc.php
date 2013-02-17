@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 2.1
+Version: 2.2
 License: GPL2++
 */
 
@@ -72,10 +72,10 @@ License: GPL2++
                     $query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query     
                     
                     // Get any existing copy of our transient data
-                    if ( false === ( $tweets = get_transient( 'last_twit' ) ) ) {
+                    if ( false === ( $tweets = get_site_transient( 'last_twit' ) ) ) {
                     //It wasn't there, so regenerate the data and save the transient              
                     $tweets = $connection->get($query);
-                    set_transient( 'last_twit', $tweets, $opts['time'] );
+                    set_site_transient( 'last_twit', $tweets, $opts['time'] );
                    }
                     
                  //output
@@ -101,7 +101,7 @@ License: GPL2++
 								}
 							  }
 							  else {
-							 delete_transient( 'last_twit' );//to avoid waiting for 30'
+							 delete_site_transient( 'last_twit' );//to avoid waiting for 30'
 								$output ='
 								<div class="twitter_status">
 									<p><a href="http://dev.twitter.com/status/" title="Twitter API Status health">'.__('API Twitter is down... sorry, this should be fixed!','jm-ltsc').'</a>'.__('Please wait or try to reload page.','jm-ltsc').'
