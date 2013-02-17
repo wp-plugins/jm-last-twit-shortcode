@@ -66,7 +66,7 @@ none.
 
 = 2.2 =
 * 17 fev 2013
-* Replace get_transient with get_site_transient thanks to great comment by sethmatics
+* bugfix Multisite : replace get_transient with get_site_transient thanks to great comment by sethmatics
 
 = 2.1 =
 * 09 fev 2013
