@@ -100,7 +100,7 @@ msgstr ""
 
 #. Text in echo
 #: jm-ltsc.php
-msgid "API Twitter is down... or you received an error 200."
+msgid "API Twitter is down or settings are wrong."
 msgstr ""
 
 #. Text in echo

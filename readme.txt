@@ -64,6 +64,10 @@ none.
 
 == Changelog ==
 
+= 2.3 =
+* 22 fev 2013
+* fix the way the plugin displays error messages.
+
 = 2.2 =
 * 17 fev 2013
 * bugfix Multisite : replace get_transient with get_site_transient thanks to great comment by sethmatics
