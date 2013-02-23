@@ -64,6 +64,10 @@ none.
 
 == Changelog ==
 
+= 2.4 =
+* 23 fev 2013
+* fix error with condition in 2.2. Actually that can't work because error 200 is not an error !
+
 = 2.3 =
 * 22 fev 2013
 * fix the way the plugin displays error messages.
