@@ -64,6 +64,11 @@ none.
 
 == Changelog ==
 
+= 2.6 =
+* 01 mar 2013
+* Important ! forget to delete wrong condition. Next update will include a sign in.
+
+
 = 2.5 =
 * 01 mar 2013
 * Important ! fix typo on line 85 "error" > "errors". Next update will include a sign in.

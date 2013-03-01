@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 2.5
+Version: 2.6
 License: GPL2++
 */
 
@@ -82,7 +82,7 @@ License: GPL2++
                 if(!empty($consumer_key) && !empty($consumer_secret) && !empty($oauth_token) && !empty($oauth_token_secret)) {
                 //error code API Twitter
                 $errors = $connection->http_code;
-                            if(!empty($tweets) && (empty($errors) || $errors != 200)){ foreach($tweets as $tweet){
+                            if(!empty($tweets) && (empty($errors) || $errors == 200)){ foreach($tweets as $tweet){
                                 $output ='
                                 <div class="twitter_status" id="'.$tweet->id_str.'">
                                 <div class="bloc_content">
