@@ -64,6 +64,10 @@ none.
 
 == Changelog ==
 
+= 2.5 =
+* 01 mar 2013
+* Important ! fix typo on line 85 "error" > "errors". Next update will include a sign in.
+
 = 2.4 =
 * 23 fev 2013
 * fix error with condition in 2.2. Actually that can't work because error 200 is not an error !
