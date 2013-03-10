@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 2.6
+Version: 2.7
 License: GPL2++
 */
 
@@ -76,6 +76,7 @@ License: GPL2++
                     //It wasn't there, so regenerate the data and save the transient              
                     $tweets = $connection->get($query);
                     set_site_transient( 'last_twit', $tweets, $opts['time'] );
+                    $tweets = get_site_transient( 'last_twit' );/* IMPORTANT */
                    }
                     
                  //output

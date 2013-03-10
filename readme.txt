@@ -64,6 +64,10 @@ none.
 
 == Changelog ==
 
+= 2.7 =
+* 10 mar 2013
+* Important ! Fix missing get_site_transient. Now contents will update without any problem.
+
 = 2.6 =
 * 01 mar 2013
 * Important ! forget to delete wrong condition. Next update will include a sign in.
