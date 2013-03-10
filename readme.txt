@@ -43,6 +43,8 @@ En Français
 4. N'oubliez pas de créer votre application sur <a href="https://dev.twitter.com/apps/" target="_blank">dev.twitter</a>
 
 
+[dailymotion http://www.dailymotion.com/video/xxv3p6_creer-une-application-twitter-basique-pour-recuperer-des-tokens_tech]
+
 == Frequently asked questions ==
 
 = I get an error message = 
