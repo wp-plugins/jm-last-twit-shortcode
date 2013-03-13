@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 2.7
+Version: 2.8
 License: GPL2++
 */
 
@@ -76,7 +76,6 @@ License: GPL2++
                     //It wasn't there, so regenerate the data and save the transient              
                     $tweets = $connection->get($query);
                     set_site_transient( 'last_twit', $tweets, $opts['time'] );
-                    $tweets = get_site_transient( 'last_twit' );/* IMPORTANT */
                    }
                     
                  //output
@@ -151,7 +150,7 @@ License: GPL2++
           */
   
            // Language support
-          add_action( 'admin_init', 'jm_ltsc_lang_init' );
+          add_action( 'init', 'jm_ltsc_lang_init' );// replace admin_init with init to get translation on front-end 
           function jm_ltsc_lang_init() {
               load_plugin_textdomain( 'jm-ltsc', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
           }

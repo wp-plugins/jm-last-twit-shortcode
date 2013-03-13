@@ -43,7 +43,7 @@ En Français
 4. N'oubliez pas de créer votre application sur <a href="https://dev.twitter.com/apps/" target="_blank">dev.twitter</a>
 
 
-[dailymotion http://www.dailymotion.com/video/xxv3p6_creer-une-application-twitter-basique-pour-recuperer-des-tokens_tech]
+<a href="http://www.dailymotion.com/video/xxv3p6_creer-une-application-twitter-basique-pour-recuperer-des-tokens_tech">Tutoriel vidéo pour créer son application sur Twitter</a>
 
 == Frequently asked questions ==
 
@@ -65,6 +65,11 @@ En Français
 none.
 
 == Changelog ==
+
+= 2.8 =
+* 13 mar 2013
+* Important ! Fix transient. 2.7 was a bad update. Sorry guys.
+* Correct wrong hook for translation
 
 = 2.7 =
 * 10 mar 2013

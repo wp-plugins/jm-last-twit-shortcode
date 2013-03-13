@@ -4,9 +4,13 @@
 
 .twitter_status{
     background:white;
+    display:inline-block;
     padding: 20px;
     border-radius:.4em;
 	   float:left;
+}
+.twitter_status a {
+color:#4c7faa;
 }
 .userimg{
 	   float:left;
