@@ -69,7 +69,7 @@ none.
 = 2.8 =
 * 13 mar 2013
 * Important ! Fix transient. 2.7 was a bad update. Sorry guys.
-* Correct wrong hook for translation
+* Correct wrong hook for translation we need in frontend
 
 = 2.7 =
 * 10 mar 2013
