@@ -85,7 +85,7 @@ msgstr ""
 
 #. Text in echo
 #: jm-ltsc.php
-msgid "This plugin allows you to get your last Tweet with the last Twitter API (1.1). Pretty useful because <strong>Twitter API 1.0 is to cease functioning in march 2013</strong>."
+msgid "This plugin allows you to get your last Tweet with the last Twitter API (1.1). Pretty useful because <strong>Twitter API 1.0 is to cease functioning in may 2013</strong>."
 msgstr ""
 
 #. Text in echo

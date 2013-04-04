@@ -2,34 +2,36 @@
  Styles for JM Last Twit Shortcode(front end)
 */
 
+
 .twitter_status{
     background:white;
+	max-width:70%;
     padding: 20px;
     border-radius:.4em;
-	   float:left;
 }
-.userimg{
-	   float:left;
-    margin-right: 10px;
-    width: 24px;
-    height: 24px;
-}
-.userimg img{
-    width: 100%;
-    height: auto;
-}
-.bloc_caption {
-    float:right;
-}
+
 
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU DO (SPRITES CSS)*/
 
+.inyblock { display:inline-block; vertical-align:bottom; }
+.yblock { display:block; }
+.floatyRight { float:right; }
+
 .intent-meta a {
-   display: inline-block;
+    display: inline-block;
     height: 16px;
-    text-indent: -9999px;
     width: 16px;
 }
+
+.intent-meta a span {
+    position: absolute !important;
+    left: -7000px;
+    overflow:hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+
+}
+
 .intent-meta a.in-reply-to {
     background-position: 0 center;
 }

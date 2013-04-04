@@ -91,7 +91,7 @@ msgstr "Pour utiliser le shortcode dans vos templates, écrivez <em>echo apply_f
 
 #. Text in echo
 #: jm-ltsc.php
-msgid "This plugin allows you to get your last Tweet with the last Twitter API (1.1). Pretty useful because <strong>Twitter API 1.0 is to cease functioning in march 2013</strong>."
+msgid "This plugin allows you to get your last Tweet with the last Twitter API (1.1). Pretty useful because <strong>Twitter API 1.0 is to cease functioning in may 2013</strong>."
 msgstr "Ce plugin vous permet d'afficher votre dernier Tweet avec la dernière version de l'API  Twitter (1.1). Très utile quand on sait que <strong>La version 1.0  est censée être arrếtée en mars 2013</strong>."
 
 #. Text in echo

@@ -1,6 +1,7 @@
 === JM Last Twit Shortcode ===
 Contributors: jmlapam
 Tags: twitter, tweet, API 1.1, shortcode
+DonateLink: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jmlapam%40gmail%2ecom&item_name=JM%20Last%20Twit%20Shortcode&no_shipping=0&no_note=1&tax=0&currency_code=EUR&bn=PP%2dDonationsBF&charset=UTF%2d8
 Requires at least: 
 Tested up to: 3.5
 License: GPLv2 or later
@@ -65,6 +66,13 @@ En Français
 none.
 
 == Changelog ==
+
+= 2.9 =
+* 04 apr 2013
+* Update library oAuth
+* Find a proper way to hide content (delete ugly text-indent:-9999px property)
+* Add cool features to make your tweet look pretty much like embedded tweets... 
+* Sign in is coming soon
 
 = 2.8 =
 * 13 mar 2013
