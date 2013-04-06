@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 2.9
+Version: 3.0
 License: GPL2++
 */
 
@@ -72,10 +72,10 @@ $connection->host = "https://api.twitter.com/1.1/";
 $query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query     
 
 // Get any existing copy of our transient data
-if ( false === ( $tweets = get_site_transient( 'last_twit' ) ) ) {
+if ( false === ( $tweets = get_site_transient( 'jm_last_twit' ) ) ) {
 //It wasn't there, so regenerate the data and save the transient              
 $tweets = $connection->get($query);
-set_site_transient( 'last_twit', $tweets, $opts['time'] );
+set_site_transient( 'jm_last_twit', $tweets, $opts['time'] );
 }
 
 //output
@@ -91,7 +91,7 @@ $output ='
 <img src="'.$tweet->user->profile_image_url.'" alt="@'.$tweet->user->name.'" class="userimg tw_userimg" />
 </span>
 <span class="inyblock">
-<span class="username yblock">'.$tweet->user->name.'</span>
+<span class="username dark yblock">'.$tweet->user->name.'</span>
 <span class="username tw_username">@'.$tweet->user->screen_name.'</span>
 </span>
 </a>
@@ -109,7 +109,7 @@ $output ='
 }
 }
 else {
-delete_site_transient( 'last_twit' );//to avoid waiting for 30'
+delete_site_transient( 'jm_last_twit' );//to avoid waiting for 30'
 $output ='
 <div class="twitter_status">
 <p><a href="http://dev.twitter.com/status/" title="Twitter API Status health">'.__('API Twitter is down or settings are wrong.','jm-ltsc').'</a>'.__('','jm-ltsc').'

@@ -67,6 +67,10 @@ none.
 
 == Changelog ==
 
+= 3.0 =
+* 07 apr 2013
+* reproduce Twitter Style for embedded tweets
+
 = 2.9 =
 * 04 apr 2013
 * Update library oAuth
