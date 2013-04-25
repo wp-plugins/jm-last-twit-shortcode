@@ -107,3 +107,46 @@ msgstr ""
 #: jm-ltsc.php
 msgid "Please wait or try to reload page."
 msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "yes"
+msgstr ""
+
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "no"
+msgstr ""
+
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Use default styles?"
+msgstr ""
+
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "If you do no want to use my styles and use your own in your main stylesheet I recommand you to copy-paste code of my CSS in /jm-last-twit-shortcode/styles/ because I use sprites to display web intents"
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "To use the shortcode in widget text, just use shortcode like you do in posts.But you have to use your own styles to do such a thing, default styles will not applied in this section."
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Your credentials might be unset or incorrect. In any case this error is not due to Twitter API."
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Twitter is overwhelmed or something bad happened with its API."
+msgstr ""
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Something is wrong or missing."
+msgstr ""

@@ -119,3 +119,43 @@ msgstr "L'API Twitter est HS... ou il y a une erreur de configuration."
 msgid "Please wait or try to reload page."
 msgstr "SVP Patientez ou essayez de recharger la page."
 
+#. Text in echo
+#: jm-ltsc.php
+msgid "yes"
+msgstr "oui"
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "no"
+msgstr "non"
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Use default styles?"
+msgstr "Utiliser les styles par défaut?"
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "If you do no want to use my styles and use your own in your main stylesheet I recommand you to copy-paste code of my CSS in /jm-last-twit-shortcode/styles/ because I use sprites to display web intents"
+msgstr "Si vous choisissez de gérer vos propres styles pour le tweet je vous recommande de copier-coller ma base de code CSS dans /jm-last-twit-shortcode/styles/ car j'utilise des sprites pour afficher les web intents"
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "To use the shortcode in widget text, just use shortcode like you do in posts. But you have to use your own styles to do such a thing, default styles will not applied in this section."
+msgstr "Pour utiliser le shortcode dans un widget text, faites-le comme vous le feriez dans un post. Mais attention, vous devez utilisez votre propres styles pour cela, les styles par défaut ne s'appliqueront pas dans cette section."
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Your credentials might be unset or incorrect. In any case this error is not due to Twitter API."
+msgstr "Vos identifiants ne semblent pas corrects ou ne sont pas renseignés. En tous cas cette erreur ne vient pas de Twitter"
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Twitter is overwhelmed or something bad happened with its API."
+msgstr "Twitter est en surcapacité ou son API est hors-service ou fonctionne mal."
+
+#. Text in echo
+#: jm-ltsc.php
+msgid "Something is wrong or missing."
+msgstr "Le plugin est mal réglé ou des informations sont manquantes."
+

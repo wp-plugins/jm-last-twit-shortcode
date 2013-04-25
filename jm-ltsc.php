@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.0
+Version: 3.1
 License: GPL2++
 */
 
@@ -69,7 +69,7 @@ require_once(plugin_dir_path( __FILE__ ) .'/admin/libs/twitteroauth.php');
 $connection = new TwitterOAuth($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
 $connection->host = "https://api.twitter.com/1.1/";
 
-$query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query     
+$query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query        
 
 // Get any existing copy of our transient data
 if ( false === ( $tweets = get_site_transient( 'jm_last_twit' ) ) ) {
@@ -79,57 +79,64 @@ set_site_transient( 'jm_last_twit', $tweets, $opts['time'] );
 }
 
 //output
-if(!empty($consumer_key) && !empty($consumer_secret) && !empty($oauth_token) && !empty($oauth_token_secret)) {
-//error code API Twitter
-$errors = $connection->http_code;
-if(!empty($tweets) && (empty($errors) || $errors == 200)){ foreach($tweets as $tweet){
-$output ='
-<div class="twitter_status" id="'.$tweet->id_str.'">
-<div class="bloc_content">
-<a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
-<span class="inyblock">
-<img src="'.$tweet->user->profile_image_url.'" alt="@'.$tweet->user->name.'" class="userimg tw_userimg" />
-</span>
-<span class="inyblock">
-<span class="username dark yblock">'.$tweet->user->name.'</span>
-<span class="username tw_username">@'.$tweet->user->screen_name.'</span>
-</span>
-</a>
-<span class="floatyRight"><a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'"> Suivre</a></span>
-<p class="status tw_status">'.parseTweets($tweet->text).'
-</p></div>
-<div class="bloc_caption floatyRight"> 
-<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="in-reply-to" href="http://twitter.com/intent/tweet?in_reply_to='.$tweet->id_str.'"><span>'.__('Reply','jm-ltsc').'</span></a></span>
-<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="retweet" href="http://twitter.com/intent/retweet?tweet_id='.$tweet->id_str.'"><span>'.__('Retweet','jm-ltsc').'</span></a></span>
-<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="favorite" href="http://twitter.com/intent/favorite?tweet_id='.$tweet->id_str.'"><span>'.__('Favorite','jm-ltsc').'</span></a></span>
-</span>
-</div>
-<span class="timestamp tw_timestamp">'.date('d M Y - H:i A',strtotime($tweet->created_at)).'</span>
-</div>';
-}
-}
-else {
-delete_site_transient( 'jm_last_twit' );//to avoid waiting for 30'
-$output ='
-<div class="twitter_status">
-<p><a href="http://dev.twitter.com/status/" title="Twitter API Status health">'.__('API Twitter is down or settings are wrong.','jm-ltsc').'</a>'.__('','jm-ltsc').'
-<p></div>';
-}
-
-$output .='
-<div style="clear:both;"></div>
-';
-} else { ?>
-<p> <?php _e('Please update your settings to provide valid credentials','jm-ltsc'); ?></p> <?php
-}
-return $output;
+foreach ($tweets as $tweet) {
+//response code API Twitter
+$response = $connection->http_code;
+switch ($response) {
+	case '200':
+	case '304':
+		$output ='
+		<div class="twitter_status" id="'.$tweet->id_str.'">
+		<div class="bloc_content">
+		<a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
+		<span class="inyblock">
+		<img src="'.$tweet->user->profile_image_url.'" alt="@'.$tweet->user->name.'" class="userimg tw_userimg" />
+		</span>
+		<span class="inyblock">
+		<span class="username dark yblock">'.$tweet->user->name.'</span>
+		<span class="username tw_username">@'.$tweet->user->screen_name.'</span>
+		</span>
+		</a>
+		<span class="floatyRight"><a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'"> Suivre</a></span>
+		<p class="status tw_status">'.parseTweets($tweet->text).'
+		</p></div>
+		<div class="bloc_caption floatyRight"> 
+		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="in-reply-to" href="http://twitter.com/intent/tweet?in_reply_to='.$tweet->id_str.'"><span>'.__('Reply','jm-ltsc').'</span></a></span>
+		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="retweet" href="http://twitter.com/intent/retweet?tweet_id='.$tweet->id_str.'"><span>'.__('Retweet','jm-ltsc').'</span></a></span>
+		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="favorite" href="http://twitter.com/intent/favorite?tweet_id='.$tweet->id_str.'"><span>'.__('Favorite','jm-ltsc').'</span></a></span>
+		</span>
+		</div>
+		<span class="timestamp tw_timestamp">'.date('d M Y - H:i A',strtotime($tweet->created_at)).'</span>
+		</div>';
+	 break;	
+	
+	case '400':
+	case '401':
+	case '403':
+	case '404':
+	case '406':
+		$output = '<div class="large pa1 error">'.__('Your credentials might be unset or incorrect. In any case this error is not due to Twitter API.','jm-ltsc').'</div>';
+	  break;
+	case '500':
+	case '502':
+	case '503':
+		$output = '<div class="large pa1 error">'.__('Twitter is overwhelmed or something bad happened with its API.','jm-ltsc').'</div>';
+	  break;
+	default:
+		$output = __('Something is wrong or missing. ','jm-ltsc');
+	}
+	
+	return $output;
+	}
 } 
 add_shortcode( 'jmlt', 'jm_ltsc_output' );
+add_shortcode( 'widget','jmlt');
 }//end of output
 
 
 //styles 
-
+$opts = jm_ltsc_get_options();
+if($opts['twitStyles'] === 'yes') {
 function jm_ltsc_style_front() {
 //tip made by BAW (http://boiteaweb.fr) / I slightly modified it.
 global $post;
@@ -138,16 +145,19 @@ $matches = array();
 $pattern = get_shortcode_regex();
 preg_match_all( '/' . $pattern . '/s', $post->post_content, $matches );
 foreach( $matches[2] as $value ) {
-if( $value == 'jmlt' ) {
+if( $value == 'jmlt') {
 wp_enqueue_style('front_style', plugins_url('/styles/jm-ltsc-front-style.css',__FILE__)); 
 break;
 }
 }
 }
 add_action( 'wp_enqueue_scripts', 'jm_ltsc_style_front' );
-
-
-
+}
+/* shortcode in sidebar
+* */
+if ( !is_admin() ) {
+    add_filter('widget_text', 'do_shortcode', 11);
+}
 
 /*
 * ADMIN OPTION PAGE
@@ -228,9 +238,18 @@ $opts = jm_ltsc_get_options();
 <p>
 <label for="time"><?php _e('Set expired time for transient (min:1800s)', 'jm-ltsc'); ?> :</label>
 <input id="time" type="number" min="1800" name="jm_ltsc[time]" class="regular-text" value="<?php echo $opts['time']; ?>" />
-</p> 
-<p><em><?php _e('*This is the time in the course of which your tweet will be stored. This allows us to limit server requests.', 'jm-ltsc'); ?></em>
+<br /><em><?php _e('*This is the time in the course of which your tweet will be stored. This allows us to limit server requests.', 'jm-ltsc'); ?></em>
 </p>
+<p>
+<label for="twitStyles"><?php _e('Use default styles?', 'jm-ltsc'); ?> :</label>
+<select id="twitStyles" name="jm_ltsc[twitStyles]">
+<option value="yes" <?php echo $opts['twitStyles'] == 'yes' ? 'selected="selected"' : ''; ?> ><?php _e('yes', 'jm-ltsc'); ?></option>
+<option value="no" <?php echo $opts['twitStyles'] == 'no' ? 'selected="selected"' : ''; ?> ><?php _e('no', 'jm-ltsc'); ?></option>
+</select>
+
+<br /><em><?php _e('If you do no want to use my styles and use your own in your main stylesheet I recommand you to copy-paste code of my CSS in /jm-last-twit-shortcode/styles/ because I use sprites to display web intents','jm-ltsc');?></em>
+</p>
+
 
 <?php submit_button(null, 'primary', 'JM_submit'); ?>
 
@@ -243,6 +262,7 @@ $opts = jm_ltsc_get_options();
 <li><?php _e('Really easy, just put <strong>[jmlt]</strong> in your posts.','jm-ltsc');?></li>
 <li><?php _e('You can even change timeline, e.g <strong>[jmlt timeline="mentions_timeline"]</strong> will display last mention of your Twitter account. Default is user_timeline. Other options are retweets_of_me and home_timeline.','jm-ltsc');?></li>
 <li> <?php _e('To use the shortcode in templates, just use <em>echo apply_filters("the_content","[jmlt]")</em>','jm-ltsc'); ?></li>    
+<li> <?php _e('To use the shortcode in widget text, just use shortcode like you do in posts. But you have to use your own styles to do such a thing, default styles will not applied in this section.','jm-ltsc'); ?></li>    
 </ol>
 
 <h3><?php _e('Useful links', 'jm-ltsc') ?></h3>
@@ -283,6 +303,8 @@ if ( isset($options['tokenSecret']) )
 $new['tokenSecret']              = esc_attr(strip_tags( $options['tokenSecret'] ));
 if ( isset($options['time']) )
 $new['time']                     = (int) $options['time'];// because it comes from an input type number
+if ( isset($options['twitStyles']) )
+$new['twitStyles']               =  $options['twitStyles'];// because it comes from an input type number
 return $new;
 }
 
@@ -294,7 +316,8 @@ return array(
 'consumerSecret'           => __('replace with your keys - required', 'jm-ltsc'),
 'oauthToken'               => __('replace with your keys - required', 'jm-ltsc'),
 'tokenSecret'              => __('replace with your keys - required', 'jm-ltsc'),
-'time'                     => 1800
+'time'                     => 1800,
+'twitStyles'			   => 'yes'
 );
 }
 
