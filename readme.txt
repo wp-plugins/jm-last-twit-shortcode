@@ -71,7 +71,7 @@ none.
 * 25 apr 2013
 * make error test more accurate
 * add opt out for default styles
-* add shortcode in widget text
+* add possibility to use shortcode in a widget text
 
 = 3.0 =
 * 07 apr 2013
