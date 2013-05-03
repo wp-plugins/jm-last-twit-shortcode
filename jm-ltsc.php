@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.1.6
+Version: 3.1.7
 License: GPL2++
 */
 
@@ -46,7 +46,13 @@ return $text;
 /*
 * OUTPUT
 */
-
+//set site transient
+if(!function_exists('jm_last_twit_transient')) {
+function jm_last_twit_transient($content) {
+$opts = jm_ltsc_get_options();
+set_site_transient( 'last_twit', $content, $opts['time'] );
+}
+}
 
 if(!function_exists('jm_ltsc_output')) {
 function jm_ltsc_output( $atts ) {
@@ -72,15 +78,8 @@ $connection->host = "https://api.twitter.com/1.1/";
 $query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query        
 $tweet = $connection->get($query);
 
-//set site transient
-if(!function_exists('jm_last_twit_transient')) {
-function jm_last_twit_transient($content) {
-$opts = jm_ltsc_get_options();
-set_site_transient( 'last_twit', $content, $opts['time'] );
-}
-}
 //set our transient if there's no recent copy
-if ( false === ( $tweet = get_site_transient( 'last_twit' ) ) ) jm_last_twit_transient($tweet);
+if ( false === get_site_transient( 'last_twit' ) ) jm_last_twit_transient($tweet);
 
 
 //output

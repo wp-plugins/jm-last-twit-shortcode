@@ -70,6 +70,10 @@ En Français
 
 == Changelog ==
 
+= 3.1.7 =
+* 03 May 2013
+* wrong position for transient function
+
 = 3.1.6 =
 * 03 May 2013
 * fix versionning issue in repository
