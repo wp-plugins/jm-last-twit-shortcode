@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.1
+Version: 3.1.5
 License: GPL2++
 */
 
@@ -70,43 +70,45 @@ $connection = new TwitterOAuth($consumer_key, $consumer_secret, $oauth_token, $o
 $connection->host = "https://api.twitter.com/1.1/";
 
 $query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query        
+$tweet = $connection->get($query);
 
-// Get any existing copy of our transient data
-if ( false === ( $tweets = get_site_transient( 'jm_last_twit' ) ) ) {
-//It wasn't there, so regenerate the data and save the transient              
-$tweets = $connection->get($query);
-set_site_transient( 'jm_last_twit', $tweets, $opts['time'] );
+//set site transient
+if(!function_exists('jm_last_twit_transient')) {
+function jm_last_twit_transient($content) {
+$opts = jm_ltsc_get_options();
+set_site_transient( 'last_twit', $content, $opts['time'] );
 }
+}
+//set our transient if there's no recent copy
+if ( false === ( $tweet = get_site_transient( 'last_twit' ) ) ) jm_last_twit_transient($tweet);
 
 //output
-foreach ($tweets as $tweet) {
-//response code API Twitter
-$response = $connection->http_code;
-switch ($response) {
+foreach ($tweet as $twit) {
+switch ($connection->http_code) {
 	case '200':
 	case '304':
 		$output ='
-		<div class="twitter_status" id="'.$tweet->id_str.'">
+		<div class="twitter_status" id="'.$twit->id_str.'">
 		<div class="bloc_content">
-		<a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'">
+		<a href="http://twitter.com/intent/user?screen_name='.$twit->user->screen_name.'">
 		<span class="inyblock">
-		<img src="'.$tweet->user->profile_image_url.'" alt="@'.$tweet->user->name.'" class="userimg tw_userimg" />
+		<img src="'.$twit->user->profile_image_url.'" alt="@'.$twit->user->name.'" class="userimg tw_userimg" />
 		</span>
 		<span class="inyblock">
-		<span class="username dark yblock">'.$tweet->user->name.'</span>
-		<span class="username tw_username">@'.$tweet->user->screen_name.'</span>
+		<span class="username dark yblock">'.$twit->user->name.'</span>
+		<span class="username tw_username">@'.$twit->user->screen_name.'</span>
 		</span>
 		</a>
-		<span class="floatyRight"><a href="http://twitter.com/intent/user?screen_name='.$tweet->user->screen_name.'"> Suivre</a></span>
-		<p class="status tw_status">'.parseTweets($tweet->text).'
+		<span class="floatyRight"><a href="http://twitter.com/intent/user?screen_name='.$twit->user->screen_name.'"> Suivre</a></span>
+		<p class="status tw_status">'.parseTweets($twit->text).'
 		</p></div>
 		<div class="bloc_caption floatyRight"> 
-		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="in-reply-to" href="http://twitter.com/intent/tweet?in_reply_to='.$tweet->id_str.'"><span>'.__('Reply','jm-ltsc').'</span></a></span>
-		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="retweet" href="http://twitter.com/intent/retweet?tweet_id='.$tweet->id_str.'"><span>'.__('Retweet','jm-ltsc').'</span></a></span>
-		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="favorite" href="http://twitter.com/intent/favorite?tweet_id='.$tweet->id_str.'"><span>'.__('Favorite','jm-ltsc').'</span></a></span>
+		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="in-reply-to" href="http://twitter.com/intent/tweet?in_reply_to='.$twit->id_str.'"><span>'.__('Reply','jm-ltsc').'</span></a></span>
+		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="retweet" href="http://twitter.com/intent/retweet?tweet_id='.$twit->id_str.'"><span>'.__('Retweet','jm-ltsc').'</span></a></span>
+		<span class="intent-meta"><a style="background-image:url('.plugins_url('styles/img/everything-spritev2.png',__FILE__).');" class="favorite" href="http://twitter.com/intent/favorite?tweet_id='.$twit->id_str.'"><span>'.__('Favorite','jm-ltsc').'</span></a></span>
 		</span>
 		</div>
-		<span class="timestamp tw_timestamp">'.date('d M Y - H:i A',strtotime($tweet->created_at)).'</span>
+		<span class="timestamp tw_timestamp">'.date('d M Y - H:i A',strtotime($twit->created_at)).'</span>
 		</div>';
 	 break;	
 	
@@ -132,6 +134,17 @@ switch ($response) {
 add_shortcode( 'jmlt', 'jm_ltsc_output' );
 add_shortcode( 'widget','jmlt');
 }//end of output
+
+
+/* quicktags
+* */
+add_action( 'admin_enqueue_scripts', 'jm_ltsc_add_quicktags' );
+function jm_ltsc_add_quicktags( $hook_suffix ) {
+if( 'post.php' == $hook_suffix || 'post-new.php' == $hook_suffix ) // only on post edit
+wp_enqueue_script( 'jmltsc_quicktags_js', plugins_url('admin/quicktag.js',__FILE__), array( 'quicktags' ), null, true );
+}
+
+
 
 
 //styles 

@@ -63,9 +63,18 @@ En Français
 3. Si vous n'avez pas de message d'erreur mais n'obtenez toujours pas vos Tweet c'est probablement du à Twitter lui-même donc SVP <a href="http://dev.twitter.com/status/" title="Twitter API Status health">utilisez ce lien </a>
 
 == Screenshots ==
-none.
+1. front-end result with default styles
+2. quicktags in posts
+3. use in widget
+4. front-end result when use in widget while using in post
 
 == Changelog ==
+
+= 3.1.5 =
+* 03 May 2013
+* fix bug regarding transients in some configurations
+* fix bug with use in widget while using in post: 'cannot redeclare function'
+* add buttons (shortcuts) in HTML editor
 
 = 3.1 =
 * 25 apr 2013
