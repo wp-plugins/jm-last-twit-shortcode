@@ -70,6 +70,10 @@ En Français
 
 == Changelog ==
 
+= 3.1.6 =
+* 03 May 2013
+* fix versionning issue in repository
+
 = 3.1.5 =
 * 03 May 2013
 * fix bug regarding transients in some configurations
