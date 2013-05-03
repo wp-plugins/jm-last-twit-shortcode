@@ -72,16 +72,6 @@ $connection->host = "https://api.twitter.com/1.1/";
 $query = 'https://api.twitter.com/1.1/statuses/'.$timeline.'.json?count=1&screen_name='.$opts['twitAccount']; //Our query        
 $tweet = $connection->get($query);
 
-//set site transient
-if(!function_exists('jm_last_twit_transient')) {
-function jm_last_twit_transient($content) {
-$opts = jm_ltsc_get_options();
-set_site_transient( 'last_twit', $content, $opts['time'] );
-}
-}
-//set our transient if there's no recent copy
-if ( false === ( $tweet = get_site_transient( 'last_twit' ) ) ) jm_last_twit_transient($tweet);
-
 //output
 foreach ($tweet as $twit) {
 switch ($connection->http_code) {
@@ -136,6 +126,17 @@ add_shortcode( 'widget','jmlt');
 }//end of output
 
 
+//set site transient
+if(!function_exists('jm_last_twit_transient')) {
+function jm_last_twit_transient($content) {
+$opts = jm_ltsc_get_options();
+set_site_transient( 'last_twit', $content, $opts['time'] );
+}
+}
+//set our transient if there's no recent copy
+if ( false === ( $tweet = get_site_transient( 'last_twit' ) ) ) jm_last_twit_transient($tweet);
+
+
 /* quicktags
 * */
 add_action( 'admin_enqueue_scripts', 'jm_ltsc_add_quicktags' );
@@ -143,9 +144,6 @@ function jm_ltsc_add_quicktags( $hook_suffix ) {
 if( 'post.php' == $hook_suffix || 'post-new.php' == $hook_suffix ) // only on post edit
 wp_enqueue_script( 'jmltsc_quicktags_js', plugins_url('admin/quicktag.js',__FILE__), array( 'quicktags' ), null, true );
 }
-
-
-
 
 //styles 
 $opts = jm_ltsc_get_options();
