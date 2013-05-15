@@ -5,45 +5,17 @@
  */
 
 /* content */
-#jm-ltsc {
-	padding: 1.2em;
-	max-width: 800px;/* handier*/
-}
-
-#jm-ltsc a:before {
-	content: "[";
-}
-#jm-ltsc a:after {
-	content: "]";
-}
-
-#jm-ltsc h2, #jm-ltsc h3 {
-	font-size: 2em;
-	margin-bottom: 1em;
-	color: #444;
-	font-weight: normal;
-}
-#jm-ltsc h2 {
-	font-size: 2.5em;
-}
-
-
-#jm-ltsc-form label, #jm-ltsc-form input, .inbl {
-	display: inline;
-	zoom: 1;/* IE7*/
-	display: inline-block;/* really better ! */
-	vertical-align: middle;
-}
-
-#jm-ltsc-form {
- background-color: Mintcream;
- 	border: 1px solid #ddd;
- padding:2em;
-	line-height: 1.6;
-}
-s
-
-#JM_submit {
-	float: right;
-}
-
+#jm-ltsc { padding: 1.2em; line-height:1.5; max-width: 860px;/* handier*/ }
+#jm-ltsc > div { margin: 3em 0;}
+#jm-ltsc h2, #jm-ltsc legend, .legend-like { font-size: 2em; margin-bottom: 1em; color: #444; font-weight: normal; }
+#jm-ltsch2 { font-size: 2.5em; }
+.jm-ltsc-form,.form-like { max-width: 660px; background-color: #ECF8FD; border: 1px solid #ddd; padding:2em; line-height: 1.6; }
+.jm-ltsc-form input, .jm-ltsc-form label { padding:.7em; } 
+.warning { border: 1px solid darkred; display:inline-block; color: #444; padding: 12px; background: #FFEBE8; }
+.inbl { display:inline-block!important;}
+.normal { font: normal normal Copperplate, "Copperplate Gothic Light", fantasy!important; text-shadow:none!important}
+.redwp { background:#D54E21!important; color:white!important; }
+.twitblue { background:#78BFEA!important; color:white!important; }
+.paypal { background:#376D98!important; color:white!important; }
+pre { line-height:26px; width:200px; padding: 15px; white-space: pre; white-space: pre-wrap; white-space: pre-line; word-wrap: break-word; }
+.instructions li:before { float:left; padding-right:.5em; content: "\2023"; font-size:15px; }

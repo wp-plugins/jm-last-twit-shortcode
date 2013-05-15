@@ -70,6 +70,12 @@ En Français
 
 == Changelog ==
 
+= 3.1.8 =
+* 15 May 2013
+* MAJOR UPDATE
+* change library
+* display last tweet from any timeline you want
+
 = 3.1.7 =
 * 03 May 2013
 * wrong position for transient function
