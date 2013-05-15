@@ -302,8 +302,6 @@ function jm_ltsc_options_page() {
 	.twitpermalink  {}
 	.twitsource  {}
 	.twitintent-meta  {}
-	.twitintent-meta  {}
-	.twitintent-meta  {}
 	</pre>
 	</div>
 	</div>
