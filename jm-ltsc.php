@@ -4,12 +4,12 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.1.8
+Version: 3.1.9
 License: GPL2++
 */
 
-//Source : freely inspired by https://github.com/NOEinteractive/twitterapi1.1
-
+// New sources => http://clark-technet.com/2013/03/updated-wordpress-twitter-functions#comment-148551 (slightly modified)
+// and https://dev.twitter.com/docs/platform-objects/entities
 
 
 // Plugin activation: create default values if they don't exist
@@ -34,22 +34,72 @@ function jm_ltsc_remove_at($at) {
 	return $noat;
 }
 
+//function created by @clarktechnet
+if(!function_exists('jc_twitter_format')) {
+function jc_twitter_format( $raw_text, $tweet = NULL ) {
+    // first set output to the value we received when calling this function
+    $output = $raw_text;
+ 
+    // create xhtml safe text (mostly to be safe of ampersands)
+    $output = htmlentities( html_entity_decode( $raw_text, ENT_NOQUOTES, 'UTF-8' ), ENT_NOQUOTES, 'UTF-8' );
+ 
+    // parse urls
+    if ( $tweet == NULL ) {
+        // for regular strings, just create <a> tags for each url
+        $pattern = '/([A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&\?\/.=]+)/i';
+        $replacement = '<a href="${1}" rel="external">${1}</a>';
+        $output = preg_replace( $pattern, $replacement, $output );
+    } else {
+        // for tweets, let's extract the urls from the entities object
+        foreach ( $tweet->entities->urls as $url ) {
+            $old_url = $url->url;
+            $expanded_url = ( empty( $url->expanded_url ) ) ? $url->url : $url->expanded_url;
+            $display_url = ( empty( $url->display_url ) ) ? $url->url : $url->display_url;
+            $replacement = '<a href="' . $expanded_url . '" rel="external">' . $display_url . '</a>';
+            $output = str_replace( $old_url, $replacement, $output );
+        }
+ 
+        // let's extract the hashtags from the entities object
+        foreach ( $tweet->entities->hashtags as $hashtags ) {
+            $hashtag = '#' . $hashtags->text;
+            $replacement = '<a href="http://twitter.com/search?q=%23' . $hashtags->text . '" rel="external">' . $hashtag . '</a>';
+            $output = str_ireplace( $hashtag, $replacement, $output );
+        }
+ 
+        // let's extract the usernames from the entities object
+        foreach ( $tweet->entities->user_mentions as $user_mentions ) {
+            $username = '@' . $user_mentions->screen_name;
+            $replacement = '<a href="http://twitter.com/' . $user_mentions->screen_name . '" rel="external" title="' . $user_mentions->name . ''.__('on Twitter','jm-ltsc').'">' . $username . '</a>';
+            $output = str_ireplace( $username, $replacement, $output );
+        }
+ 
+        // if we have media attached, let's extract those from the entities as well
+        if ( isset( $tweet->entities->media ) ) {
+            foreach ( $tweet->entities->media as $media ) {
+                $old_url = $media->url;
+                $replacement = '<a href="' . $media->expanded_url . '" rel="external" class="twitter-media" data-media="' . $media->media_url . '">' . $media->display_url . '</a>';
+                $output = str_replace( $old_url, $replacement, $output );
+            }
+        }
+    }
+ 
+    return $output;
+	}
+}
+
+
+
+
 /*
 * OUTPUT
 */
-//set site transient
-if(!function_exists('jm_last_twit_transient')) {
-	function jm_last_twit_transient($content) {
-		$opts = jm_ltsc_get_options();
-		set_site_transient( 'last_twit', $content, 60*$opts['time'] );
-	}
-}
 
 if(!function_exists('jm_ltsc_output')) {
 	function jm_ltsc_output( $atts ) {
 		extract(shortcode_atts(array(
 		'username'   => '',
-		'tl' => 'user_timeline'
+		'tl' => 'user_timeline',
+		'count'=> 1
 		), $atts));
 
 		$opts = jm_ltsc_get_options(); 
@@ -69,12 +119,12 @@ if(!function_exists('jm_ltsc_output')) {
 		$consumer_key = $opts['consumerKey'];
 		$consumer_secret = $opts['consumerSecret'];
 		$user_token = $opts['oauthToken'];
-		$user_secret = $opts['oauthToken_secret'];
+		$user_secret = $opts['oauthToken_secret'];	
 		
 
 		//libs
-		require_once(plugin_dir_path( __FILE__ ) .'/admin/libs/tmhOAuth.php');
-		require_once(plugin_dir_path( __FILE__ ) .'/admin/libs/tmhUtilities.php');
+		require_once(plugin_dir_path( __FILE__ ) .'admin/libs/tmhOAuth.php');
+		require_once(plugin_dir_path( __FILE__ ) .'admin/libs/tmhUtilities.php');
 
 		//query
 
@@ -85,59 +135,44 @@ if(!function_exists('jm_ltsc_output')) {
 		'user_secret'     => $user_secret
 		));
 
-		$timeline = $tmhOAuth->request('GET', $tmhOAuth->url('1.1/statuses/'.$tl), 
+		$code = $tmhOAuth->request('GET', $tmhOAuth->url('1.1/statuses/'.$tl), 
 		array(
 		'include_entities' => '1',
-		'screen_name'      => $username
+		'screen_name'      => $username,
+		'count'			   => $count	
 		));
-	
+		
+		if ( empty( $code ) ) {
+			return __('There is no tweet to display yet.','jm-ltsc');
+		}
 
 		//set our transient if there's no recent copy
-		if ( false === get_site_transient( 'last_twit' ) ) jm_last_twit_transient($timeline);
-		$code = $tmhOAuth->response['code'];
+		$transient = "_last_twit";
+		$i = 1;
+		$incache = get_site_transient( $transient );
+		
+		if ( false !== $incache ) {
+		$output = $incache . '<!--'. __('JM Last Twit Shortcode - cache','jm-ltsc') .'-->';
+		}
          
 		//output
 		switch ($code) {
 		case '200':
-		case '304':
-				$timeline = json_decode($tmhOAuth->response['response'], true);
-				foreach ($timeline as $tweet) :
-					$entified_tweet = tmhUtilities::entify_with_options($tweet);
-					$is_retweet = isset($tweet['retweeted_status']);
-
-					$diff = time() - strtotime($tweet['created_at']);
-					if ($diff < 60*60)
-					$created_at = floor($diff/60) . __(' minutes ago','jm-ltsc');
-					elseif ($diff < 60*60*24)
-					$created_at = floor($diff/(60*60)) . __(' hours ago','jm-ltsc');
-					else
-					$created_at = date('d M', strtotime($tweet['created_at']));
-
-					$permalink  = str_replace(
-					array(
-					'%screen_name%',
-					'%id%',
-					'%created_at%'
-					),
-					array(
-					$tweet['user']['screen_name'],
-					$tweet['id_str'],
-					$created_at,
-					),
-					'<a href="https://twitter.com/%screen_name%/%id%">%created_at%</a>'
-					);
-				$output = '<div class="twitstatus" id="'.$tweet['id_str'].'" style="margin-bottom: 1em">
-							<span class="twittar"><img src="'. $tweet['user']['profile_image_url'] .'" alt="@'. $tweet['user']['name'] .'" /></span>
-							<span class="twitusername"><a href="http://twitter.com/intent/user?screen_name='. $tweet['user']['screen_name'] .'">'. $tweet['user']['name'] .'</a></span><br />
-							<span class="twitscreenname"><a href="http://twitter.com/intent/user?screen_name='. $tweet['user']['screen_name'] .'">'. $tweet['user']['screen_name'] .'</a></span><br />
-							<span class="twitentitied">'. $entified_tweet .'</span><br />
-							<span class="twitpermalink"><small>'. $permalink .'</small></span>
-							<span class="twitsource"><small>via '. $tweet['source'].'</small></span>
-							<span class="twitintent-meta"><small><a class="in-reply-to" href="http://twitter.com/intent/tweet?in_reply_to='.$tweet['id_str'].'"><span>'.__('Reply','jm-ltsc').'</span></a></small></span>
-							<span class="twitintent-meta"><small><a class="retweet" href="http://twitter.com/intent/retweet?tweet_id='.$tweet['id_str'].'"><span>'.__('Retweet','jm-ltsc').'</span></a></small></span>
-							<span class="twitintent-meta"><small><a class="favorite" href="http://twitter.com/intent/favorite?tweet_id='.$tweet['id_str'].'"><span>'.__('Favorite','jm-ltsc').'</span></small></a></span>
-						   </div>';
-				endforeach;		   
+		case '304':				
+				$data = json_decode( $tmhOAuth->response['response'] );
+				 $output = "<ul>\r\n";
+						while ( $i <= $count ) {
+							//Assign feed to $feed
+							if ( isset( $data[$i - 1] ) ) {
+								$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
+								$id_str = $data[$i - 1]->id_str;
+								$output .= "<li class='tweetfeed'>" . $feed . " - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
+							}
+							$i++;
+						}
+				 
+						$output .="</ul>";
+				//set_site_transient( $transient, $output, $opts['time']*60 );
 			break;	
 			
 		case '400':
@@ -160,7 +195,6 @@ if(!function_exists('jm_ltsc_output')) {
 		default:
 			$output = __('Something is wrong or missing. ','jm-ltsc');
 		}
-		
 		return $output;
 		
 	} 
@@ -250,27 +284,27 @@ function jm_ltsc_options_page() {
 	<h3><?php _e('Options', 'jm-ltsc'); ?></h3>
 	<p>
 	<label for="twitAccount"><?php _e('Provide your Twitter username (used by default and without @)', 'jm-ltsc'); ?> :</label>
-	<input id="twitAccount" type="text" name="jm_ltsc[twitAccount]" value="<?php echo jm_ltsc_remove_at($opts['twitAccount']); ?>" />
+	<input id="twitAccount" type="text" name="jm_ltsc[twitAccount]" class="paDemi" value="<?php echo jm_ltsc_remove_at($opts['twitAccount']); ?>" />
 	</p>
 	<p>
 	<label for="consumerKey"><?php _e('Provide your application consumer key', 'jm-ltsc'); ?> :</label><br />
-	<input id="consumerKey" type="text" name="jm_ltsc[consumerKey]" size="70" value="<?php echo $opts['consumerKey']; ?>" />
+	<input id="consumerKey" type="text" name="jm_ltsc[consumerKey]" class="paDemi" size="70" value="<?php echo $opts['consumerKey']; ?>" />
 	</p>
 	<p>
 	<label for="consumerSecret"><?php _e('Provide your application consumer secret', 'jm-ltsc'); ?> :</label><br />
-	<input id="consumerSecret" type="text" name="jm_ltsc[consumerSecret]" size="70" value="<?php echo $opts['consumerSecret']; ?>" />
+	<input id="consumerSecret" type="text" name="jm_ltsc[consumerSecret]" class="paDemi" size="70" value="<?php echo $opts['consumerSecret']; ?>" />
 	</p>
 	<p>
 	<label for="oauthToken"><?php _e('Provide your oAuth Token', 'jm-ltsc'); ?> :</label><br />
-	<input id="oauthToken" type="text" name="jm_ltsc[oauthToken]" size="70" value="<?php echo $opts['oauthToken']; ?>" />
+	<input id="oauthToken" type="text" name="jm_ltsc[oauthToken]" class="paDemi" size="70" value="<?php echo $opts['oauthToken']; ?>" />
 	</p>
 	<p>
 	<label for="oauthToken_secret"><?php _e('Provide your oAuth Token Secret', 'jm-ltsc'); ?> :</label><br />
-	<input id="oauthToken_secret" type="text" name="jm_ltsc[oauthToken_secret]" size="70" value="<?php echo $opts['oauthToken_secret']; ?>" />
+	<input id="oauthToken_secret" type="text" name="jm_ltsc[oauthToken_secret]" class="paDemi" size="70" value="<?php echo $opts['oauthToken_secret']; ?>" />
 	</p>
 	<p>
 	<label for="time"><?php _e('Set expired time for transient (30 min at least)', 'jm-ltsc'); ?> :</label><br />
-	<input id="time" type="number" min="30" name="jm_ltsc[time]" size="70" value="<?php echo $opts['time']; ?>" />
+	<input id="time" type="number" min="30" name="jm_ltsc[time]" class="paDemi" size="70" value="<?php echo $opts['time']; ?>" />
 	<br /><em><?php _e('*This is the time in the course of which your tweet will be stored. This allows us to limit server requests.', 'jm-ltsc'); ?></em>
 	</p>
 
@@ -290,20 +324,7 @@ function jm_ltsc_options_page() {
 	<li> <?php _e('To use the shortcode in templates, just use <em>echo apply_filters("the_content","[jmlt]")</em>','jm-ltsc'); ?></li>    
 	<li> <?php _e('To use the shortcode in text widgets, just use shortcode like you do in posts.','jm-ltsc'); ?></li>    
 	<li><div class="error"> <?php _e('Do not try to display mentions or retweets from other accounts from yours. This logically impossible !','jm-ltsc'); ?></div></li> 
-	<li> <?php _e('To add your own style, just use these CSS classes in your main stylesheet','jm-ltsc');?></li>
 	</ul>
-	<div class="updated">
-	<pre>
-	.twitstatus {}
-	.twittar  {}
-	.twitusername  {}
-	.twitscreenname  {}
-	.twitentitied  {}
-	.twitpermalink  {}
-	.twitsource  {}
-	.twitintent-meta  {}
-	</pre>
-	</div>
 	</div>
 	<h2><?php _e('Useful links', 'jm-ltsc') ?></h2>
 	<ul>

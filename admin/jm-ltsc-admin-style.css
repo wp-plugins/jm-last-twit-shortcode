@@ -17,5 +17,6 @@
 .redwp { background:#D54E21!important; color:white!important; }
 .twitblue { background:#78BFEA!important; color:white!important; }
 .paypal { background:#376D98!important; color:white!important; }
+.paDemi { padding:.4em; }
 pre { line-height:26px; width:200px; padding: 15px; white-space: pre; white-space: pre-wrap; white-space: pre-line; word-wrap: break-word; }
 .instructions li:before { float:left; padding-right:.5em; content: "\2023"; font-size:15px; }

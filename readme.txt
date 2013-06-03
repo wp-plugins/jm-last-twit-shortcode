@@ -70,6 +70,13 @@ En Français
 
 == Changelog ==
 
+= 3.1.9 =
+* 2 june 2013
+* MAJOR UPDATE
+* display more than 1 tweet
+* transients are fixed (simple and multisite)
+* have fun :=)
+
 = 3.1.8 =
 * 15 May 2013
 * MAJOR UPDATE
