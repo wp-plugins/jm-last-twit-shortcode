@@ -15,6 +15,7 @@ A plugin meant to add your last tweet with the lattest API way :
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
 It allows you to change user_timeline for mentions_timeline, home_timeline or retweets_of_me.
 
+See **FAQ** here and/or option page of plugin on your installation
 
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
 
@@ -43,7 +44,7 @@ En Français
 3. Allez dans réglages > JM Last Twit Shortcode pour configurer le plugin
 4. N'oubliez pas de créer votre application sur <a href="https://dev.twitter.com/apps/" target="_blank">dev.twitter</a>
 
-
+<a href="http://www.dailymotion.com/tweetpress#video=x10ja68">présentation du plugin en version 3.1.9</a>
 <a href="http://www.dailymotion.com/video/xxv3p6_creer-une-application-twitter-basique-pour-recuperer-des-tokens_tech">Tutoriel vidéo pour créer son application sur Twitter</a>
 
 == Frequently asked questions ==
@@ -53,6 +54,15 @@ En Français
 2. If it's `Call to undefined function curl_init()` then the curl extension is not active on your server. Developers who use WampServer might activate curl extension in PHP > PHP Extension > curl
 3. If there are no message but you do not get your Tweet it's probably to Twitter itself so please <a href="http://dev.twitter.com/status/" title="Twitter API Status health">check this link </a>
 
+= How can I get more than 1 tweet? = 
+Simple, just use the parameter "count" in shorcode, see example :
+`[jmlt count="4"]`
+This will display the last 4 tweets from the user specified in option page
+
+= How can I get tweets from another Twitter account? =
+`[jmlt username="TweetPressFr"]`
+This will display tweet from TweetPressFr
+
 ----
 En Français
 –––––––––––––––––––––––––––––––––––
@@ -61,6 +71,16 @@ En Français
 1. S'il s'agit de `Please update your settings to provide valid credentials` vos identifiants (token, clés) sont manquants ou ne sont pas valides vérifiez-les à nouveau SVP.
 2. S'il s'agit de `Call to undefined function curl_init()` alors l'extension curl est désactivée sur votre serveur. Les développeurs sous WampServer peuvent activer cette extension dans PHP > PHP Extension > curl
 3. Si vous n'avez pas de message d'erreur mais n'obtenez toujours pas vos Tweet c'est probablement du à Twitter lui-même donc SVP <a href="http://dev.twitter.com/status/" title="Twitter API Status health">utilisez ce lien </a>
+
+= Et pour avoir plus d'un tweet? = 
+Simple, utilisez le paramètre "count" dans le shorcode, par exemple :
+`[jmlt count="4"]`
+affichera les 4 derniers tweets de l'utilisateur spécifié en page d'option
+
+= Et pour afficher les tweets d'un autre compte? = 
+Utilisez le paramètre "username" dans le shortcode :
+`[jmlt username="TweetPressFr"]`
+affichera le dernier tweet du compte TweetPressFr
 
 == Screenshots ==
 1. front-end result with default styles
@@ -73,7 +93,7 @@ En Français
 = 3.1.9 =
 * 2 june 2013
 * MAJOR UPDATE
-* display more than 1 tweet
+* display more than 1 tweet (new parameter for shortcode -> "count")
 * transients are fixed (simple and multisite)
 * have fun :=)
 
