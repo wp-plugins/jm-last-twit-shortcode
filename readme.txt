@@ -90,6 +90,9 @@ affichera le dernier tweet du compte TweetPressFr
 
 == Changelog ==
 
+= 3.2.0 =
+* uncomment line 175 to let transient work !!!
+
 = 3.1.9 =
 * 2 june 2013
 * MAJOR UPDATE

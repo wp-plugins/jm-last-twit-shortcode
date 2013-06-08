@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.1.9
+Version: 3.2.0
 License: GPL2++
 */
 
@@ -172,7 +172,7 @@ if(!function_exists('jm_ltsc_output')) {
 						}
 				 
 						$output .="</ul>";
-				//set_site_transient( $transient, $output, $opts['time']*60 );
+				set_site_transient( $transient, $output, $opts['time']*60 );
 			break;	
 			
 		case '400':
