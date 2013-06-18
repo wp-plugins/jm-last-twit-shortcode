@@ -90,6 +90,10 @@ affichera le dernier tweet du compte TweetPressFr
 
 == Changelog ==
 
+= 3.2.1 =
+* 18 june 2013
+* add option to show twittar (Twitter Avatar), just use [jmlt show_twittar="on"] in your post
+
 = 3.2.0 =
 * uncomment line 175 to let transient work !!!
 

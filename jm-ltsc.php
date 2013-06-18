@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.0
+Version: 3.2.1
 License: GPL2++
 */
 
@@ -99,7 +99,8 @@ if(!function_exists('jm_ltsc_output')) {
 		extract(shortcode_atts(array(
 		'username'   => '',
 		'tl' => 'user_timeline',
-		'count'=> 1
+		'count'=> 1,
+		'show_twittar' => 'off'
 		), $atts));
 
 		$opts = jm_ltsc_get_options(); 
@@ -166,7 +167,9 @@ if(!function_exists('jm_ltsc_output')) {
 							if ( isset( $data[$i - 1] ) ) {
 								$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
 								$id_str = $data[$i - 1]->id_str;
-								$output .= "<li class='tweetfeed'>" . $feed . " - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
+								$twittar = '';
+								if ( $show_twittar == 'on') $twittar = '<img width="24" height="24" src="'.$data[$i - 1]->user->profile_image_url.'" alt=@"'.$data[$i - 1]->user->screen_name.'" />'; 
+								$output .= "<li class='tweetfeed'>" . $twittar ." ". $feed . " - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
 							}
 							$i++;
 						}
