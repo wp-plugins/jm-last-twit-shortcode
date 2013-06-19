@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.1
+Version: 3.2.2
 License: GPL2++
 */
 
@@ -161,7 +161,7 @@ if(!function_exists('jm_ltsc_output')) {
 		case '200':
 		case '304':				
 				$data = json_decode( $tmhOAuth->response['response'] );
-				 $output = "<ul>\r\n";
+				 $output = "<ul class='tweetfeed'>\r\n";
 						while ( $i <= $count ) {
 							//Assign feed to $feed
 							if ( isset( $data[$i - 1] ) ) {
@@ -169,7 +169,7 @@ if(!function_exists('jm_ltsc_output')) {
 								$id_str = $data[$i - 1]->id_str;
 								$twittar = '';
 								if ( $show_twittar == 'on') $twittar = '<img width="24" height="24" src="'.$data[$i - 1]->user->profile_image_url.'" alt=@"'.$data[$i - 1]->user->screen_name.'" />'; 
-								$output .= "<li class='tweetfeed'>" . $twittar ." ". $feed . " - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
+								$output .= "<li>" . $twittar ." ". $feed . " - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
 							}
 							$i++;
 						}

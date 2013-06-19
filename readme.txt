@@ -91,6 +91,10 @@ affichera le dernier tweet du compte TweetPressFr
 == Changelog ==
 
 = 3.2.1 =
+* 19 june 2013
+* move the 'tweetfeed' class from the li to the ul to make it easier to style with your own CSS
+
+= 3.2.1 =
 * 18 june 2013
 * add option to show twittar (Twitter Avatar), just use [jmlt show_twittar="on"] in your post
 
