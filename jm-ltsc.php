@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.2
+Version: 3.2.3
 License: GPL2++
 */
 
@@ -169,7 +169,7 @@ if(!function_exists('jm_ltsc_output')) {
 								$id_str = $data[$i - 1]->id_str;
 								$twittar = '';
 								if ( $show_twittar == 'on') $twittar = '<img width="24" height="24" src="'.$data[$i - 1]->user->profile_image_url.'" alt=@"'.$data[$i - 1]->user->screen_name.'" />'; 
-								$output .= "<li>" . $twittar ." ". $feed . " - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
+								$output .= "<li>" . $twittar ." <span class='tweetcontent'>". $feed . "</span> - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
 							}
 							$i++;
 						}
@@ -273,18 +273,26 @@ function jm_ltsc_options_page() {
 	<div id="jm-ltsc">
 	<span id="icon-jmltsc" class="icon32"></span>
 	<h1><?php _e('JM Last Twit Shortcode Options', 'jm-ltsc'); ?></h1>
+	
+	<h2 class="nav-tab-wrapper">
+	<a href="#tab1" class="nav-tab nav-tab-active"><?php _e('Options','jm-tc');?></a>
+	<a href="#tab2" class="nav-tab"><?php _e('How to','jm-tc');?></a>
+	<a href="#tab3" class="nav-tab"><?php _e('Styles','jm-tc');?></a>
+	<a href="#tab4" class="nav-tab"><?php _e('Useful links','jm-tc');?></a>
+	</h2>
+	
+	
+	
 	<div class="form-like">
-	<p><?php _e('This plugin allows you to get your last Tweet with the last Twitter API (1.1). Pretty useful because <strong>Twitter API 1.0 is to cease functioning in june 2013</strong>.', 'jm-ltsc'); ?></p>
 	<h2><?php _e('Before', 'jm-ltsc'); ?></h2>
 	<p><?php _e('Do not forget to go to', 'jm-ltsc'); ?> <a href="https://dev.twitter.com/apps/" target="_blank">dev.twitter.com</a> <?php _e('to create your application <strong>before anything</strong> cause you might forget get it after. In any case you will need token to proceed.','jm-ltsc'); ?></p>
-
 	</div>
 	
 	<form class="jm-ltsc-form" method="post" action="options.php">
 	<?php settings_fields('jm-ltsc'); ?>
 	<fieldset>
 
-	<h3><?php _e('Options', 'jm-ltsc'); ?></h3>
+	<legend id="tab1"><?php _e('Options', 'jm-ltsc'); ?></legend>
 	<p>
 	<label for="twitAccount"><?php _e('Provide your Twitter username (used by default and without @)', 'jm-ltsc'); ?> :</label>
 	<input id="twitAccount" type="text" name="jm_ltsc[twitAccount]" class="paDemi" value="<?php echo jm_ltsc_remove_at($opts['twitAccount']); ?>" />
@@ -318,8 +326,9 @@ function jm_ltsc_options_page() {
 	</form>
 
 	<div class="form-like">
-	<h2><?php _e('How to', 'jm-ltsc') ?></h2>
+	<h2 id="tab2">[ <?php _e('How to', 'jm-ltsc') ?> ]</h2>
 	<ul class="instructions">
+	<li><?php _e('To show Twitter avatar write [jmlt show_twittar="on"]','jm-ltsc');?></li>
 	<li><?php _e('Really easy, just put <strong>[jmlt]</strong> in your posts.','jm-ltsc');?></li>
 	<li><?php _e('To change Twitter Acount in a post, just put <strong>[jmlt username="twitter"]</strong> and you will get tweets by @twitter','jm-ltsc');?></li>
 	<li><?php _e('You can even change timeline, e.g <strong>[jmlt tl="mentions_timeline"]</strong> will display last mention of your Twitter account. Default is user_timeline. Other options are retweets_of_me and home_timeline.','jm-ltsc');?></li>
@@ -329,15 +338,58 @@ function jm_ltsc_options_page() {
 	<li><div class="error"> <?php _e('Do not try to display mentions or retweets from other accounts from yours. This logically impossible !','jm-ltsc'); ?></div></li> 
 	</ul>
 	</div>
-	<h2><?php _e('Useful links', 'jm-ltsc') ?></h2>
+	
+	<div class="form-like">
+	<h2 id="tab3">{ <?php _e('Styles', 'jm-ltsc') ?> }</h2>
+	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS class <code>.tweetfeed {}</code>. To apply styles to the text of you tweets just us CSS class <code>.tweetcontent{}</code>','jm-ltsc');?></p>
+	</div>
+	
+	
+	<h2 id="tab4"><?php _e('Useful links', 'jm-ltsc') ?></h2>
 	<ul>
 	<li class="inbl"><a class="button normal redwp" target="_blank" href="http://wordpress.org/support/view/plugin-reviews/jm-last-twit-shortcode"><?php _e('Rate the plugin on WordPress.org', 'jm-ltsc') ?></a></li>
 	<li class="inbl"><a class="button normal twitblue" target="_blank" href="<?php _e('https://twitter.com/intent/tweet?source=webclient&amp;hastags=WordPress,Plugin&amp;text=JM%20Last%20Twit%20%20Shortcode%20a%20great%20WordPress%20plugin%20to%20get%20your%20last%20tweet%20Try%20it!&amp;url=http://wordpress.org/extend/plugins/jm-last-twit-shortcode/&amp;related=TweetPressFr&amp;via=TweetPressFr','jm-ltsc'); ?>"><?php _e('Tweet it', 'jm-ltsc') ?></a></li>      
-	<li class="inbl"><a class="button normal paypal" target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tweetpressfr%40gmail%2ecom&item_name=JM%20Last%20Twit%20Shortcode&no_shipping=0&no_note=1&tax=0&currency_code=EUR&bn=PP%2dDonationsBF&charset=UTF%2d8"><?php _e('Donate to this plugin', 'jm-ltsc'); ?></a></li>    
 	<li class="inbl"><a class="button normal" target="_blank" href="https://twitter.com/intent/user?screen_name=TweetPressFr"><?php _e('follow me on Twitter', 'jm-ltsc'); ?></a></li>       
 	</ul>
 	
 	</div>
+	<div class="postbox medium">
+		<h3 class="hndle"><span><?php _e('About the developer','jm-ltsc');?></span></h3>
+		<div class="inside">
+				<p><img src="http://www.gravatar.com/avatar/<?php echo md5( 'tweetpressfr'.'@'.'gmail'.'.'.'com' ); ?>" style="float:left;margin-right:10px;"/>
+				<strong>Julien Maury</strong><br />
+				<?php _e('I am a WordPress Developer, I like to make it simple.', 'jm-ltsc') ?> <br />
+				<a href="http://www.tweetpress.fr" target="_blank" title="TweetPress.fr - WordPress and Twitter tips">www.tweetpress.fr</a> - <a href="http://twitter.com/intent/user?screen_name=tweetpressfr" >@TweetPressFR</a><br />
+				<a href="http://profiles.wordpress.org/jmlapam/" title="on WordPress.org"><?php _e('My WordPress Profile', 'jm-ltsc') ?></a><br />
+				</p>
+			</div>
+		</div>
+
+		<div class="postbox medium">
+			<h3 class="hndle"><span><?php _e('Help me keep this free', 'jm-ltsc'); ?></span></h3>
+			<div class="inside">
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="2NBS57W3XG62L">
+					<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+					<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</div>
+		</div>	
+
+		<div class="postbox large">
+			<h3 class="hndle"><span><?php _e('Other plugins you might dig','jm-ltsc');?></span></h3>
+			<div class="inside">
+				<ul>
+					<li><a href="http://wordpress.org/plugins/jm-last-twit-shortcode/">JM Last Twit Shortcode</a> - <?php _e('Display any timeline you want the Twitter 1.1 way with a simple shortcode','jm-ltsc');?></li>
+					<li><a href="http://wordpress.org/plugins/jm-html5-and-responsive-gallery/">JM HTML5 and Responsive Gallery</a> - <?php _e('Fix poor native markup for WordPress gallery with some HTML5 markup and add responsive rules.','jm-ltsc');?></li>
+					<li><a href="http://wordpress.org/plugins/jm-twit-this-comment/">JM Twit This Comment</a> - <?php _e('Make your comments tweetable','jm-ltsc');?></li>
+					<li><a href="http://wordpress.org/plugins/jm-widget-feed-panel/">JM Widget Feed Panel</a> - <?php _e('Add a third RSS widget to your dashboard','jm-ltsc');?></li>
+					<li><a href="http://wordpress.org/plugins/jm-twitter-status-api-monitor/">JM Twitter Status API Monitor</a> - <?php _e('Monitor the Twitter API 1.1 from dashboard','jm-ltsc');?></li>
+				</ul>
+			</div>
+		</div>
+
 	<?php
 }
 /*

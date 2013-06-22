@@ -90,7 +90,12 @@ affichera le dernier tweet du compte TweetPressFr
 
 == Changelog ==
 
-= 3.2.1 =
+= 3.2.3 =
+* 22 june 2013
+* Improve option page with some explanation (how to use and style the tweets)
+* Add class to let you apply your own CSS to the text of your tweets, thanks **sam** to report it and for your suggestion.
+
+= 3.2.2 =
 * 19 june 2013
 * move the 'tweetfeed' class from the li to the ul to make it easier to style with your own CSS
 

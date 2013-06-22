@@ -13,12 +13,12 @@ msgstr ""
 #. Text in function
 #: jm-ltsc.php
 msgid " hours ago"
-msgstr "heures "
+msgstr " heures "
 
 #. Text in function
 #: jm-ltsc.php
 msgid " minutes ago"
-msgstr "minutes "
+msgstr " minutes "
 
 #. Text in echo
 #: jm-ltsc.php
@@ -194,4 +194,69 @@ msgstr "pour créer votre application<strong>avant toute chose</strong> car vous
 #: jm-ltsc.php
 msgid "Do not try to display mentions or retweets from other accounts from yours. This logically impossible !"
 msgstr "N'essayez pas d'afficher les mentions ou les retweets d'autres comptes que le votre. C'est logiquement impossible !"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "About the developer"
+msgstr "À propos de l'auteur"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "I am a WordPress Developer, I like to make it simple."
+msgstr "Je suis intégrateur WordPress, j'aime faire simple."
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "My WordPress Profile"
+msgstr "Mon profil WordPress"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Help me keep this free"
+msgstr " Maintenir le plugin gratuit"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Other plugins you might dig"
+msgstr "D'autres plugins que vous pourriez aimer"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Display any timeline you want the Twitter 1.1 way with a simple shortcode"
+msgstr "Affiche n'importe quelle timeline en respectant les derniers changement de l'API Twitter 1.1 et grâce à un simple shortcode"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Fix poor native markup for WordPress gallery with some HTML5 markup and add responsive rules."
+msgstr "Corrige le markup natif assez pauvre de WordPress concernant les galeries et ajoute quelques règles CSS responsive"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Make your comments tweetable"
+msgstr "Rend vos commentaires tweetables"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Add a third RSS widget to your dashboard"
+msgstr "Ajoute un 3ème widget RSS dans votre dashboard"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Monitor the Twitter API 1.1 from dashboard"
+msgstr "Permet de surveiller l'API Twitter"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "To show Twitter avatar write [jmlt show_twittar=\"on\"]"
+msgstr "Pour afficher les avatar Twitter écrivez [jmlt show_twittar=\"on\"]"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Styles"
+msgstr "Styles"
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS class <code>.tweetfeed {}</code>. To apply styles to the text of you tweets just us CSS class <code>.tweetcontent{}</code>"
+msgstr "Le plugin affiche vos tweets dans une liste non ordonnée que vous pouvez styler avec la classe CSS <code>.tweetfeed {}</code>. Pour clibler le texte des tweets utilisez la class CSS <code>.tweetcontent{}</code>"
 
