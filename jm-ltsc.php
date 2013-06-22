@@ -381,7 +381,7 @@ function jm_ltsc_options_page() {
 			<h3 class="hndle"><span><?php _e('Other plugins you might dig','jm-ltsc');?></span></h3>
 			<div class="inside">
 				<ul>
-					<li><a href="http://wordpress.org/plugins/jm-last-twit-shortcode/">JM Last Twit Shortcode</a> - <?php _e('Display any timeline you want the Twitter 1.1 way with a simple shortcode','jm-ltsc');?></li>
+					<li><a href="http://wordpress.org/plugins/jm-twitter-cards/">JM Twitter Cards</a></li>
 					<li><a href="http://wordpress.org/plugins/jm-html5-and-responsive-gallery/">JM HTML5 and Responsive Gallery</a> - <?php _e('Fix poor native markup for WordPress gallery with some HTML5 markup and add responsive rules.','jm-ltsc');?></li>
 					<li><a href="http://wordpress.org/plugins/jm-twit-this-comment/">JM Twit This Comment</a> - <?php _e('Make your comments tweetable','jm-ltsc');?></li>
 					<li><a href="http://wordpress.org/plugins/jm-widget-feed-panel/">JM Widget Feed Panel</a> - <?php _e('Add a third RSS widget to your dashboard','jm-ltsc');?></li>
