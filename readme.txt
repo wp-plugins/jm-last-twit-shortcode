@@ -90,6 +90,12 @@ affichera le dernier tweet du compte TweetPressFr
 
 == Changelog ==
 
+= 3.2.4 =
+* 22 june 2013
+* Remove support for multiple timeline because twitter has changed it rate limits for mentions_timeline, home_timeline and retweets_of_me see https://dev.twitter.com/docs/rate-limiting/1.1/limits
+* Now it 15tweets/user/window and not available for app which triggers error 429
+* So you can still use user_timeline (180tweets/user and 300tweets/app per window)
+
 = 3.2.3 =
 * 22 june 2013
 * Improve option page with some explanation (how to use and style the tweets)

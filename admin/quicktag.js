@@ -1,5 +1,4 @@
 //quicktags for plugin JM Last Twit Shortcode
 QTags.addButton( 'eg_jmltsc', 'jmlt', '[jmlt]', '', 'q', 'Last Twit Shortcode', 130 );
-QTags.addButton( 'eg_jmltsc_mentions', 'jmlt @', '[jmlt tl="mentions_timeline"]', '', 'q', 'Last Twit Shortcode mentions tl', 130 );
-QTags.addButton( 'eg_jmltsc_rt', 'jmlt RT', '[jmlt tl="retweets_of_me"]', '', 'q', 'Last Twit Shortcode retweets of me', 130 );
-QTags.addButton( 'eg_jmltsc_ht', 'jmlt HT', '[jmlt tl="home_timeline"]', '', 'q', 'Last Twit Shortcode home tl', 130 );
+QTags.addButton( 'eg_jmltsc_twittar', 'jmlt twittar', '[jmlt show_twittar="on"]', '', 'q', 'Last Twit Shortcode twittar', 130 );
+QTags.addButton( 'eg_jmltsc_count', 'jmlt count', '[jmlt count=""]', '', 'q', 'Last Twit Shortcode count', 130 );

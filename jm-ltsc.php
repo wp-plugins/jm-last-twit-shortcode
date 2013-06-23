@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.3
+Version: 3.2.4
 License: GPL2++
 */
 
@@ -109,12 +109,7 @@ if(!function_exists('jm_ltsc_output')) {
 		if ($username == '') $username = $opts['twitAccount'];
 		
 		//add some checking to avoid misuse of shortcode
-		$checking = array("user_timeline", "mentions_timeline", "home_timeline");
-		if (!in_array($tl, $checking))	$tl = 'user_timeline';
-		
-		//avoid broken display in particular case which are not allowed by Twitter
-		if ( ($tl == 'mentions_timeline' && $username !== $opts['twitAccount']) || ($tl == 'retweets_of_me' && $username !== $opts['twitAccount']) ) $tl = 'user_timeline';
-
+		if ($tl !== 'user_timeline') $tl = 'user_timeline';
 
 		//config 
 		$consumer_key = $opts['consumerKey'];
@@ -136,7 +131,7 @@ if(!function_exists('jm_ltsc_output')) {
 		'user_secret'     => $user_secret
 		));
 
-		$code = $tmhOAuth->request('GET', $tmhOAuth->url('1.1/statuses/'.$tl), 
+		$code = $tmhOAuth->request('GET', $tmhOAuth->url('1.1/statuses/user_timeline'), 
 		array(
 		'include_entities' => '1',
 		'screen_name'      => $username,
@@ -148,7 +143,7 @@ if(!function_exists('jm_ltsc_output')) {
 		}
 
 		//set our transient if there's no recent copy
-		$transient = "_last_twit";
+		$transient = "_last_twitq";
 		$i = 1;
 		$incache = get_site_transient( $transient );
 		
@@ -173,9 +168,9 @@ if(!function_exists('jm_ltsc_output')) {
 							}
 							$i++;
 						}
-				 
+						
+				        set_site_transient( $transient, $output, $opts['time']*60 );
 						$output .="</ul>";
-				set_site_transient( $transient, $output, $opts['time']*60 );
 			break;	
 			
 		case '400':
@@ -183,16 +178,19 @@ if(!function_exists('jm_ltsc_output')) {
 		case '403':
 		case '404':
 		case '406':
+			delete_site_transient( $transient);
 			$output = '<div class="large pa1 error">'.__('Your credentials might be unset or incorrect or username is wrong. In any case this error is not due to Twitter API.','jm-ltsc').'</div>';
 			break;
 			
 		case '429':
+			delete_site_transient( $transient);
 			$output = '<div class="large pa1 error">'.__('Rate limits are exceed!','jm-ltsc').'</div>';
 			break;
 			
 		case '500':
 		case '502':
 		case '503':
+			delete_site_transient( $transient);
 			$output = '<div class="large pa1 error">'.__('Twitter is overwhelmed or something bad happened with its API.','jm-ltsc').'</div>';
 			break;
 		default:
@@ -331,7 +329,6 @@ function jm_ltsc_options_page() {
 	<li><?php _e('To show Twitter avatar write [jmlt show_twittar="on"]','jm-ltsc');?></li>
 	<li><?php _e('Really easy, just put <strong>[jmlt]</strong> in your posts.','jm-ltsc');?></li>
 	<li><?php _e('To change Twitter Acount in a post, just put <strong>[jmlt username="twitter"]</strong> and you will get tweets by @twitter','jm-ltsc');?></li>
-	<li><?php _e('You can even change timeline, e.g <strong>[jmlt tl="mentions_timeline"]</strong> will display last mention of your Twitter account. Default is user_timeline. Other options are retweets_of_me and home_timeline.','jm-ltsc');?></li>
 	<li><?php _e('Use quicktags buttons in HTML editor if you are not sur of how to use shortcode or if you just want to spare time.','jm-ltsc');?></li>
 	<li> <?php _e('To use the shortcode in templates, just use <em>echo apply_filters("the_content","[jmlt]")</em>','jm-ltsc'); ?></li>    
 	<li> <?php _e('To use the shortcode in text widgets, just use shortcode like you do in posts.','jm-ltsc'); ?></li>    
