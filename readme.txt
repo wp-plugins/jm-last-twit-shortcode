@@ -107,7 +107,7 @@ Cela effacera les transients
 == Changelog ==
 
 = 3.2.5 =
-* 27 juin 2013
+* 27 june 2013
 * MAJOR UPDATE !
 * Change transient system to allow you define cache time in shortcode, just put [jmlt cache="1800"] to store tweets during 30 minutes.
 * This will fix 429 errors and now you can use the shortcode several time on your website (1 transient for 1 username)
