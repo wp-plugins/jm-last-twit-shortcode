@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.4
+Version: 3.2.5
 License: GPL2++
 */
 
@@ -99,6 +99,7 @@ if(!function_exists('jm_ltsc_output')) {
 		extract(shortcode_atts(array(
 		'username'   => '',
 		'tl' => 'user_timeline',
+		'cache' => 1800,
 		'count'=> 1,
 		'show_twittar' => 'off'
 		), $atts));
@@ -117,6 +118,13 @@ if(!function_exists('jm_ltsc_output')) {
 		$user_token = $opts['oauthToken'];
 		$user_secret = $opts['oauthToken_secret'];	
 		
+		
+		//set our transient if there's no recent copy
+		$transient = $username."_last_twit";
+		$i = 1;
+		$incache = get_site_transient( $transient );
+		
+		if( !$incache ) {
 
 		//libs
 		require_once(plugin_dir_path( __FILE__ ) .'admin/libs/tmhOAuth.php');
@@ -130,26 +138,15 @@ if(!function_exists('jm_ltsc_output')) {
 		'user_token'      => $user_token,
 		'user_secret'     => $user_secret
 		));
+		
 
 		$code = $tmhOAuth->request('GET', $tmhOAuth->url('1.1/statuses/user_timeline'), 
 		array(
 		'include_entities' => '1',
 		'screen_name'      => $username,
 		'count'			   => $count	
-		));
+		));    
 		
-		if ( empty( $code ) ) {
-			return __('There is no tweet to display yet.','jm-ltsc');
-		}
-
-		//set our transient if there's no recent copy
-		$transient = "_last_twitq";
-		$i = 1;
-		$incache = get_site_transient( $transient );
-		
-		if ( false !== $incache ) {
-		$output = $incache . '<!--'. __('JM Last Twit Shortcode - cache','jm-ltsc') .'-->';
-		}
          
 		//output
 		switch ($code) {
@@ -164,12 +161,11 @@ if(!function_exists('jm_ltsc_output')) {
 								$id_str = $data[$i - 1]->id_str;
 								$twittar = '';
 								if ( $show_twittar == 'on') $twittar = '<img width="24" height="24" src="'.$data[$i - 1]->user->profile_image_url.'" alt=@"'.$data[$i - 1]->user->screen_name.'" />'; 
-								$output .= "<li>" . $twittar ." <span class='tweetcontent'>". $feed . "</span> - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp' ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
+								$output .= "<li>" . $twittar ." <span class='tweetcontent'>". $feed . "</span> - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp', 1 ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
 							}
 							$i++;
 						}
 						
-				        set_site_transient( $transient, $output, $opts['time']*60 );
 						$output .="</ul>";
 			break;	
 			
@@ -178,23 +174,29 @@ if(!function_exists('jm_ltsc_output')) {
 		case '403':
 		case '404':
 		case '406':
-			delete_site_transient( $transient);
+			
 			$output = '<div class="large pa1 error">'.__('Your credentials might be unset or incorrect or username is wrong. In any case this error is not due to Twitter API.','jm-ltsc').'</div>';
 			break;
 			
 		case '429':
-			delete_site_transient( $transient);
+			
 			$output = '<div class="large pa1 error">'.__('Rate limits are exceed!','jm-ltsc').'</div>';
 			break;
 			
 		case '500':
 		case '502':
 		case '503':
-			delete_site_transient( $transient);
+			
 			$output = '<div class="large pa1 error">'.__('Twitter is overwhelmed or something bad happened with its API.','jm-ltsc').'</div>';
 			break;
 		default:
 			$output = __('Something is wrong or missing. ','jm-ltsc');
+		}
+		
+		set_site_transient( $transient, $output, $cache );
+		
+		} else {
+			return $incache . '<!--'. __('JM Last Twit Shortcode - cache','jm-ltsc') .'-->';
 		}
 		return $output;
 		
@@ -311,12 +313,6 @@ function jm_ltsc_options_page() {
 	<label for="oauthToken_secret"><?php _e('Provide your oAuth Token Secret', 'jm-ltsc'); ?> :</label><br />
 	<input id="oauthToken_secret" type="text" name="jm_ltsc[oauthToken_secret]" class="paDemi" size="70" value="<?php echo $opts['oauthToken_secret']; ?>" />
 	</p>
-	<p>
-	<label for="time"><?php _e('Set expired time for transient (30 min at least)', 'jm-ltsc'); ?> :</label><br />
-	<input id="time" type="number" min="30" name="jm_ltsc[time]" class="paDemi" size="70" value="<?php echo $opts['time']; ?>" />
-	<br /><em><?php _e('*This is the time in the course of which your tweet will be stored. This allows us to limit server requests.', 'jm-ltsc'); ?></em>
-	</p>
-
 
 	<?php submit_button(null, 'primary right', '_submit'); ?>
 
@@ -415,8 +411,7 @@ function jm_ltsc_sanitize_options($options) {
 	$new['oauthToken']               = esc_attr(strip_tags( $options['oauthToken'] ));
 	if ( isset($options['oauthToken_secret']) )
 	$new['oauthToken_secret']        = esc_attr(strip_tags( $options['oauthToken_secret'] ));
-	if ( isset($options['time']) )
-	$new['time']                     = (int) $options['time'];// because it comes from an input type number
+	
 	return $new;
 }
 
@@ -427,8 +422,7 @@ function jm_ltsc_get_default_options() {
 	'consumerKey'              => __('replace with your keys - required', 'jm-ltsc'),
 	'consumerSecret'           => __('replace with your keys - required', 'jm-ltsc'),
 	'oauthToken'               => __('replace with your keys - required', 'jm-ltsc'),
-	'oauthToken_secret'        => __('replace with your keys - required', 'jm-ltsc'),
-	'time'                     => 30
+	'oauthToken_secret'        => __('replace with your keys - required', 'jm-ltsc')
 	);
 }
 

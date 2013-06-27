@@ -13,8 +13,6 @@ A plugin meant to add your last tweet with the lattest API way :
 == Description ==
 
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
-It allows you to change user_timeline for mentions_timeline, home_timeline or retweets_of_me.
-
 See **FAQ** here and/or option page of plugin on your installation
 
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
@@ -24,7 +22,6 @@ En Français
 –––––––––––––––––––––––––––––––––––
 
 Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une connexion authentifiée et grâce à un shortcode. 
-Le plugin vous permet de changer user_timeline pour mentions_timeline, home_timeline ou retweets_of_me.
 
 <a href="http://twitter.com/tweetpressfr">Me suivre sur Twitter</a>
 
@@ -63,6 +60,10 @@ This will display the last 4 tweets from the user specified in option page
 `[jmlt username="TweetPressFr"]`
 This will display tweet from TweetPressFr
 
+= How can I set cache ? =
+`[jmlt cache="1800"]`
+This will store tweets during 30 minutes allowing you to limit your API requests 
+
 ----
 En Français
 –––––––––––––––––––––––––––––––––––
@@ -82,19 +83,32 @@ Utilisez le paramètre "username" dans le shortcode :
 `[jmlt username="TweetPressFr"]`
 affichera le dernier tweet du compte TweetPressFr
 
+= Comment je fixe le cache ? =
+`[jmlt cache="1800"]`
+Cela mettra les tweets en cache durant 30 minutes et permettra de limiter les requêtes API
+
 == Screenshots ==
 1. front-end result with default styles
 2. quicktags in posts
 3. use in widget
 4. front-end result when use in widget while using in post
 
+
 == Changelog ==
+
+= 3.2.5 =
+* 27 juin 2013
+* MAJOR UPDATE !
+* Change transient system to allow you define cache time in shortcode, just put [jmlt cache="1800"] to store tweets during 30 minutes.
+* This will fix 429 errors and now you can use the shortcode several time on your website (1 transient for 1 username)
+* Fix bug with current_time(), now it will take local time even if your timezone settings are wrong
+
 
 = 3.2.4 =
 * 22 june 2013
 * Remove support for multiple timeline because twitter has changed it rate limits for mentions_timeline, home_timeline and retweets_of_me see https://dev.twitter.com/docs/rate-limiting/1.1/limits
-* Now it 15tweets/user/window and not available for app which triggers error 429
-* So you can still use user_timeline (180tweets/user and 300tweets/app per window)
+* Now it 15/tweets/user/window and not available for app which triggers error 429
+* So you can still use user_timeline (180/tweets/user and 300/tweets/app per window)
 
 = 3.2.3 =
 * 22 june 2013
