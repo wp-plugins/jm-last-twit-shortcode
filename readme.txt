@@ -22,6 +22,7 @@ En Français
 –––––––––––––––––––––––––––––––––––
 
 Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une connexion authentifiée et grâce à un shortcode. 
+Voir la **FAQ** et/ou la page d'options du plugin sur votre installation
 
 <a href="http://twitter.com/tweetpressfr">Me suivre sur Twitter</a>
 
@@ -64,6 +65,10 @@ This will display tweet from TweetPressFr
 `[jmlt cache="1800"]`
 This will store tweets during 30 minutes allowing you to limit your API requests 
 
+= How can I delete cache? =
+`delete_site_transient( $transient );`
+This will delete transient.
+
 ----
 En Français
 –––––––––––––––––––––––––––––––––––
@@ -86,6 +91,11 @@ affichera le dernier tweet du compte TweetPressFr
 = Comment je fixe le cache ? =
 `[jmlt cache="1800"]`
 Cela mettra les tweets en cache durant 30 minutes et permettra de limiter les requêtes API
+
+= Comment purger le cache? =
+`delete_site_transient( $transient );`
+Cela effacera les transients
+
 
 == Screenshots ==
 1. front-end result with default styles
