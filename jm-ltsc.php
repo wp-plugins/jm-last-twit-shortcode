@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.5
+Version: 3.2.6
 License: GPL2++
 */
 
@@ -99,9 +99,8 @@ if(!function_exists('jm_ltsc_output')) {
 		extract(shortcode_atts(array(
 		'username'   => '',
 		'tl' => 'user_timeline',
-		'cache' => 1800,
-		'count'=> 1,
-		'show_twittar' => 'off'
+		'cache' => 0,
+		'count'=> 1
 		), $atts));
 
 		$opts = jm_ltsc_get_options(); 
@@ -153,15 +152,20 @@ if(!function_exists('jm_ltsc_output')) {
 		case '200':
 		case '304':				
 				$data = json_decode( $tmhOAuth->response['response'] );
-				 $output = "<ul class='tweetfeed'>\r\n";
+				 $output = "<ul class='tweetfeed'>";
 						while ( $i <= $count ) {
 							//Assign feed to $feed
 							if ( isset( $data[$i - 1] ) ) {
 								$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
 								$id_str = $data[$i - 1]->id_str;
-								$twittar = '';
-								if ( $show_twittar == 'on') $twittar = '<img width="24" height="24" src="'.$data[$i - 1]->user->profile_image_url.'" alt=@"'.$data[$i - 1]->user->screen_name.'" />'; 
-								$output .= "<li>" . $twittar ." <span class='tweetcontent'>". $feed . "</span> - <em>\r\n<a href='http://twitter.com/$username/status/$id_str'>" . human_time_diff( strtotime( $data[$i - 1]->created_at ), current_time( 'timestamp', 1 ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</a></em></li>\r\n";
+								$screen_name = $data[$i - 1]->user->screen_name;
+								$date = $data[$i - 1]->created_at;
+								$date_format = get_option('date_format').' - '.get_option('time_format');
+								$profile_image_url = $data[$i - 1]->user->profile_image_url;
+							    $twittar = '<img width="36" height="36" src="'.$profile_image_url.'" alt=@"'.$screen_name .'" />'; 
+								
+								
+								$output = "<li>" . $twittar ."<a href='http://twitter.com/".$screen_name."'><span class='tweet-name'>".$username."</span><span class='tweet-screen-name'>@".$screen_name."</span></a> <p class='tweet-content'>".$feed . "</p><em><a class='tweet-timestamp' href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date'>".date( $date_format, strtotime($date))."</span></a> - <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</span></em><span class='tweet-reply'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'>". __( 'Reply', 'jm-ltsc' ) ."</a></span> <span class='tweet-retweet'><a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'>". __( 'Retweet', 'jm-ltsc' ) ."</a></span> <span class='tweet-favorite'><a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'>". __( 'Favorite', 'jm-ltsc' ) ."</a></span></li>";
 							}
 							$i++;
 						}
@@ -328,13 +332,12 @@ function jm_ltsc_options_page() {
 	<li><?php _e('Use quicktags buttons in HTML editor if you are not sur of how to use shortcode or if you just want to spare time.','jm-ltsc');?></li>
 	<li> <?php _e('To use the shortcode in templates, just use <em>echo apply_filters("the_content","[jmlt]")</em>','jm-ltsc'); ?></li>    
 	<li> <?php _e('To use the shortcode in text widgets, just use shortcode like you do in posts.','jm-ltsc'); ?></li>    
-	<li><div class="error"> <?php _e('Do not try to display mentions or retweets from other accounts from yours. This logically impossible !','jm-ltsc'); ?></div></li> 
 	</ul>
 	</div>
 	
 	<div class="form-like">
 	<h2 id="tab3">{ <?php _e('Styles', 'jm-ltsc') ?> }</h2>
-	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS class <code>.tweetfeed {}</code>. To apply styles to the text of you tweets just us CSS class <code>.tweetcontent{}</code>','jm-ltsc');?></p>
+	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {},{} .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweetcontent{}</code>','jm-ltsc');?></p>
 	</div>
 	
 	
