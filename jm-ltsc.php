@@ -101,7 +101,7 @@ if(!function_exists('jm_ltsc_output')) {
 		'tl' => 'user_timeline',
 		'username'   => '',
 		'cache' => 1800,
-		'count'=> 1,
+		'count' => 1
 		), $atts));
 
 		$opts = jm_ltsc_get_options(); 
@@ -165,8 +165,7 @@ if(!function_exists('jm_ltsc_output')) {
 								$profile_image_url = $data[$i - 1]->user->profile_image_url;
 							    $twittar = '<img width="36" height="36" src="'.$profile_image_url.'" alt=@"'.$screen_name .'" />'; 
 								
-								
-								$output .= "<li>" . $twittar ."<a href='http://twitter.com/".$screen_name."'><span class='tweet-name'>".$username."</span><span class='tweet-screen-name'>@".$screen_name."</span></a> <p class='tweet-content'>".$feed . "</p><em><a class='tweet-timestamp' href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date'>".date( $date_format, strtotime($date))."</span></a> - <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</span></em><span class='tweet-reply'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'>". __( 'Reply', 'jm-ltsc' ) ."</a></span> <span class='tweet-retweet'><a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'>". __( 'Retweet', 'jm-ltsc' ) ."</a></span> <span class='tweet-favorite'><a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'>". __( 'Favorite', 'jm-ltsc' ) ."</a></span></li>";
+									$output .= "<li>" . $twittar ."<a href='http://twitter.com/".$screen_name."'><span class='tweet-name'>".$username."</span><span class='tweet-screen-name'>@".$screen_name."</span></a> <p class='tweet-content'>".$feed . "</p><em><a class='tweet-timestamp' href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date'>".date( $date_format, strtotime($date))."</span></a> - <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</span></em><span class='tweet-reply'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'>". __( 'Reply', 'jm-ltsc' ) ."</a></span> <span class='tweet-retweet'><a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'>". __( 'Retweet', 'jm-ltsc' ) ."</a></span> <span class='tweet-favorite'><a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'>". __( 'Favorite', 'jm-ltsc' ) ."</a></span></li>";
 							}
 							$i++;
 						}
