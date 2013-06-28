@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.6
+Version: 3.2.7
 License: GPL2++
 */
 
@@ -326,7 +326,6 @@ function jm_ltsc_options_page() {
 	<div class="form-like">
 	<h2 id="tab2">[ <?php _e('How to', 'jm-ltsc') ?> ]</h2>
 	<ul class="instructions">
-	<li><?php _e('To show Twitter avatar write [jmlt show_twittar="on"]','jm-ltsc');?></li>
 	<li><?php _e('Really easy, just put <strong>[jmlt]</strong> in your posts.','jm-ltsc');?></li>
 	<li><?php _e('To change Twitter Acount in a post, just put <strong>[jmlt username="twitter"]</strong> and you will get tweets by @twitter','jm-ltsc');?></li>
 	<li><?php _e('Use quicktags buttons in HTML editor if you are not sur of how to use shortcode or if you just want to spare time.','jm-ltsc');?></li>
@@ -337,7 +336,7 @@ function jm_ltsc_options_page() {
 	
 	<div class="form-like">
 	<h2 id="tab3">{ <?php _e('Styles', 'jm-ltsc') ?> }</h2>
-	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {},{} .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweetcontent{}</code>','jm-ltsc');?></p>
+	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {}, .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>','jm-ltsc');?></p>
 	</div>
 	
 	

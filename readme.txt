@@ -106,6 +106,10 @@ Cela effacera les transients
 
 == Changelog ==
 
+= 3.2.7 =
+* 28 june 2013
+* wrong instructions for CSS on option page (sorry :/). Now it's fixed.
+
 = 3.2.6 =
 * 28 june 2013
 * Make the plugin respect the display requirements according to https://dev.twitter.com/terms/display-requirements
