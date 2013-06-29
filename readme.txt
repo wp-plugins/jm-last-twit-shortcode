@@ -106,6 +106,11 @@ Cela effacera les transients
 
 == Changelog ==
 
+= 3.2.8 =
+* 29 june 2013
+* problem with SVN, update failed yesterday. 
+* count is fixed, you can grab as many tweets as possible
+
 = 3.2.7 =
 * 28 june 2013
 * wrong instructions for CSS on option page (sorry :/). Now it's fixed.

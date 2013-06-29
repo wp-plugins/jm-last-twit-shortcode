@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.7
+Version: 9.9.9
 License: GPL2++
 */
 
@@ -120,7 +120,7 @@ if(!function_exists('jm_ltsc_output')) {
 		
 		
 		//set our transient if there's no recent copy
-		$transient = $username."_last_twit";
+		$transient = $username."_last_twiit";
 		$i = 1;
 		$incache = get_site_transient( $transient );
 		
@@ -161,11 +161,11 @@ if(!function_exists('jm_ltsc_output')) {
 								$id_str = $data[$i - 1]->id_str;
 								$screen_name = $data[$i - 1]->user->screen_name;
 								$date = $data[$i - 1]->created_at;
-								$date_format = get_option('date_format').' - '.get_option('time_format');
+								$date_format = 'j/m/y - '.get_option('time_format');
 								$profile_image_url = $data[$i - 1]->user->profile_image_url;
 							    $twittar = '<img width="36" height="36" src="'.$profile_image_url.'" alt=@"'.$screen_name .'" />'; 
 								
-									$output .= "<li>" . $twittar ."<a href='http://twitter.com/".$screen_name."'><span class='tweet-name'>".$username."</span><span class='tweet-screen-name'>@".$screen_name."</span></a> <p class='tweet-content'>".$feed . "</p><em><a class='tweet-timestamp' href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date'>".date( $date_format, strtotime($date))."</span></a> - <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ) . " " . __( 'ago', 'jm-ltsc' ) . "</span></em><span class='tweet-reply'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'>". __( 'Reply', 'jm-ltsc' ) ."</a></span> <span class='tweet-retweet'><a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'>". __( 'Retweet', 'jm-ltsc' ) ."</a></span> <span class='tweet-favorite'><a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'>". __( 'Favorite', 'jm-ltsc' ) ."</a></span></li>";
+									$output .= "<li class='mt1 mb1'>" . $twittar ."<a class='' href='http://twitter.com/".$screen_name."'><span class='tweet-name inbl'>".$username."</span><span class='tweet-screen-name'>@".$screen_name."</span></a> <p class='tweet-content'>".$feed . "</p><em><a class='tweet-timestamp' href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date small'>".date( $date_format, strtotime($date))."</span></a> - <span class='tweet-timediff small'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ) . __(' ago','jmltsc')."</span> </em><span class='tweet-reply small ml1'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'>". __( 'Reply', 'jm-ltsc' ) ."</a></span> <span class='tweet-retweet small'><a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'>". __( 'Retweet', 'jm-ltsc' ) ."</a></span> <span class='tweet-favorite small'><a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'>". __( 'Favorite', 'jm-ltsc' ) ."</a></span></li>";
 							}
 							$i++;
 						}
@@ -336,7 +336,7 @@ function jm_ltsc_options_page() {
 	
 	<div class="form-like">
 	<h2 id="tab3">{ <?php _e('Styles', 'jm-ltsc') ?> }</h2>
-	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {}, .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>','jm-ltsc');?></p>
+	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {},{} .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweetcontent{}</code>','jm-ltsc');?></p>
 	</div>
 	
 	
