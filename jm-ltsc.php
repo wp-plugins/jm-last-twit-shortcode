@@ -336,7 +336,7 @@ function jm_ltsc_options_page() {
 	
 	<div class="form-like">
 	<h2 id="tab3">{ <?php _e('Styles', 'jm-ltsc') ?> }</h2>
-	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {},{} .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweetcontent{}</code>','jm-ltsc');?></p>
+	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {}, .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>','jm-ltsc');?></p>
 	</div>
 	
 	
