@@ -4,7 +4,7 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.2.8
+Version: 3.2.9
 License: GPL2++
 */
 
@@ -120,7 +120,7 @@ if(!function_exists('jm_ltsc_output')) {
 		
 		
 		//set our transient if there's no recent copy
-		$transient = $username."_last_twiit";
+		$transient = $username."_last_tweety";
 		$i = 1;
 		$incache = get_site_transient( $transient );
 		
@@ -157,15 +157,14 @@ if(!function_exists('jm_ltsc_output')) {
 						while ( $i <= $count ) {
 							//Assign feed to $feed
 							if ( isset( $data[$i - 1] ) ) {
-								$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
+								$feed = utf8_decode(jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] ));
 								$id_str = $data[$i - 1]->id_str;
 								$screen_name = $data[$i - 1]->user->screen_name;
 								$date = $data[$i - 1]->created_at;
 								$date_format = 'j/m/y - '.get_option('time_format');
 								$profile_image_url = $data[$i - 1]->user->profile_image_url;
-							    $twittar = '<img width="36" height="36" src="'.$profile_image_url.'" alt=@"'.$screen_name .'" />'; 
-								
-									$output .= "<li class='mt1 mb1'>" . $twittar ."<a class='' href='http://twitter.com/".$screen_name."'><span class='tweet-name inbl'>".$username."</span><span class='tweet-screen-name'>@".$screen_name."</span></a> <p class='tweet-content'>".$feed . "</p><em><a class='tweet-timestamp' href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date small'>".date( $date_format, strtotime($date))."</span></a> - <span class='tweet-timediff small'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ) . __(' ago','jmltsc')."</span> </em><span class='tweet-reply small ml1'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'>". __( 'Reply', 'jm-ltsc' ) ."</a></span> <span class='tweet-retweet small'><a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'>". __( 'Retweet', 'jm-ltsc' ) ."</a></span> <span class='tweet-favorite small'><a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'>". __( 'Favorite', 'jm-ltsc' ) ."</a></span></li>";
+							    $twittar = '<img class="tweet-twittar" width="36" height="36" src="'.$profile_image_url.'" alt=@"'.$screen_name .'" />'; 								
+								$output .= "<li>" . $twittar ."<span class='tweet-name'><a class='' href='http://twitter.com/".$screen_name."'>".$username."</a></span><span class='tweet-screen-name'>@<a class='' href='http://twitter.com/".$screen_name."'>".$screen_name."</a></span> <p class='tweet-content'>".$feed . "</p><em><span class='tweet-timestamp'><a href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date small'>".date( $date_format, strtotime($date))."</span></a> <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ).__(' ago','jm-ltsc')."</span> </em><span class='intent-meta'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'><span class='tweet-reply'>". __( 'Reply', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'> <span class='tweet-retweet'>". __( 'Retweet', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'><span class='tweet-favorite'>". __( 'Favorite', 'jm-ltsc' ) ."</span></a></span></li>";
 							}
 							$i++;
 						}
@@ -336,7 +335,15 @@ function jm_ltsc_options_page() {
 	
 	<div class="form-like">
 	<h2 id="tab3">{ <?php _e('Styles', 'jm-ltsc') ?> }</h2>
-	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>.tweetfeed {}, .tweet-name {}, .tweet-screen-name {}, .tweet-timestamp{}, .time-date{}, .tweet-timediff{}, .tweet-reply{}, .tweet-retweet{}, .tweet-favorite{} </code>. To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>','jm-ltsc');?></p>
+	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>tweet-name {}</code>, <code>.tweet-screen-name {}</code>, <code>.tweet-twittar {}</code>, <code>.tweet-timestamp{}</code>, <code>.time-date{}</code>, <code>.tweet-timediff{}</code>, <code>.intent-meta{}</code>, <code>.tweet-reply{}</code>, <code>.tweet-retweet{}</code>, <code>.tweet-favorite{}</code>. To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>','jm-ltsc');?></p>
+	<p><?php _e('Example','jm-ltsc');?> :</p>
+	<pre>
+	.tweet-timediff {position:absolute; right:.2em;top:0; }
+	.intent-meta{ position:absolute; right:.2em; bottom:.2em; }
+	.tweetfeed  li { background:#eee; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; position:relative; list-style-type:none; border:1px solid #ccc; margin:1em 0; padding:.4em; }
+	.tweet-reply,.tweet-favorite,.tweet-retweet { margin-right:.2em; font-size: 11px; font-weight: bold; line-height: 1; text-decoration: none!important; color: #ccc!important; text-shadow: 0 -1px 0 rgba(0,0,0,0.5); color:#fff!important; background:#3e3e3e; display: inline-block; padding: 8px 10px 8px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; border-bottom: 1px solid rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.5); margin: 2px;}
+	.tweet-reply:hover,.tweet-favorite:hover,.tweet-retweet:hover{background: #222;}
+	</pre>
 	</div>
 	
 	

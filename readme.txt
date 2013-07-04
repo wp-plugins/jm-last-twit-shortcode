@@ -106,6 +106,15 @@ Cela effacera les transients
 
 == Changelog ==
 
+= 3.2.9 =
+* 04 July 2013
+* Add utf8_decode to retrieve all characters
+* Improve CSS and add a real example I use on one of my site : http://apis.tweetpress.fr/twitter-feed
+* Make styling easier by changing span and adding markup
+* Next update will include some js to improve Ux (refresh)
+* Have a nice day ^^
+
+
 = 3.2.8 =
 * 29 june 2013
 * problem with SVN, update failed yesterday. 

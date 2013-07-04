@@ -187,4 +187,8 @@ msgstr ""
 #: jm-ltsc.php
 msgid "Do not try to display mentions or retweets from other accounts from yours. This logically impossible !"
 msgstr ""
-""
+
+#. Text in echo
+#: jm-twitter-cards.php
+msgid "Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>tweet-name {}</code>, <code>.tweet-screen-name {}</code>, <code>.tweet-twittar {}</code>, <code>.tweet-timestamp{}</code>, <code>.time-date{}</code>, <code>.tweet-timediff{}</code>, <code>.intent-meta{}</code>, <code>.tweet-reply{}</code>, <code>.tweet-retweet{}</code>, <code>.tweet-favorite{}</code>. To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>"
+msgstr ""
