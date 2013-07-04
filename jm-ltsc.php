@@ -157,7 +157,7 @@ if(!function_exists('jm_ltsc_output')) {
 						while ( $i <= $count ) {
 							//Assign feed to $feed
 							if ( isset( $data[$i - 1] ) ) {
-								$feed = utf8_decode(jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] ));
+								$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
 								$id_str = $data[$i - 1]->id_str;
 								$screen_name = $data[$i - 1]->user->screen_name;
 								$date = $data[$i - 1]->created_at;
