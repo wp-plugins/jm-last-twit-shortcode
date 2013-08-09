@@ -106,13 +106,16 @@ Cela effacera les transients
 
 == Changelog ==
 
+= 3.3.0 =
+* 09 Aug 2013
+* Use now composer to load library and all dependencies 
+* Add new parameters (and of course new quicktags ^^) : [jmlt exclude_replies="true"] will exclude replies from your timeline, [jmlt include_rts="false"] will exclude RTs from your timeline, thanks Marie For the idea ;)
+
 = 3.2.9 =
 * 04 July 2013
 * Improve CSS and add a real example I use on one of my site : http://apis.tweetpress.fr/twitter-feed
 * Make styling easier by changing span and adding markup
-* Next update will include some js to improve Ux (refresh)
 * Have a nice day ^^
-
 
 = 3.2.8 =
 * 29 june 2013
