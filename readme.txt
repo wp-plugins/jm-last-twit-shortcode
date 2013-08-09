@@ -13,7 +13,7 @@ A plugin meant to add your last tweet with the lattest API way :
 == Description ==
 
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
-See **FAQ** here and/or option page of plugin on your installation
+See **FAQ** here and/or option page of plugin on your installation.
 
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
 
