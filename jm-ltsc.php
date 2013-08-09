@@ -4,12 +4,20 @@ Plugin URI: http://tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.3.0
+Version: 3.3.1
 License: GPL2++
 */
 
 // New sources => http://clark-technet.com/2013/03/updated-wordpress-twitter-functions#comment-148551 (slightly modified)
 // and https://dev.twitter.com/docs/platform-objects/entities
+
+
+
+
+/** PHP version checking
+  */
+if (version_compare(PHP_VERSION, '5.3', '<'))
+    exit(sprintf('JM Last Twit Shortcode requires PHP 5.3 or higher. You’re still on %s.',PHP_VERSION));
 
 
 // Plugin activation: create default values if they don't exist
@@ -88,8 +96,6 @@ if(!function_exists('jc_twitter_format')) {
 }
 
 
-
-
 /*
 * OUTPUT
 */
@@ -116,15 +122,15 @@ if(!function_exists('jm_ltsc_output')) {
 		$user_secret = $opts['oauthToken_secret'];	
 		
 		//set our transient if there's no recent copy
-		$transient = $username."_last_twit_sc";
+		$transient = $username."_last_twit_sh";
 		$i = 1;
 		$incache = get_site_transient( $transient );
 		
 		if( !$incache ) {
 
 			//libs
-			require_once(plugin_dir_path( __FILE__ ) .'admin/libs/vendor/autoload.php');//composer yeah !
-
+	        require_once(plugin_dir_path( __FILE__ ) .'admin/libs/vendor/autoload.php');//composer yeah !
+			
 			//query
 
 			$tmhOAuth = new tmhOAuth(array(
@@ -244,7 +250,7 @@ function jm_ltsc_settings_action_links( $links, $file ) {
 //The add_action to add onto the WordPress menu.
 add_action('admin_menu', 'jm_ltsc_add_options');
 function jm_ltsc_add_options() {
-	$page = add_submenu_page( 'options-general.php', 'JM Last Twit Options', 'JM Last Twit', 'manage_options', 'jmltscoptions', 'jm_ltsc_options_page' );
+	$page = add_submenu_page( 'options-general.php', 'JM Last Twit Options', 'JM Last Twit', 'manage_options', 'jm_ltsc_options', 'jm_ltsc_options_page' );
 	register_setting( 'jm-ltsc', 'jm_ltsc', 'jm_ltsc_sanitize' );
 	add_action( 'admin_print_styles-' . $page, 'jm_ltsc_admin_css' );
 	add_action( 'admin_head-' . $page, 'jm_ltsc_screen_icon' );

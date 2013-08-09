@@ -106,6 +106,11 @@ Cela effacera les transients
 
 == Changelog ==
 
+= 3.3.1 =
+* 09 Aug 2013
+* Add some PHP version checking to be sure users are on PHP 5.3 at least.
+* Bugfix, permission error ion option pages
+
 = 3.3.0 =
 * 09 Aug 2013
 * Use now composer to load library and all dependencies 
