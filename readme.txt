@@ -3,7 +3,7 @@ Contributors: jmlapam
 Tags: twitter, tweet, API 1.1, shortcode
 DonateLink: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tweetpressfr%40gmail%2ecom&item_name=JM%20Last%20Twit%20Shortcode&no_shipping=0&no_note=1&tax=0&currency_code=EUR&bn=PP%2dDonationsBF&charset=UTF%2d8
 Requires at least: 
-Tested up to: 3.5.2
+Tested up to: 3.6
 License: GPLv2 or later
 Stable tag: trunk
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
