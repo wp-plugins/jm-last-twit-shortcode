@@ -106,6 +106,10 @@ Cela effacera les transients
 
 == Changelog ==
 
+= 3.3.3 =
+* 20 Aug 2013
+* Update library tmhOAuth to the latest version
+
 = 3.3.2 =
 * 15 Aug 2013
 * change the way PHP version is checked. Now in case PHP version is under 5.3 it displays a simple notice which is more appropriate than an exit().
