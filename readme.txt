@@ -106,6 +106,13 @@ Cela effacera les transients
 
 == Changelog ==
 
+= 3.3.4 =
+* 27 Aug 2013
+* Change connection process
+* Use some global
+* Now you can re-use your connection to the Twittter API for other requests in templates or everything else
+* Just use `global $tcTmhOAuth;` and enjoy ^^
+
 = 3.3.3 =
 * 20 Aug 2013
 * Update library tmhOAuth to the latest version
