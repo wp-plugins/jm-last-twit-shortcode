@@ -69,6 +69,14 @@ This will store tweets during 30 minutes allowing you to limit your API requests
 `delete_site_transient( $transient );`
 This will delete transient.
 
+= How can I reuse tokens? =
+`global $tcTmhOAuth;`
+This will allow you to do this. Just put it before your request and use it like this :
+`$request = $tcTmhOAuth->request('GET', $tcTmhOAuth->url('your request'), 
+			array(
+						//your parameters
+			));` 
+
 ----
 En Français
 –––––––––––––––––––––––––––––––––––
@@ -95,6 +103,14 @@ Cela mettra les tweets en cache durant 30 minutes et permettra de limiter les re
 = Comment purger le cache? =
 `delete_site_transient( $transient );`
 Cela effacera les transients
+
+= Comment réutiliser les tokens? =
+`global $tcTmhOAuth;`
+Avec le code précédent placé avant votre requête et ensuite su la base de ce modèle :
+`$request = $tcTmhOAuth->request('GET', $tcTmhOAuth->url('your request'), 
+			array(
+						//your parameters
+			));` 
 
 
 == Screenshots ==
