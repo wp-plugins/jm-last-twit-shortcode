@@ -45,7 +45,8 @@ En Français
 <a href="http://www.dailymotion.com/tweetpress#video=x10ja68">présentation du plugin en version 3.1.9</a>
 <a href="http://www.dailymotion.com/video/xxv3p6_creer-une-application-twitter-basique-pour-recuperer-des-tokens_tech">Tutoriel vidéo
  pour créer son application sur Twitter</a>
- [youtube http://www.youtube.com/watch?v=KfgkFjEoyv0]
+
+[youtube http://www.youtube.com/watch?v=KfgkFjEoyv0]
 
 == Frequently asked questions ==
 
