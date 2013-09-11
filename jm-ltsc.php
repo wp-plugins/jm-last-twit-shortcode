@@ -1,10 +1,10 @@
 <?php
 /*Plugin Name: JM Last Twit Shortcode
-Plugin URI: http://tweetPress.fr
+Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.3.4
+Version: 3.3.5
 License: GPL2++
 */
 
@@ -263,7 +263,7 @@ function jm_ltsc_lang_init() {
 // Add a "Settings" link in the plugins list
 add_filter( 'plugin_action_links_'.plugin_basename(__FILE__), 'jm_ltsc_settings_action_links', 10, 2 );
 function jm_ltsc_settings_action_links( $links, $file ) {
-	$settings_link = '<a href="' . admin_url( 'options-general.php?page=jm_ltsc_options' ) . '">' . __("Settings") . '</a>';
+	$settings_link = '<a href="' . admin_url( 'admin.php?page=jm_ltsc_options' ) . '">' . __("Settings") . '</a>';
 	array_unshift( $links, $settings_link );
 	return $links;
 }
@@ -272,151 +272,129 @@ function jm_ltsc_settings_action_links( $links, $file ) {
 //The add_action to add onto the WordPress menu.
 add_action('admin_menu', 'jm_ltsc_add_options');
 function jm_ltsc_add_options() {
-	$page = add_submenu_page( 'options-general.php', 'JM Last Twit Options', 'JM Last Twit', 'manage_options', 'jm_ltsc_options', 'jm_ltsc_options_page' );
+	$ltscpage = add_menu_page( 'JM Last Twit Options', 'JM LTSC',  'manage_options', 'jm_ltsc_options', 'jm_ltsc_options_page', plugins_url('admin/img/bird_orange_16.png', __FILE__),98);
 	register_setting( 'jm-ltsc', 'jm_ltsc', 'jm_ltsc_sanitize' );
-	add_action( 'admin_print_styles-' . $page, 'jm_ltsc_admin_css' );
-	add_action( 'admin_head-' . $page, 'jm_ltsc_screen_icon' );
+	add_action( 'load-'.$ltscpage, 'jm_ltsc_load_admin_css' );
 }
 
+function jm_ltsc_load_admin_css() {	
+	add_action( 'admin_enqueue_scripts','jm_ltsc_admin_css' );
+}
 
-// Add styles the WordPress Way >> http://codex.wordpress.org/Function_Reference/wp_enqueue_style#Load_stylesheet_only_on_a_plugin.27s_options_page
 function jm_ltsc_admin_css() {  
-	wp_enqueue_style( 'jm-style-ltw', plugins_url('admin/jm-ltsc-admin-style.css', __FILE__)); 
+	wp_enqueue_style( 'jm-style-ltw', plugins_url('admin/jm-ltsc-admin-style.css', __FILE__) ); 
 } 
-// Add screen icon
-function jm_ltsc_screen_icon() {
-	?>
-	<style type="text/css">
-	#icon-jmltsc {
-		background: url(<?php echo plugins_url('admin/icons/bird_gray_32.png', __FILE__); ?>) no-repeat 50% 50%;
-	}
-	</style>
-	<?php
-}
+
 
 // Settings page
 function jm_ltsc_options_page() {
 	$opts = jm_ltsc_get_options();
 	?>
-	<div id="jm-ltsc">
-	<span id="icon-jmltsc" class="icon32"></span>
-	<h1><?php _e('JM Last Twit Shortcode Options', 'jm-ltsc'); ?></h1>
+	<div class="jm-ltsc" id="pluginwrapper">
+			<!-- column-1 -->
+			<div class="column column-1">
+				<aside class="header">
+					<div class="box">
+						<h1><?php _e('JM Last Twit Shortcode', 'jm-ltsc'); ?></h1>
+						<h2 class="white"><?php _e('Get your last tweets <br />the Twitter 1.1 way</br> with a simple shortcode','jm-ltsc');?></h2>
+						<p class="plugin-desc"><?php _e('To grab your feed you need to authenticate in the new version of Twitter API 1.1', 'jm-ltsc'); ?></p>
+						<p class="plugin-desc white"><?php _e('With this plugin you can display any Twitter timeline with a simple a shortcode', 'jm-ltsc'); ?></p>
+					</div>	
+				</aside>
+			</div><!-- /.column-1 -->
+			
+			<!-- div column-2 -->
+			<div class="column column-2">
 	
-	<h2 class="nav-tab-wrapper">
-	<a href="#tab1" class="nav-tab nav-tab-active"><?php _e('Options','jm-tc');?></a>
-	<a href="#tab2" class="nav-tab"><?php _e('How to','jm-tc');?></a>
-	<a href="#tab3" class="nav-tab"><?php _e('Styles','jm-tc');?></a>
-	<a href="#tab4" class="nav-tab"><?php _e('Useful links','jm-tc');?></a>
-	</h2>
-	
-	
-	
-	<div class="form-like">
-	<h2><?php _e('Before', 'jm-ltsc'); ?></h2>
-	<p><?php _e('Do not forget to go to', 'jm-ltsc'); ?> <a href="https://dev.twitter.com/apps/" target="_blank">dev.twitter.com</a> <?php _e('to create your application <strong>before anything</strong> cause you might forget get it after. In any case you will need token to proceed.','jm-ltsc'); ?></p>
-	</div>
-	
-	<form class="jm-ltsc-form" method="post" action="options.php">
-	<?php settings_fields('jm-ltsc'); ?>
-	<fieldset>
+				<form class="jm-ltsc-form" method="post" action="options.php">
+				<?php settings_fields('jm-ltsc'); ?>
+					<section class="postbox">
+					<h1 class="hndle"><?php _e('Options', 'jm-ltsc'); ?></h1>	
+					<p>
+						<label for="twitAccount"><?php _e('Provide your Twitter username (used by default and without @)', 'jm-ltsc'); ?> :</label>
+						<input id="twitAccount" type="text" name="jm_ltsc[twitAccount]" class="paDemi" value="<?php echo jm_ltsc_remove_at($opts['twitAccount']); ?>" />
+					</p>
+					<p>
+						<label for="consumerKey"><?php _e('Provide your application consumer key', 'jm-ltsc'); ?> :</label><br />
+						<input id="consumerKey" type="text" name="jm_ltsc[consumerKey]" class="paDemi" size="70" value="<?php echo $opts['consumerKey']; ?>" />
+					</p>
+					<p>
+						<label for="consumerSecret"><?php _e('Provide your application consumer secret', 'jm-ltsc'); ?> :</label><br />
+						<input id="consumerSecret" type="text" name="jm_ltsc[consumerSecret]" class="paDemi" size="70" value="<?php echo $opts['consumerSecret']; ?>" />
+					</p>
+					<p>
+						<label for="oauthToken"><?php _e('Provide your oAuth Token', 'jm-ltsc'); ?> :</label><br />
+						<input id="oauthToken" type="text" name="jm_ltsc[oauthToken]" class="paDemi" size="70" value="<?php echo $opts['oauthToken']; ?>" />
+					</p>
+					<p>
+						<label for="oauthToken_secret"><?php _e('Provide your oAuth Token Secret', 'jm-ltsc'); ?> :</label><br />
+						<input id="oauthToken_secret" type="text" name="jm_ltsc[oauthToken_secret]" class="paDemi" size="70" value="<?php echo $opts['oauthToken_secret']; ?>" />
+					</p>
 
-	<legend id="tab1"><?php _e('Options', 'jm-ltsc'); ?></legend>
-	<p>
-	<label for="twitAccount"><?php _e('Provide your Twitter username (used by default and without @)', 'jm-ltsc'); ?> :</label>
-	<input id="twitAccount" type="text" name="jm_ltsc[twitAccount]" class="paDemi" value="<?php echo jm_ltsc_remove_at($opts['twitAccount']); ?>" />
-	</p>
-	<p>
-	<label for="consumerKey"><?php _e('Provide your application consumer key', 'jm-ltsc'); ?> :</label><br />
-	<input id="consumerKey" type="text" name="jm_ltsc[consumerKey]" class="paDemi" size="70" value="<?php echo $opts['consumerKey']; ?>" />
-	</p>
-	<p>
-	<label for="consumerSecret"><?php _e('Provide your application consumer secret', 'jm-ltsc'); ?> :</label><br />
-	<input id="consumerSecret" type="text" name="jm_ltsc[consumerSecret]" class="paDemi" size="70" value="<?php echo $opts['consumerSecret']; ?>" />
-	</p>
-	<p>
-	<label for="oauthToken"><?php _e('Provide your oAuth Token', 'jm-ltsc'); ?> :</label><br />
-	<input id="oauthToken" type="text" name="jm_ltsc[oauthToken]" class="paDemi" size="70" value="<?php echo $opts['oauthToken']; ?>" />
-	</p>
-	<p>
-	<label for="oauthToken_secret"><?php _e('Provide your oAuth Token Secret', 'jm-ltsc'); ?> :</label><br />
-	<input id="oauthToken_secret" type="text" name="jm_ltsc[oauthToken_secret]" class="paDemi" size="70" value="<?php echo $opts['oauthToken_secret']; ?>" />
-	</p>
+					<?php submit_button(null, 'primary right', '_submit'); ?>
 
-	<?php submit_button(null, 'primary right', '_submit'); ?>
+					</section>
+				</form>
+				
+			<section class="postbox">
+				<h1 class="hndle"><?php _e('How to', 'jm-ltsc'); ?></h1>
+				<ul class="howtouse"> 
+					<li><?php _e('Basic use, no option => whether it is in a post or in a Text widget use: <code>[jmlt]</code>', 'jm-ltsc'); ?> </code></li>
+					<li><?php _e('Different username => whether it is in a post or in a Text widget use: <code>[jmlt username="rihanna"]</code>', 'jm-ltsc'); ?></li>
+					<li><?php _e('More than 1 tweet, e.g 5 => whether it is in a post or in a Text widget use: <code>[jmlt count="5"]</code>', 'jm-ltsc'); ?></li>
+					<li><?php _e('Exclude replies => whether it is in a post or in a Text widget use: <code>[jmlt exclude_replies="true"]</code>', 'jm-ltsc'); ?></li>
+					<li><?php _e('Exclude RTs => whether it is in a post or in a Text widget use: <code>[jmlt include_rts="false"]</code>', 'jm-ltsc'); ?></li>			
+					<li><?php _e('Set cache duration => whether it is in a post or in a Text widget use: <code>[jmlt cache="3600"]</code> to put tweets in cache for 1 hour', 'jm-ltsc'); ?></li>			
+					<li><?php _e('To reuse tokens you set to use the plugin => just write in your templates and codes :<code>global $tcTmhOAuth;</code>', 'jm-ltsc'); ?></li>	
+				</ul>
+			</section>
+				
+				
+			<section class="postbox">
+				<h1 class="hndle"><?php _e('Styles', 'jm-ltsc'); ?></h1>	
+				<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>tweet-name {}</code>, <code>.tweet-screen-name {}</code>, <code>.tweet-twittar {}</code>, <code>.tweet-timestamp{}</code>, <code>.time-date{}</code>, <code>.tweet-timediff{}</code>, <code>.intent-meta{}</code>, <code>.tweet-reply{}</code>, <code>.tweet-retweet{}</code>, <code>.tweet-favorite{}</code>. <br />To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>','jm-ltsc');?></p>
+			</section>
+			
+			<section class="postbox">
+				<h1 class="hndle"><?php _e('Useful links', 'jm-ltsc'); ?></h1>	
+				<ul>
+					<li class="inbl"><a class="button normal redwp" target="_blank" href="http://wordpress.org/support/view/plugin-reviews/jm-last-twit-shortcode"><?php _e('Rate the plugin on WordPress.org', 'jm-ltsc') ?></a></li>
+					<li class="inbl"><a class="button normal twitblue" target="_blank" href="<?php _e('https://twitter.com/intent/tweet?source=webclient&amp;hastags=WordPress,Plugin&amp;text=JM%20Last%20Twit%20%20Shortcode%20a%20great%20WordPress%20plugin%20to%20get%20your%20last%20tweet%20Try%20it!&amp;url=http://wordpress.org/extend/plugins/jm-last-twit-shortcode/&amp;related=TweetPressFr&amp;via=TweetPressFr','jm-ltsc'); ?>"><?php _e('Tweet it', 'jm-ltsc') ?></a></li>      
+					<li class="inbl"><a class="button normal" target="_blank" href="https://twitter.com/intent/user?screen_name=TweetPressFr"><?php _e('follow me on Twitter', 'jm-ltsc'); ?></a></li>       
+				</ul>
+			</section>
+			
+			<section class="postbox">
+				<h1 class="hndle"><?php _e('About the developer', 'jm-ltsc'); ?></h1>	
+				<p>
+					<img src="http://www.gravatar.com/avatar/<?php echo md5( 'tweetpressfr'.'@'.'gmail'.'.'.'com' ); ?>" style="float:left;margin-right:10px;"/>
+					<strong>Julien Maury</strong><br />
+					<?php _e('I am a WordPress Developer, I like to make it simple.', 'jm-ltsc') ?> <br />
+					<a href="http://www.tweetpress.fr" target="_blank" title="TweetPress.fr - WordPress and Twitter tips">www.tweetpress.fr</a> - <a href="http://twitter.com/intent/user?screen_name=tweetpressfr" >@TweetPressFR</a><br />
+					<a href="http://profiles.wordpress.org/jmlapam/" title="on WordPress.org"><?php _e('My WordPress Profile', 'jm-ltsc') ?></a><br />
+				</p>
+			</section>
 
-	</fieldset>
-	</form>
+			<section class="postbox">
+				<h1 class="hndle"><?php _e('Help me keep this free', 'jm-ltsc'); ?></h1>	
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="2NBS57W3XG62L">
+				<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+				<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</section>	
 
-	<div class="form-like">
-	<h2 id="tab2">[ <?php _e('How to', 'jm-ltsc') ?> ]</h2>
-	<ul class="instructions">
-	<li><?php _e('Really easy, just put <strong>[jmlt]</strong> in your posts.','jm-ltsc');?></li>
-	<li><?php _e('To change Twitter Acount in a post, just put <strong>[jmlt username="twitter"]</strong> and you will get tweets by @twitter','jm-ltsc');?></li>
-	<li><?php _e('Use quicktags buttons in HTML editor if you are not sur of how to use shortcode or if you just want to spare time.','jm-ltsc');?></li>
-	<li> <?php _e('To use the shortcode in templates, just use <em>echo apply_filters("the_content","[jmlt]")</em>','jm-ltsc'); ?></li>    
-	<li> <?php _e('To use the shortcode in text widgets, just use shortcode like you do in posts.','jm-ltsc'); ?></li>    
-	</ul>
+			<section class="postbox">
+				<h1 class="hndle"><?php _e('Other plugins you might dig', 'jm-ltsc'); ?></h1>	
+				<ul>
+					<li><a href="http://wordpress.org/plugins/jm-twitter-cards/">JM Twitter Cards</a></li>
+					<li><a href="http://wordpress.org/plugins/jm-html5-and-responsive-gallery/">JM HTML5 and Responsive Gallery</a> - <?php _e('Fix poor native markup for WordPress gallery with some HTML5 markup and add responsive rules.','jm-ltsc');?></li>
+					<li><a href="http://wordpress.org/plugins/jm-twit-this-comment/">JM Twit This Comment</a> - <?php _e('Make your comments tweetable','jm-ltsc');?></li>
+				</ul>
+			</section>	
+		</div>
 	</div>
-	
-	<div class="form-like">
-	<h2 id="tab3">{ <?php _e('Styles', 'jm-ltsc') ?> }</h2>
-	<p><?php _e('Plugin displays tweets in an unordered list you can style in your own stylesheet with CSS classes <code>tweet-name {}</code>, <code>.tweet-screen-name {}</code>, <code>.tweet-twittar {}</code>, <code>.tweet-timestamp{}</code>, <code>.time-date{}</code>, <code>.tweet-timediff{}</code>, <code>.intent-meta{}</code>, <code>.tweet-reply{}</code>, <code>.tweet-retweet{}</code>, <code>.tweet-favorite{}</code>. To apply styles to the text of you tweets just us CSS class <code>.tweet-content{}</code>','jm-ltsc');?></p>
-	<p><?php _e('Example','jm-ltsc');?> :</p>
-	<pre>
-	.tweet-timediff {position:absolute; right:.2em;top:0; }
-	.intent-meta{ position:absolute; right:.2em; bottom:.2em; }
-	.tweetfeed  li { background:#eee; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; position:relative; list-style-type:none; border:1px solid #ccc; margin:1em 0; padding:.4em; }
-	.tweet-reply,.tweet-favorite,.tweet-retweet { margin-right:.2em; font-size: 11px; font-weight: bold; line-height: 1; text-decoration: none!important; color: #ccc!important; text-shadow: 0 -1px 0 rgba(0,0,0,0.5); color:#fff!important; background:#3e3e3e; display: inline-block; padding: 8px 10px 8px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; border-bottom: 1px solid rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.5); margin: 2px;}
-	.tweet-reply:hover,.tweet-favorite:hover,.tweet-retweet:hover{background: #222;}
-	</pre>
-	</div>
-	
-	
-	<h2 id="tab4"><?php _e('Useful links', 'jm-ltsc') ?></h2>
-	<ul>
-	<li class="inbl"><a class="button normal redwp" target="_blank" href="http://wordpress.org/support/view/plugin-reviews/jm-last-twit-shortcode"><?php _e('Rate the plugin on WordPress.org', 'jm-ltsc') ?></a></li>
-	<li class="inbl"><a class="button normal twitblue" target="_blank" href="<?php _e('https://twitter.com/intent/tweet?source=webclient&amp;hastags=WordPress,Plugin&amp;text=JM%20Last%20Twit%20%20Shortcode%20a%20great%20WordPress%20plugin%20to%20get%20your%20last%20tweet%20Try%20it!&amp;url=http://wordpress.org/extend/plugins/jm-last-twit-shortcode/&amp;related=TweetPressFr&amp;via=TweetPressFr','jm-ltsc'); ?>"><?php _e('Tweet it', 'jm-ltsc') ?></a></li>      
-	<li class="inbl"><a class="button normal" target="_blank" href="https://twitter.com/intent/user?screen_name=TweetPressFr"><?php _e('follow me on Twitter', 'jm-ltsc'); ?></a></li>       
-	</ul>
-	
-	</div>
-	<div class="postbox medium">
-	<h3 class="hndle"><span><?php _e('About the developer','jm-ltsc');?></span></h3>
-	<div class="inside">
-	<p><img src="http://www.gravatar.com/avatar/<?php echo md5( 'tweetpressfr'.'@'.'gmail'.'.'.'com' ); ?>" style="float:left;margin-right:10px;"/>
-	<strong>Julien Maury</strong><br />
-	<?php _e('I am a WordPress Developer, I like to make it simple.', 'jm-ltsc') ?> <br />
-	<a href="http://www.tweetpress.fr" target="_blank" title="TweetPress.fr - WordPress and Twitter tips">www.tweetpress.fr</a> - <a href="http://twitter.com/intent/user?screen_name=tweetpressfr" >@TweetPressFR</a><br />
-	<a href="http://profiles.wordpress.org/jmlapam/" title="on WordPress.org"><?php _e('My WordPress Profile', 'jm-ltsc') ?></a><br />
-	</p>
-	</div>
-	</div>
-
-	<div class="postbox medium">
-	<h3 class="hndle"><span><?php _e('Help me keep this free', 'jm-ltsc'); ?></span></h3>
-	<div class="inside">
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="2NBS57W3XG62L">
-	<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
-	<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-	</form>
-	</div>
-	</div>	
-
-	<div class="postbox large">
-	<h3 class="hndle"><span><?php _e('Other plugins you might dig','jm-ltsc');?></span></h3>
-	<div class="inside">
-	<ul>
-	<li><a href="http://wordpress.org/plugins/jm-twitter-cards/">JM Twitter Cards</a></li>
-	<li><a href="http://wordpress.org/plugins/jm-html5-and-responsive-gallery/">JM HTML5 and Responsive Gallery</a> - <?php _e('Fix poor native markup for WordPress gallery with some HTML5 markup and add responsive rules.','jm-ltsc');?></li>
-	<li><a href="http://wordpress.org/plugins/jm-twit-this-comment/">JM Twit This Comment</a> - <?php _e('Make your comments tweetable','jm-ltsc');?></li>
-	<li><a href="http://wordpress.org/plugins/jm-widget-feed-panel/">JM Widget Feed Panel</a> - <?php _e('Add a third RSS widget to your dashboard','jm-ltsc');?></li>
-	<li><a href="http://wordpress.org/plugins/jm-twitter-status-api-monitor/">JM Twitter Status API Monitor</a> - <?php _e('Monitor the Twitter API 1.1 from dashboard','jm-ltsc');?></li>
-	</ul>
-	</div>
-	</div>
-
 	<?php
 }
 /*

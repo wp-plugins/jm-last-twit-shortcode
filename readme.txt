@@ -15,6 +15,8 @@ A plugin meant to add your last tweet with the lattest API way :
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
 See **FAQ** here and/or option page of plugin on your installation.
 
+Plugin has now its own <a href="http://support.tweetpress.fr">support here</a>
+
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
 
 ––––
@@ -23,6 +25,8 @@ En Français
 
 Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une connexion authentifiée et grâce à un shortcode. 
 Voir la **FAQ** et/ou la page d'options du plugin sur votre installation
+
+Le plugin possède son propre <a href="http://support.tweetpress.fr">support ici</a>. La langue principale est l'Anglais mais le Français est accepté vu que c'est aussi la langue du dév ^^
 
 <a href="http://twitter.com/tweetpressfr">Me suivre sur Twitter</a>
 
@@ -124,6 +128,12 @@ Avec le code précédent placé avant votre requête et ensuite su la base de ce
 
 
 == Changelog ==
+
+= 3.3.5 =
+* 11 Sep 2013
+* Renew option page styles
+* Update How to section
+* Add links to support website http://support.tweetpress.fr
 
 = 3.3.4 =
 * 27 Aug 2013

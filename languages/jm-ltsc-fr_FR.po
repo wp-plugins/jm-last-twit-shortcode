@@ -11,215 +11,282 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
 msgid " ago"
-msgstr " "
-
-#. Text in echo
-#: jm-ltsc.php
-msgid ""
-"*This is the time in the course of which your tweet will be stored. This "
-"allows us to limit server requests."
 msgstr ""
-"*Il s'agit du temps durant lequel le tweet sera mis en cache. Cela permet de "
-"reduire les requêtes vers l'API"
 
 #. Text in echo
-#: jm-ltsc.php
-msgid "Before"
-msgstr "Avant"
+#: jm-ltsc.php:368
+msgid "About the developer"
+msgstr "A propos du developpeur"
 
 #. Text in echo
-#: jm-ltsc.php
-msgid "Do not forget to go to"
-msgstr "N'oubliez pas de"
-
-#. Text in echo
-#: jm-ltsc.php
-msgid "Donate to this plugin"
-msgstr "Faire un don pour ce plugin"
+#: jm-ltsc.php:342
+msgid ""
+"Basic use, no option => whether it is in a post or in a Text widget use: "
+"<code>[jmlt]</code>"
+msgstr ""
+"Utilisation basique sans option : que ce soit dans un post ou un widget text "
+"utilisez: <code>[jmlt]</code>"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
+msgid ""
+"Class tmhOAuth is already running in your website, this could break the "
+"plugin JMLTSC !"
+msgstr ""
+"La classe tmhOAuth est déjà utilisée sur le site, cela peut engendrer "
+"d'importants conflits avec le plugin JMLTSC!"
+
+#. Text in echo
+#: jm-ltsc.php:343
+msgid ""
+"Different username => whether it is in a post or in a Text widget use: <code>"
+"[jmlt username=\"rihanna\"]</code>"
+msgstr ""
+"Autre nom d'utilisateur, autre timeline =>que ce soit dans un post ou un "
+"widget text utlisez: <code>[jmlt username=\"rihanna\"]</code>"
+
+#. Text in echo
+#: jm-ltsc.php:346
+msgid ""
+"Exclude RTs => whether it is in a post or in a Text widget use: <code>[jmlt "
+"include_rts=\"false\"]</code>"
+msgstr ""
+"Exclure les RTs => que ce soit dans un post ou un widget text utlisez: <code>"
+"[jmlt include_rts=\"false\"]</code>"
+
+#. Text in echo
+#: jm-ltsc.php:345
+msgid ""
+"Exclude replies => whether it is in a post or in a Text widget use: <code>"
+"[jmlt exclude_replies=\"true\"]</code>"
+msgstr ""
+"Exclure les réponses => que ce soit dans un post ou un widget text utlisez: "
+"<code>[jmlt exclude_replies=\"true\"]</code>"
+
+#. Text in function
+#: jm-ltsc.php:1
 msgid "Favorite"
-msgstr "Favoris"
+msgstr "Favori"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:392
+msgid ""
+"Fix poor native markup for WordPress gallery with some HTML5 markup and add "
+"responsive rules."
+msgstr ""
+"Corrige le markup native assez pauvre de WordPress concernant les galeries "
+"avec un peu d'HMTL5 et quelques règles CSS responsive."
+
+#. Text in echo
+#: jm-ltsc.php:299
+msgid ""
+"Get your last tweets <br />the Twitter 1.1 way</br> with a simple shortcode"
+msgstr ""
+"Afficher vos derniers tweets <br />selon l'API Twitter 1.1</br> avec un "
+"simple shortcode"
+
+#. Text in echo
+#: jm-ltsc.php:379
+msgid "Help me keep this free"
+msgstr "Restons gratuit"
+
+#. Text in echo
+#: jm-ltsc.php:340
 msgid "How to"
-msgstr "Comment utiliser le plugin"
+msgstr "Comment utiliser le shortcode"
 
 #. Text in echo
-#: jm-ltsc.php
-msgid "JM Last Twit Shortcode Options"
-msgstr "JM Last Twit Shortcode Options"
+#: jm-ltsc.php:372
+msgid "I am a WordPress Developer, I like to make it simple."
+msgstr "Je suis développeur WordPress, j'aime faire simple."
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:298
+msgid "JM Last Twit Shortcode"
+msgstr "JM Last Twit Shortcode"
+
+#. Text in function
+#: jm-ltsc.php:1
+msgid "JM Last Twit Shortcode - cache"
+msgstr "JM Last Twit Shortcode - cache"
+
+#. Text in echo
+#: jm-ltsc.php:393
+msgid "Make your comments tweetable"
+msgstr "Ajoutez un lien twitter sur chacun de vos commentaires"
+
+#. Text in echo
+#: jm-ltsc.php:344
+msgid ""
+"More than 1 tweet, e.g 5 => whether it is in a post or in a Text widget use: "
+"<code>[jmlt count=\"5\"]</code>"
+msgstr ""
+"Plus d' 1 tweet, ex : 5 =>  que ce soit dans un post ou un widget text "
+"utilisez: <code>[jmlt count=\"5\"]</code>"
+
+#. Text in echo
+#: jm-ltsc.php:374
+msgid "My WordPress Profile"
+msgstr "Mon profil WordPress"
+
+#. Text in echo
+#: jm-ltsc.php:312
 msgid "Options"
 msgstr "Options"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:389
+msgid "Other plugins you might dig"
+msgstr "D'autres plugins que vous pourriez aimer"
+
+#. Text in echo
+#: jm-ltsc.php:355
+msgid ""
+"Plugin displays tweets in an unordered list you can style in your own "
+"stylesheet with CSS classes <code>tweet-name {}</code>, <code>.tweet-screen-"
+"name {}</code>, <code>.tweet-twittar {}</code>, <code>.tweet-timestamp{}</"
+"code>, <code>.time-date{}</code>, <code>.tweet-timediff{}</code>, <code>."
+"intent-meta{}</code>, <code>.tweet-reply{}</code>, <code>.tweet-retweet{}</"
+"code>, <code>.tweet-favorite{}</code>. <br />To apply styles to the text of "
+"you tweets just us CSS class <code>.tweet-content{}</code>"
+msgstr ""
+"Le plugin affiche les tweets dans une liste non ordonnée que vous pouvez "
+"styler dans votre propre CSS avec les classes suivantes <code>tweet-name {}</"
+"code>, <code>.tweet-screen-name {}</code>, <code>.tweet-twittar {}</code>, "
+"<code>.tweet-timestamp{}</code>, <code>.time-date{}</code>, <code>.tweet-"
+"timediff{}</code>, <code>.intent-meta{}</code>, <code>.tweet-reply{}</code>, "
+"<code>.tweet-retweet{}</code>, <code>.tweet-favorite{}</code>. <br />Pour "
+"les styles spécifiques au texte des tweets utilisez <code>.tweet-content{}</"
+"code>"
+
+#. Text in echo
+#: jm-ltsc.php:314
 msgid "Provide your Twitter username (used by default and without @)"
-msgstr "Entrez votre pseudo Twitter (utilisé par défaut et sans @)"
+msgstr "Entrez votre compte Twitter (utilisé par défaut et sans @)"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:318
 msgid "Provide your application consumer key"
-msgstr "Entrez la consumer key"
+msgstr "Entrez la consumer key de votre application"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:322
 msgid "Provide your application consumer secret"
-msgstr "Entrez la consumer secret"
+msgstr "Entrez la consumer secret de votre application"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:326
 msgid "Provide your oAuth Token"
-msgstr "Entrez votre oAuth Token"
+msgstr "Entrez l'oAuth Token de votre application"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:330
 msgid "Provide your oAuth Token Secret"
-msgstr "Entrez votre oAuth Token Secret"
+msgstr "Entrez l'oAuth Token Secret de votre application"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
 msgid "Rate limits are exceed!"
-msgstr "Le quota de requêtes est dépassé !"
+msgstr "Les quotas Twitter sont dépassés !"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:361
 msgid "Rate the plugin on WordPress.org"
-msgstr "Notez le plugin sur WordPress.org"
-
-#. Text in echo
-#: jm-ltsc.php
-msgid "Really easy, just put <strong>[jmlt]</strong> in your posts."
-msgstr ""
-"Très facile, il suffit d'écrire <strong>[jmlt]</strong> dans vos posts."
+msgstr "Donner un 5 étoile au plugin sur WordPress.org"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
 msgid "Reply"
-msgstr "Réponse"
+msgstr "Répondre"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
 msgid "Retweet"
-msgstr "Retweet"
+msgstr "Retweeter"
 
 #. Text in echo
-#: jm-ltsc.php
-msgid "Set expired time for transient (30 min at least)"
-msgstr "Fixer le temps des transients (30 minutes minimum)"
+#: jm-ltsc.php:347
+msgid ""
+"Set cache duration => whether it is in a post or in a Text widget use: <code>"
+"[jmlt cache=\"3600\"]</code> to put tweets in cache for 1 hour"
+msgstr ""
+"Définir la durée du cache  => que ce soit dans un post ou un widget text "
+"utlisez:  <code>[jmlt cache=\"3600\"]</code>pour mettre les tweets en cache "
+"pour 1 heure"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
 msgid "Something is wrong or missing. "
-msgstr "Quelque chose fait defaut."
-
-#. Text in echo
-#: jm-ltsc.php
-msgid ""
-"This plugin allows you to get your last Tweet with the last Twitter API "
-"(1.1). Pretty useful because <strong>Twitter API 1.0 is to cease functioning "
-"in june 2013</strong>."
 msgstr ""
-"Ce plugin vous permet de récupérer et d'afficher votre dernier Tweet de "
-"manière compatible avec la version la plus récente de l'API Twitter (1.1). "
-"Utile car <strong>La fermeture de l'API Twitter version 1.0 is est "
-"programmée pour juin 2013</strong>."
+"Quelque chose ne va pas et sort du cadre d'identification du plugin JMLTSC"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:354
+msgid "Styles"
+msgstr "Styles"
+
+#. Text in echo
+#: jm-ltsc.php:300
 msgid ""
-"To add your own style, just use these CSS classes in your main stylesheet"
+"To grab your feed you need to authenticate in the new version of Twitter API "
+"1.1"
 msgstr ""
-"Pour ajouter vos styles, utilisez simplement les classes CSS suivantes dans "
-"votre feuille de style principale"
+"Pour affichez votre flux Twitter vous devez vous authentifier dans la "
+"version 1.1 de l'API Twitter"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:348
 msgid ""
-"To change Twitter Acount in a post, just put <strong>[jmlt username=\"twitter"
-"\"]</strong> and you will get tweets by @twitter"
+"To reuse tokens you set to use the plugin => just write in your templates "
+"and codes :<code>global $tcTmhOAuth;</code>"
 msgstr ""
-"Pour changer de compte Twitter, mettez juste <strong>[jmlt username="
-"\"votre_pseudo\"]</strong> et vous obtiendrez les tweets de @votre_pseudo. "
+"Pour réutiliser les identifiants créés pour utiliser le plugin => écrivez "
+"dans vos templates et codes:<code>global $tcTmhOAuth;</code>"
 
 #. Text in echo
-#: jm-ltsc.php
-msgid ""
-"To use the shortcode in templates, just use <em>echo apply_filters"
-"(\"the_content\",\"[jmlt]\")</em>"
-msgstr ""
-"Pour utiliser le code dans un template,  utilisez <em>echo apply_filters"
-"(\"the_content\",\"[jmlt]\")</em>"
-
-#. Text in echo
-#: jm-ltsc.php
-msgid ""
-"To use the shortcode in text widgets, just use shortcode like you do in "
-"posts."
-msgstr ""
-"Pour utiliser le shortcode dans un widget texte, écrivez exactement la même "
-"chose que dans un post."
-
-#. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:362
 msgid "Tweet it"
-msgstr "Tweeter à propos du plugin"
+msgstr "Tweeter"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
 msgid "Twitter is overwhelmed or something bad happened with its API."
 msgstr ""
-"Twitter est en surcapacité ou quelque chose de grave est arrivé à son API"
+"Twitter est totalement dépassé et en surcapacité, l'API a subi un crash "
+"important."
 
 #. Text in echo
-#: jm-ltsc.php
-msgid ""
-"Use quicktags buttons in HTML editor if you are not sur of how to use "
-"shortcode or if you just want to spare time."
-msgstr ""
-"Utilisez les boutons quicktags dans l'éditeur HTML si vous n'êtes pas très à "
-"l'aise avec les shortcodes ou tout simplement si vous voulez gagner du temps "
-"dans la rédaction de vos posts."
-
-#. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:359
 msgid "Useful links"
 msgstr "Liens utiles"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:301
 msgid ""
-"You can even change timeline, e.g <strong>[jmlt tl=\"mentions_timeline\"]</"
-"strong> will display last mention of your Twitter account. Default is "
-"user_timeline. Other options are retweets_of_me and home_timeline."
+"With this plugin you can display any Twitter timeline with a simple a "
+"shortcode"
 msgstr ""
-"Vous pouvez même changer de timeline, par exemple <strong>[jmlt tl="
-"\"mentions_timeline\"]</strong> affichera. Default is user_timeline. Other "
-"options are retweets_of_me and home_timeline."
+"Avec ce plugin vous pouvez afficher n'importe quelle timeline Twittter avec "
+"un simple shortcode"
 
 #. Text in function
-#: jm-ltsc.php
+#: jm-ltsc.php:1
 msgid ""
 "Your credentials might be unset or incorrect or username is wrong. In any "
 "case this error is not due to Twitter API."
 msgstr ""
-"Vos identifiants ne sont pas renseignés ou expirés ou le pseudo Twitter "
-"n'est pas correct. Cette erreur n'est pas du à l'API Twitter."
+"Vos identifiants n'ont pas été fournis ou sont incorrects ou alors le nom "
+"d'utilisateur est incorrect. En tous cas cela ne vient pas de Twitter. "
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:363
 msgid "follow me on Twitter"
 msgstr "me suivre sur Twitter"
 
 #. Text in echo
-#: jm-ltsc.php
+#: jm-ltsc.php:362
 msgid ""
 "https://twitter.com/intent/tweet?source=webclient&amp;hastags=WordPress,"
 "Plugin&amp;text=JM%20Last%20Twit%20%20Shortcode%20a%20great%20WordPress"
@@ -228,107 +295,12 @@ msgid ""
 "related=TweetPressFr&amp;via=TweetPressFr"
 msgstr ""
 "https://twitter.com/intent/tweet?source=webclient&amp;hastags=WordPress,"
-"Plugin&amp;text=JM%20Last%20Twit%20%20Shortcode%20est%20un%20plugin"
-"%20WordPress%20utile%20pour%20afficher%20son%20dernier%20tweet%20Essayez!"
-"&amp;url=http://wordpress.org/extend/plugins/jm-last-twit-shortcode/&amp;"
+"Plugin&amp;text=JM%20Last%20Twit%20%20Shortcode%20est%20un%excellent%20plugin"
+"%20WordPress%20pour%20afficher%20des%20timelines%20Twitter%20essayez-le!&amp;"
+"url=http://wordpress.org/extend/plugins/jm-last-twit-shortcode/&amp;"
 "related=TweetPressFr&amp;via=TweetPressFr"
 
-#. Text in echo
-#: jm-ltsc.php
-msgid ""
-"to create your application <strong>before anything</strong> cause you might "
-"forget get it after. In any case you will need token to proceed."
-msgstr ""
-"pour créer votre application<strong>avant toute chose</strong> car vous "
-"pourriez oublier de le faire. De toute manière, vous aurez besoin "
-"d'identifiants pour obtenir les tweets."
-
-#. Text in echo
-#: jm-ltsc.php
-msgid ""
-"Do not try to display mentions or retweets from other accounts from yours. "
-"This logically impossible !"
-msgstr ""
-"N'essayez pas d'afficher les mentions ou les retweets d'autres comptes que "
-"le votre. C'est logiquement impossible !"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "About the developer"
-msgstr "À propos de l'auteur"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "I am a WordPress Developer, I like to make it simple."
-msgstr "Je suis intégrateur WordPress, j'aime faire simple."
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "My WordPress Profile"
-msgstr "Mon profil WordPress"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "Help me keep this free"
-msgstr " Maintenir le plugin gratuit"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "Other plugins you might dig"
-msgstr "D'autres plugins que vous pourriez aimer"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid ""
-"Display any timeline you want the Twitter 1.1 way with a simple shortcode"
-msgstr ""
-"Affiche n'importe quelle timeline en respectant les derniers changement de "
-"l'API Twitter 1.1 et grâce à un simple shortcode"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid ""
-"Fix poor native markup for WordPress gallery with some HTML5 markup and add "
-"responsive rules."
-msgstr ""
-"Corrige le markup natif assez pauvre de WordPress concernant les galeries et "
-"ajoute quelques règles CSS responsive"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "Make your comments tweetable"
-msgstr "Rend vos commentaires tweetables"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "Add a third RSS widget to your dashboard"
-msgstr "Ajoute un 3ème widget RSS dans votre dashboard"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "Monitor the Twitter API 1.1 from dashboard"
-msgstr "Permet de surveiller l'API Twitter"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid "Styles"
-msgstr "Styles"
-
-#. Text in echo
-#: jm-twitter-cards.php
-msgid ""
-"Plugin displays tweets in an unordered list you can style in your own "
-"stylesheet with CSS classes <code>tweet-name {}</code>, <code>.tweet-screen-"
-"name {}</code>, <code>.tweet-twittar {}</code>, <code>.tweet-timestamp{}</"
-"code>, <code>.time-date{}</code>, <code>.tweet-timediff{}</code>, <code>."
-"intent-meta{}</code>, <code>.tweet-reply{}</code>, <code>.tweet-retweet{}</"
-"code>, <code>.tweet-favorite{}</code>. To apply styles to the text of you "
-"tweets just us CSS class <code>.tweet-content{}</code>"
-msgstr ""
-"Le plugin affiche les tweets dans une liste non ordonnée que vous pouvez "
-"styler via les classes CSS suivantes:  <code>tweet-name {}</code>, <code>."
-"tweet-screen-name {}</code>, <code>.tweet-twittar {}</code>, <code>.tweet-"
-"timestamp{}</code>, <code>.time-date{}</code>, <code>.tweet-timediff{}</"
-"code>, <code>.intent-meta{}</code>, <code>.tweet-reply{}</code>, <code>."
-"tweet-retweet{}</code>, <code>.tweet-favorite{}</code>. Pour appliquer des "
-"styles au text utilisez la classe CSS <code>.tweet-content{}</code>"
+#. Text in function
+#: jm-ltsc.php:1
+msgid "on Twitter"
+msgstr "sur Twitter"
