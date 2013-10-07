@@ -162,52 +162,42 @@ msgstr ""
 "code>"
 
 #. Text in echo
-#: jm-ltsc.php:314
 msgid "Provide your Twitter username (used by default and without @)"
 msgstr "Entrez votre compte Twitter (utilisé par défaut et sans @)"
 
 #. Text in echo
-#: jm-ltsc.php:318
 msgid "Provide your application consumer key"
 msgstr "Entrez la consumer key de votre application"
 
 #. Text in echo
-#: jm-ltsc.php:322
 msgid "Provide your application consumer secret"
 msgstr "Entrez la consumer secret de votre application"
 
 #. Text in echo
-#: jm-ltsc.php:326
 msgid "Provide your oAuth Token"
 msgstr "Entrez l'oAuth Token de votre application"
 
 #. Text in echo
-#: jm-ltsc.php:330
 msgid "Provide your oAuth Token Secret"
 msgstr "Entrez l'oAuth Token Secret de votre application"
 
 #. Text in function
-#: jm-ltsc.php:1
 msgid "Rate limits are exceed!"
 msgstr "Les quotas Twitter sont dépassés !"
 
 #. Text in echo
-#: jm-ltsc.php:361
 msgid "Rate the plugin on WordPress.org"
 msgstr "Donner un 5 étoile au plugin sur WordPress.org"
 
 #. Text in function
-#: jm-ltsc.php:1
 msgid "Reply"
 msgstr "Répondre"
 
 #. Text in function
-#: jm-ltsc.php:1
 msgid "Retweet"
 msgstr "Retweeter"
 
 #. Text in echo
-#: jm-ltsc.php:347
 msgid ""
 "Set cache duration => whether it is in a post or in a Text widget use: <code>"
 "[jmlt cache=\"3600\"]</code> to put tweets in cache for 1 hour"
@@ -217,18 +207,15 @@ msgstr ""
 "pour 1 heure"
 
 #. Text in function
-#: jm-ltsc.php:1
 msgid "Something is wrong or missing. "
 msgstr ""
 "Quelque chose ne va pas et sort du cadre d'identification du plugin JMLTSC"
 
 #. Text in echo
-#: jm-ltsc.php:354
 msgid "Styles"
 msgstr "Styles"
 
 #. Text in echo
-#: jm-ltsc.php:300
 msgid ""
 "To grab your feed you need to authenticate in the new version of Twitter API "
 "1.1"
@@ -237,7 +224,6 @@ msgstr ""
 "version 1.1 de l'API Twitter"
 
 #. Text in echo
-#: jm-ltsc.php:348
 msgid ""
 "To reuse tokens you set to use the plugin => just write in your templates "
 "and codes :<code>global $tcTmhOAuth;</code>"
@@ -246,24 +232,20 @@ msgstr ""
 "dans vos templates et codes:<code>global $tcTmhOAuth;</code>"
 
 #. Text in echo
-#: jm-ltsc.php:362
 msgid "Tweet it"
 msgstr "Tweeter"
 
 #. Text in function
-#: jm-ltsc.php:1
 msgid "Twitter is overwhelmed or something bad happened with its API."
 msgstr ""
 "Twitter est totalement dépassé et en surcapacité, l'API a subi un crash "
 "important."
 
 #. Text in echo
-#: jm-ltsc.php:359
 msgid "Useful links"
 msgstr "Liens utiles"
 
 #. Text in echo
-#: jm-ltsc.php:301
 msgid ""
 "With this plugin you can display any Twitter timeline with a simple a "
 "shortcode"
@@ -272,7 +254,6 @@ msgstr ""
 "un simple shortcode"
 
 #. Text in function
-#: jm-ltsc.php:1
 msgid ""
 "Your credentials might be unset or incorrect or username is wrong. In any "
 "case this error is not due to Twitter API."
@@ -281,12 +262,10 @@ msgstr ""
 "d'utilisateur est incorrect. En tous cas cela ne vient pas de Twitter. "
 
 #. Text in echo
-#: jm-ltsc.php:363
 msgid "follow me on Twitter"
 msgstr "me suivre sur Twitter"
 
 #. Text in echo
-#: jm-ltsc.php:362
 msgid ""
 "https://twitter.com/intent/tweet?source=webclient&amp;hastags=WordPress,"
 "Plugin&amp;text=JM%20Last%20Twit%20%20Shortcode%20a%20great%20WordPress"
@@ -301,6 +280,23 @@ msgstr ""
 "related=TweetPressFr&amp;via=TweetPressFr"
 
 #. Text in function
-#: jm-ltsc.php:1
 msgid "on Twitter"
 msgstr "sur Twitter"
+
+#. Text in echo
+msgid "Do you want to add Quicktags (buttons in HTML editor) in post edit?"
+msgstr ""
+"Voulez-vous ajouter les QuickTags (boutons dans l'éditeur HTML) dans vos "
+"édits de posts?"
+
+#. Text in echo
+msgid "Default is yes"
+msgstr "Oui par défaut"
+
+#. Text in echo
+msgid "Yes"
+msgstr "Oui"
+
+#. Text in echo
+msgid "No"
+msgstr "Non"

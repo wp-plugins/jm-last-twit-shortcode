@@ -4,7 +4,7 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.3.5
+Version: 3.3.6
 License: GPL2++
 */
 
@@ -188,8 +188,8 @@ if(!function_exists('jm_ltsc_output')) {
 						$date = $data[$i - 1]->created_at;
 						$date_format = 'j/m/y - '.get_option('time_format');
 						$profile_image_url = $data[$i - 1]->user->profile_image_url;
-						$twittar = '<img class="tweet-twittar" width="36" height="36" src="'.$profile_image_url.'" alt=@"'.$screen_name .'" />'; 								
-						$output .= "<li>" . $twittar ."<span class='tweet-name'><a class='' href='http://twitter.com/".$screen_name."'>".$username."</a></span><span class='tweet-screen-name'>@<a class='' href='http://twitter.com/".$screen_name."'>".$screen_name."</a></span> <p class='tweet-content'>".$feed . "</p><em><span class='tweet-timestamp'><a href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date small'>".date( $date_format, strtotime($date))."</span></a> <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ).__(' ago','jm-ltsc')."</span> </em><span class='intent-meta'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'><span class='tweet-reply'>". __( 'Reply', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'> <span class='tweet-retweet'>". __( 'Retweet', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'><span class='tweet-favorite'>". __( 'Favorite', 'jm-ltsc' ) ."</span></a></span></li>";
+						$twittar = '<img class="tweet-twittar" width="36" height="36" src="'.$profile_image_url.'" alt="@'.$screen_name .'" />'; 								
+						$output .= "<li>" . $twittar ."<span class='tweet-name'><a class='' href='http://twitter.com/".$screen_name."'>".$username."</a></span><span class='tweet-screen-name'>@<a class='' href='http://twitter.com/".$screen_name."'>".$screen_name."</a></span> <p class='tweet-content'>".$feed . "</p><em><span class='tweet-timestamp'><a href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date small'>".date( $date_format, strtotime($date))."</span></a> <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ).__(' ago','jm-ltsc')."</span></span> </em><span class='intent-meta'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'><span class='tweet-reply'>". __( 'Reply', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'> <span class='tweet-retweet'>". __( 'Retweet', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'><span class='tweet-favorite'>". __( 'Favorite', 'jm-ltsc' ) ."</span></a></span></li>";
 					}
 					$i++;
 				}
@@ -240,8 +240,9 @@ if(!function_exists('jm_ltsc_output')) {
 * */
 add_action( 'admin_enqueue_scripts', 'jm_ltsc_add_quicktags' );
 function jm_ltsc_add_quicktags( $hook_suffix ) {
-	if( 'post.php' == $hook_suffix || 'post-new.php' == $hook_suffix ) // only on post edit
-	wp_enqueue_script( 'jmltsc_quicktags_js', plugins_url('admin/quicktag.js',__FILE__), array( 'quicktags' ), null, true );
+	$opts = jm_ltsc_get_options(); 
+		if( ('post.php' == $hook_suffix || 'post-new.php' == $hook_suffix ) && $opts['twitQuickTags'] == 'yes') // only on post edit and if user wants it
+			wp_enqueue_script( 'jmltsc_quicktags_js', plugins_url('admin/quicktag.js',__FILE__), array( 'quicktags' ), null, true );
 }
 
 /* shortcode in sidebar
@@ -329,6 +330,14 @@ function jm_ltsc_options_page() {
 					<p>
 						<label for="oauthToken_secret"><?php _e('Provide your oAuth Token Secret', 'jm-ltsc'); ?> :</label><br />
 						<input id="oauthToken_secret" type="text" name="jm_ltsc[oauthToken_secret]" class="paDemi" size="70" value="<?php echo $opts['oauthToken_secret']; ?>" />
+					</p>
+					<p>
+						<label for="twitQuickTags"><?php _e('Do you want to add Quicktags (buttons in HTML editor) in post edit?', 'jm-ltsc'); ?> :</label>
+						<select class="styled-select" id="twitQuickTags" name="jm_ltsc[twitQuickTags]">
+							<option value="yes" <?php echo $opts['twitQuickTags'] == 'yes' ? 'selected="selected"' : ''; ?> ><?php _e('Yes', 'jm-tc'); ?></option>
+							<option value="no" <?php echo $opts['twitQuickTags'] == 'no' ? 'selected="selected"' : ''; ?> ><?php _e('No', 'jm-tc'); ?></option>
+						</select>
+						<br /><em>(<?php _e('Default is yes', 'jm-ltsc'); ?>)</em>
 					</p>
 
 					<?php submit_button(null, 'primary right', '_submit'); ?>
@@ -423,6 +432,8 @@ function jm_ltsc_sanitize_options($options) {
 	$new['oauthToken']               = esc_attr(strip_tags( $options['oauthToken'] ));
 	if ( isset($options['oauthToken_secret']) )
 	$new['oauthToken_secret']        = esc_attr(strip_tags( $options['oauthToken_secret'] ));
+	if ( isset($options['twitQuickTags']) )
+	$new['twitQuickTags']            = $options['twitQuickTags'] ;
 	
 	return $new;
 }
@@ -434,7 +445,8 @@ function jm_ltsc_get_default_options() {
 	'consumerKey'              => __('replace with your keys - required', 'jm-ltsc'),
 	'consumerSecret'           => __('replace with your keys - required', 'jm-ltsc'),
 	'oauthToken'               => __('replace with your keys - required', 'jm-ltsc'),
-	'oauthToken_secret'        => __('replace with your keys - required', 'jm-ltsc')
+	'oauthToken_secret'        => __('replace with your keys - required', 'jm-ltsc'),
+	'twitQuickTags'            => 'yes'
 	);
 }
 

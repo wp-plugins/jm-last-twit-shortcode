@@ -129,6 +129,11 @@ Avec le code précédent placé avant votre requête et ensuite su la base de ce
 
 == Changelog ==
 
+= 3.3.6 =
+* 07 Oct 2013
+* Fix some HTML errors (e.g. non closed span)
+* add opt out for QuickTags
+
 = 3.3.5 =
 * 11 Sep 2013
 * Renew option page styles
