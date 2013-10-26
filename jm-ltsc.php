@@ -4,7 +4,7 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.3.6
+Version: 3.3.7
 License: GPL2++
 */
 
@@ -144,7 +144,7 @@ if(!function_exists('jm_ltsc_output')) {
 		'count'       	     => 1,
 		'include_rts'  		 => 'true',	
 		'exclude_replies'	 => 'false'	
-		), $atts));
+		), $atts, 'ltsc'));
 
 		
 		//add some flexibility, you can add whatever account

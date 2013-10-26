@@ -15,9 +15,12 @@ A plugin meant to add your last tweet with the lattest API way :
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
 See **FAQ** here and/or option page of plugin on your installation.
 
+Requires PHP 5.3++
+
 Plugin has now its own <a href="http://support.tweetpress.fr">support here</a>
 
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
+
 
 ––––
 En Français 
@@ -25,6 +28,8 @@ En Français
 
 Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une connexion authentifiée et grâce à un shortcode. 
 Voir la **FAQ** et/ou la page d'options du plugin sur votre installation
+
+Requiert PHP 5.3 au minimum
 
 Le plugin possède son propre <a href="http://support.tweetpress.fr">support ici</a>. La langue principale est l'Anglais mais le Français est accepté vu que c'est aussi la langue du dév ^^
 
@@ -83,6 +88,15 @@ This will allow you to do this. Just put it before your request and use it like 
 			array(
 						//your parameters
 			));` 
+			
+= How can I use it in a template ? =
+The appropriate method would be for example : 
+`
+if( function_exists('jm_ltsc_output') ) {
+	echo jm_ltsc_output( array('count' => 5, 'include_rts' => false, 'exclude_replies' => true, 'username' => 'your_username') ) ;
+}
+`
+
 
 ----
 En Français
@@ -119,6 +133,13 @@ Avec le code précédent placé avant votre requête et ensuite su la base de ce
 						//your parameters
 			));` 
 
+= Comment l'utiliser dans un template ? =
+La méthode appropriée est la suivante : 
+`
+if( function_exists('jm_ltsc_output') ) {
+	echo jm_ltsc_output( array('count' => 5, 'include_rts' => false, 'exclude_replies' => true, 'username' => 'your_username') ) ;
+}
+`
 
 == Screenshots ==
 1. front-end result with default styles
@@ -128,6 +149,11 @@ Avec le code précédent placé avant votre requête et ensuite su la base de ce
 
 
 == Changelog ==
+
+= 3.3.7 =
+* 26 Oct 2013
+* Add third parameter 'ltsc' to shortcode for developer -> shortcode_atts_{$shortcode} 
+* Add explanation in FAQ to use shortcode in template the best way
 
 = 3.3.6 =
 * 07 Oct 2013
