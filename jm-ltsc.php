@@ -4,7 +4,7 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.3.7
+Version: 3.3.8
 License: GPL2++
 */
 
@@ -226,7 +226,7 @@ if(!function_exists('jm_ltsc_output')) {
 		} else {
 			return $incache . '<!--'. __('JM Last Twit Shortcode - cache','jm-ltsc') .'-->';
 		}
-		return $output;
+		return apply_filters( 'ltsc_shortcode_markup', $output );
 		
 	} 
 	add_shortcode( 'jmlt', 'jm_ltsc_output' );

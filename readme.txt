@@ -3,7 +3,7 @@ Contributors: jmlapam
 Tags: twitter, tweet, API 1.1, shortcode
 DonateLink: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tweetpressfr%40gmail%2ecom&item_name=JM%20Last%20Twit%20Shortcode&no_shipping=0&no_note=1&tax=0&currency_code=EUR&bn=PP%2dDonationsBF&charset=UTF%2d8
 Requires at least: 
-Tested up to: 3.7
+Tested up to: 3.8
 License: GPLv2 or later
 Stable tag: trunk
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -15,7 +15,7 @@ A plugin meant to add your last tweet with the lattest API way :
 Once activated the plugin displays your latest tweet according to your settings with authenticated connexion and thanks to a shortcode. 
 See **FAQ** here and/or option page of plugin on your installation.
 
-Requires PHP 5.3++
+**Requires PHP 5.3++**
 
 Plugin has now its own <a href="http://support.tweetpress.fr">support here</a>
 
@@ -29,7 +29,7 @@ En Français
 Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une connexion authentifiée et grâce à un shortcode. 
 Voir la **FAQ** et/ou la page d'options du plugin sur votre installation
 
-Requiert PHP 5.3 au minimum
+**Requiert PHP 5.3 au minimum**
 
 Le plugin possède son propre <a href="http://support.tweetpress.fr">support ici</a>. La langue principale est l'Anglais mais le Français est accepté vu que c'est aussi la langue du dév ^^
 
@@ -97,6 +97,14 @@ if( function_exists('jm_ltsc_output') ) {
 }
 `
 
+= How can I use the filter? =
+example :
+`
+add_filter('ltsc_shortcode_markup','test_filter_jmltsc');
+function test_filter_jmltsc($output){
+	 return '<div class="extra_extra_markup">' . $output . '</div>';
+}
+`
 
 ----
 En Français
@@ -140,6 +148,14 @@ if( function_exists('jm_ltsc_output') ) {
 	echo jm_ltsc_output( array('count' => 5, 'include_rts' => false, 'exclude_replies' => true, 'username' => 'your_username') ) ;
 }
 `
+= Comment se hooker sur le filtre? =
+Exemple basique :
+`
+add_filter('ltsc_shortcode_markup','test_filter_jmltsc');
+function test_filter_jmltsc($output){
+	 return '<div class="extra_extra_markup">' . $output . '</div>';
+}
+`
 
 == Screenshots ==
 1. front-end result with default styles
@@ -149,6 +165,11 @@ if( function_exists('jm_ltsc_output') ) {
 
 
 == Changelog ==
+
+= 3.3.8 =
+* 20 dec 2013
+* Add filter for markup : ltsc_shortcode_markup
+* Do not worry about the recent SSL news. TmhOAuth is ready for that according its author.
 
 = 3.3.7 =
 * 26 Oct 2013
