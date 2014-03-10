@@ -4,26 +4,99 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.3.8
+Version: 3.4
 License: GPL2++
 */
 
 // New sources => http://clark-technet.com/2013/03/updated-wordpress-twitter-functions#comment-148551 (slightly modified)
 // and https://dev.twitter.com/docs/platform-objects/entities
+//https://github.com/BoiteAWeb/ActivationTester/blob/master/index.php
 
 
 
 
 /** PHP version checking
-	*/
-if (version_compare(PHP_VERSION, '5.3', '<=')) {
-	add_action( 'admin_notices', 'jm_ltsc_admin_notice' );
-	function jm_ltsc_admin_notice(){
-		global $current_screen;
-		if ( $current_screen->parent_base == 'plugins' ) echo '<div class="error" style="padding:1em;">'.sprintf('JM Last Twit Shortcode requires PHP 5.3 or higher. You’re still on %s.',PHP_VERSION).'</div>';
-		if ( class_exists('tmhOAuth') ) echo '<div class="error" style="padding:1em;">'.__('Class tmhOAuth is already running in your website, this could break the plugin JMLTSC !','jm-ltsc').'</div>';
+*/
+add_action( 'admin_init', 'jm_ltsc_check_version' );
+function jm_ltsc_check_version()
+{
+	// This is where you set you needs
+	$mandatory = array(	'PluginName'=>'JM Last Twit Shortcode', 
+						'PHP'=>'5.3',
+						'Function exists' => 'curl_init'
+					);
+
+	// Avoid Notice error
+	$errors = array();
+
+	// loop the mandatory things
+	foreach( $mandatory as $what => $how ) {
+		switch( $what ) {
+			case 'PHP':
+					if( version_compare( phpversion(), $how ) < 0 )
+					{
+						$errors[$what] = $how;
+					}
+				break;
+			case 'Function exists':
+					if( !function_exists( $how ) )
+					{
+						$errors[$what] = $how;
+					}
+				break;
+		}
 	}
-}	
+
+	// Add a filter for devs
+	$errors = apply_filters( 'validate_errors', $errors, $mandatory['PluginName'] );
+
+	// We got errors!
+	if( !empty( $errors ) )
+	{
+		global $current_user;
+
+		// We add the plugin name for late use
+		$errors['PluginName'] = $mandatory['PluginName'];
+
+		// Set a transient with these errors
+		set_transient( 'jm_ltsc_disabled_notice' . $current_user->ID, $errors );
+
+		// Remove the activate flag
+		unset( $_GET['activate'] );
+
+		// Deactivate this plugin
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+	}
+}
+
+add_action( 'admin_notices', 'jm_ltsc_disabled_notice' );
+function jm_ltsc_disabled_notice()
+{
+	global $current_user;
+	// We got errors!
+	if( $errors = get_transient( 'jm_ltsc_disabled_notice' . $current_user->ID ) )
+	{
+		// Remove the transient
+		delete_transient( 'jm_ltsc_disabled_notice' . $current_user->ID );
+
+		// Pop the plugin name
+		$plugin_name = array_pop( $errors );
+
+		// Begin the buffer output
+		$error = '<ul>';
+
+		// Loop on each error, you can change the "i18n domain" here -> jm_ltsc (i would like to avoid this)
+		foreach( $errors as $what => $how) {
+			$error .= '<li>'.sprintf( __( '&middot; Requires %s: <code>%s</code>', 'jm_ltsc' ), $what, $how ).'</li>';
+		}
+
+		// End the buffer output
+		$error .= '</ul>';
+
+		// Echo the output using a WordPress string (no i18n needed)
+		echo '<div class="error"><p>' . sprintf( __( 'The plugin <code>%s</code> has been <strong>deactivated</strong> due to an error: %s' ), $plugin_name, $error ) . '</p></div>';
+	}
+}
 
 // Plugin activation: create default values if they don't exist
 register_activation_hook( __FILE__, 'jm_ltsc_init' );
@@ -178,7 +251,7 @@ if(!function_exists('jm_ltsc_output')) {
 			case '200':
 			case '304':				
 				$data = json_decode( $tcTmhOAuth->response['response'] );
-				$output = "<ul class='tweetfeed'>";
+				$output = '<ul class="tweetfeed">';
 				while ( $i <= $count ) {
 					//Assign feed to $feed
 					if ( isset( $data[$i - 1] ) ) {
@@ -188,13 +261,69 @@ if(!function_exists('jm_ltsc_output')) {
 						$date = $data[$i - 1]->created_at;
 						$date_format = 'j/m/y - '.get_option('time_format');
 						$profile_image_url = $data[$i - 1]->user->profile_image_url;
-						$twittar = '<img class="tweet-twittar" width="36" height="36" src="'.$profile_image_url.'" alt="@'.$screen_name .'" />'; 								
-						$output .= "<li>" . $twittar ."<span class='tweet-name'><a class='' href='http://twitter.com/".$screen_name."'>".$username."</a></span><span class='tweet-screen-name'>@<a class='' href='http://twitter.com/".$screen_name."'>".$screen_name."</a></span> <p class='tweet-content'>".$feed . "</p><em><span class='tweet-timestamp'><a href='http://twitter.com/".$username."/status/".$id_str."'><span class='time-date small'>".date( $date_format, strtotime($date))."</span></a> <span class='tweet-timediff'>" .human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ).__(' ago','jm-ltsc')."</span></span> </em><span class='intent-meta'><a href='http://twitter.com/intent/tweet?in_reply_to=".$id_str."'><span class='tweet-reply'>". __( 'Reply', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/retweet?tweet_id=".$id_str."'> <span class='tweet-retweet'>". __( 'Retweet', 'jm-ltsc' ) ."</span></a> <a href='http://twitter.com/intent/favorite?tweet_id=".$id_str."'><span class='tweet-favorite'>". __( 'Favorite', 'jm-ltsc' ) ."</span></a></span></li>";
+						
+						
+						//class for markup
+						$class_li 				= 'tweet-container';
+						$class_twittar  		= 'tweet-twittar'; 
+						$class_reply			= 'tweet-reply';
+						$class_retweet			= 'tweet-retweet';
+						$class_favorite			= 'tweet-favorite';
+						$class_intent_container = 'intent-meta';
+						$size 	 				= '36';
+						$class_screen_name		= 'tweet-screen-name';
+						$class_username		    = 'tweet-username';
+						$class_content			= 'tweet-content';
+						$class_timestamp		= 'tweet-timestamp';
+						$class_timedate			= 'time-date';
+						$class_timediff			= 'tweet-timediff';
+					
+						//header			
+						$output .= '<li class="'.apply_filters('jmltsc_li_class', $class_li).'">';						
+						$output .= '<a href="https://twitter.com/'.$screen_name.'">';
+						$output .= '<img class="'.apply_filters('jmltsc_twittar_class', $class_twittar).'" width="'.apply_filters('jmltsc_twittar_size', $size).'" height="'.apply_filters('jmltsc_twittar_size', $size).'" src="'.$profile_image_url.'" alt="@'.$screen_name .'" />'; 				
+						$output .= '</a>'; 
+						$output .= '<span class="'.apply_filters('jmltsc_screen_name_class', $class_screen_name) .'">';
+						$output .= '@<a href="https://twitter.com/"'.$screen_name.'">'.$screen_name.'</a>';
+						$output .= '</span>';
+						$output .= '<span class="'.apply_filters('jmltsc_username_class', $class_username) .'">';
+						$output .= '<a href="https://twitter.com/"'.$username.'">'.$username.'</a>';
+						$output .= '</span>';	
+						
+						
+						//main content
+						$output .= '<div class="'.apply_filters('jmltsc_content_class', $class_content) .'">';
+						$output .= $feed;
+						$output .= '</div>';
+						
+						
+						//timestamp
+						$output .= '<span class="'.apply_filters('jmltsc_timestamp_class', $class_timestamp) .'">';
+							$output .= '<span class="'.apply_filters('jmltsc_timedate_class', $class_timedate) .'">';
+								$output .= '<a href="https://twitter.com/'.$username.'/status/'.$id_str.'">'. date( $date_format, strtotime($date) ) .'</a>';
+							$output .= '</span>';
+							
+							$output .= '<span class="'.apply_filters('jmltsc_timediff_class', $class_timediff) .'">';
+								$output .= human_time_diff( strtotime( $date ), current_time( 'timestamp', 1 ) ).__(' ago','jm-ltsc');
+							$output .= '</span>';
+						
+						$output .= '</span>'; //end of timestamp
+						
+						//intent
+						$output .= '<span class="'.apply_filters('jmltsc_intent_container_class', $class_intent_container) .'">';
+						
+							$output .= '<span class="'.apply_filters('jmltsc_reply_class', $class_reply) .'"><a href="https://twitter.com/intent/tweet?in_reply_to='.$id_str.'">'. __( 'Reply', 'jm-ltsc' ) .'</a></span>';
+							$output .= '<span class="'.apply_filters('jmltsc_retweet_class', $class_retweet) .'"><a href="https://twitter.com/intent/retweet?tweet_id='.$id_str.'">'. __( 'Retweet', 'jm-ltsc' ) .'</a> </span>';
+							$output .= '<span class="'.apply_filters('jmltsc_favorite_class', $class_favorite) .'"><a href="https://twitter.com/intent/favorite?tweet_id='.$id_str.'">'. __( 'Favorite', 'jm-ltsc' ) .'</a></span>';
+						
+						$output .= '</span>';
+						
+						$output .= '</li>';
 					}
 					$i++;
 				}
 				
-				$output .="</ul>";
+				$output .='</ul>';
 				break;	
 				
 			case '400':
@@ -436,7 +565,7 @@ function jm_ltsc_sanitize_options($options) {
 // Return default options
 function jm_ltsc_get_default_options() {
 	return array(
-	'twitAccount'              => 'TweetPressFr',
+	'twitAccount'              => 'twitterapi',
 	'consumerKey'              => __('replace with your keys - required', 'jm-ltsc'),
 	'consumerSecret'           => __('replace with your keys - required', 'jm-ltsc'),
 	'oauthToken'               => __('replace with your keys - required', 'jm-ltsc'),

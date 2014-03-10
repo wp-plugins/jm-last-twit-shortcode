@@ -163,7 +163,32 @@ function test_filter_jmltsc($output){
 4. front-end result when use in widget while using in post
 
 
+== Other notes ==
+
+= Here are the new filter you can use to replace with your own classes =
+
+* jmltsc_li_class
+* jmltsc_twittar_class
+* jmltsc_screen_name_class
+* jmltsc_username_class
+* jmltsc_content_class
+* jmltsc_timestamp_class
+* jmltsc_timedate_class
+* jmltsc_timediff_class
+* jmltsc_intent_container_class
+* jmltsc_reply_class
+* jmltsc_retweet_class
+* jmltsc_favorite_class
+
+
 == Changelog ==
+
+= 3.4 =
+* 10 Mar 2014
+* Add finer checking for PHP environnement so you do not get fatal error if requirements are not ok
+* Add a bunch of new filters to play with markup, old version was totally messed up and not so easy to understand
+* Filter's names are pretty explicit but let met know if you're not sure
+
 
 = 3.3.8 =
 * 20 dec 2013
