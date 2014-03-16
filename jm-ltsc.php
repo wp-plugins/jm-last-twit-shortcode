@@ -4,7 +4,7 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.4
+Version: 3.4.1
 License: GPL2++
 */
 
@@ -258,6 +258,7 @@ if(!function_exists('jm_ltsc_output')) {
 						$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
 						$id_str = $data[$i - 1]->id_str;
 						$screen_name = $data[$i - 1]->user->screen_name;
+						$name = $data[$i - 1]->user->name;
 						$date = $data[$i - 1]->created_at;
 						$date_format = 'j/m/y - '.get_option('time_format');
 						$profile_image_url = $data[$i - 1]->user->profile_image_url;
@@ -284,10 +285,10 @@ if(!function_exists('jm_ltsc_output')) {
 						$output .= '<img class="'.apply_filters('jmltsc_twittar_class', $class_twittar).'" width="'.apply_filters('jmltsc_twittar_size', $size).'" height="'.apply_filters('jmltsc_twittar_size', $size).'" src="'.$profile_image_url.'" alt="@'.$screen_name .'" />'; 				
 						$output .= '</a>'; 
 						$output .= '<span class="'.apply_filters('jmltsc_screen_name_class', $class_screen_name) .'">';
-						$output .= '@<a href="https://twitter.com/"'.$screen_name.'">'.$screen_name.'</a>';
+						$output .= '@<a href="https://twitter.com/'.$screen_name.'">'.$screen_name.'</a>';
 						$output .= '</span>';
 						$output .= '<span class="'.apply_filters('jmltsc_username_class', $class_username) .'">';
-						$output .= '<a href="https://twitter.com/"'.$username.'">'.$username.'</a>';
+						$output .= '<a href="https://twitter.com/'.$screen_name.'">'.$name.'</a>';
 						$output .= '</span>';	
 						
 						

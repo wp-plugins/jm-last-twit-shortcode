@@ -183,6 +183,10 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 3.4.1 =
+* 16 Mar 2014
+* Fix a little typo in screen_name and username that broke links to Twitter's profile
+
 = 3.4 =
 * 10 Mar 2014
 * Add finer checking for PHP environnement so you do not get fatal error if requirements are not ok
