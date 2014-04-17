@@ -2,7 +2,7 @@
 Contributors: jmlapam
 Tags: twitter, tweet, API 1.1, shortcode
 Requires at least: 
-Tested up to: 3.8
+Tested up to: 3.9
 License: GPLv2 or later
 Stable tag: trunk
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
