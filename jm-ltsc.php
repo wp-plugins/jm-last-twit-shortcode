@@ -4,13 +4,13 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.4.1
+Version: 3.4.2
 License: GPL2++
 */
 
 // New sources => http://clark-technet.com/2013/03/updated-wordpress-twitter-functions#comment-148551 (slightly modified)
 // and https://dev.twitter.com/docs/platform-objects/entities
-//https://github.com/BoiteAWeb/ActivationTester/blob/master/index.php
+// https://github.com/BoiteAWeb/ActivationTester/blob/master/index.php
 
 
 
@@ -372,7 +372,7 @@ add_action( 'admin_enqueue_scripts', 'jm_ltsc_add_quicktags' );
 function jm_ltsc_add_quicktags( $hook_suffix ) {
 	$opts = jm_ltsc_get_options(); 
 		if( ('post.php' == $hook_suffix || 'post-new.php' == $hook_suffix ) && $opts['twitQuickTags'] == 'yes') // only on post edit and if user wants it
-			wp_enqueue_script( 'jmltsc_quicktags_js', plugins_url('admin/quicktag.js',__FILE__), array( 'quicktags' ), null, true );
+			wp_enqueue_script( 'jmltsc_quicktags_js', plugins_url('admin/js/quicktag.js',__FILE__), array( 'quicktags' ), null, true );
 }
 
 /* shortcode in sidebar
@@ -413,7 +413,7 @@ function jm_ltsc_load_admin_css() {
 }
 
 function jm_ltsc_admin_css() {  
-	wp_enqueue_style( 'jm-style-ltw', plugins_url('admin/jm-ltsc-admin-style.css', __FILE__) ); 
+	wp_enqueue_style( 'jm-style-ltw', plugins_url('admin/css/jm-ltsc-admin-style.css', __FILE__) ); 
 } 
 
 
@@ -581,4 +581,28 @@ function jm_ltsc_get_options() {
 	return array_merge(jm_ltsc_get_default_options(), jm_ltsc_sanitize_options($options));
 }
 
+//tinymce button
+function jm_ltsc_add_mce_button() {
+	// check user permissions
+	if ( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ) ) {
+		return;
+	}
+	// check if WYSIWYG is enabled
+	if ( 'true' == get_user_option( 'rich_editing' ) ) {
+		add_filter( 'mce_external_plugins', 'jm_ltsc_add_tinymce_plugin' );
+		add_filter( 'mce_buttons', 'jm_ltsc_register_mce_button' );
+	}
+}
+add_action('admin_head', 'jm_ltsc_add_mce_button');
 
+// Declare script for new button
+function jm_ltsc_add_tinymce_plugin( $plugin_array ) {
+	$plugin_array['jm_ltsc_mce_button'] = plugins_url( 'admin/js/tinymce.js', __FILE__);
+	return $plugin_array;
+}
+
+// Register new button in the editor
+function jm_ltsc_register_mce_button( $buttons ) {
+	array_push( $buttons, 'jm_ltsc_mce_button' );
+	return $buttons;
+}

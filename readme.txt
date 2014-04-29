@@ -161,6 +161,7 @@ function test_filter_jmltsc($output){
 2. quicktags in posts
 3. use in widget
 4. front-end result when use in widget while using in post
+5. UI button (tinymce)
 
 
 == Other notes ==
@@ -182,6 +183,10 @@ function test_filter_jmltsc($output){
 
 
 == Changelog ==
+
+= 3.4.2 =
+* 29 Apr 2014
+* Add tinymce UI for shortcode
 
 = 3.4.1 =
 * 16 Mar 2014
