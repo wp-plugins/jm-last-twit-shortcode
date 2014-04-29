@@ -16,8 +16,6 @@ See **FAQ** here and/or option page of plugin on your installation.
 
 **Requires PHP 5.3++**
 
-Plugin has now its own <a href="http://support.tweetpress.fr">support here</a>
-
 <a href="http://twitter.com/tweetpressfr">Follow me on Twitter</a>
 
 
@@ -29,8 +27,6 @@ Une fois activé le plugin s'occupe d'afficher votre dernier tweet avec une conn
 Voir la **FAQ** et/ou la page d'options du plugin sur votre installation
 
 **Requiert PHP 5.3 au minimum**
-
-Le plugin possède son propre <a href="http://support.tweetpress.fr">support ici</a>. La langue principale est l'Anglais mais le Français est accepté vu que c'est aussi la langue du dév ^^
 
 <a href="http://twitter.com/tweetpressfr">Me suivre sur Twitter</a>
 
