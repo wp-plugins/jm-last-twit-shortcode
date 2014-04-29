@@ -1,7 +1,7 @@
 ﻿=== JM Last Twit Shortcode ===
 Contributors: jmlapam
 Tags: twitter, tweet, API 1.1, shortcode
-Requires at least: 
+Requires at least: 3.9
 Tested up to: 3.9
 License: GPLv2 or later
 Stable tag: trunk
