@@ -180,9 +180,14 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
-= 3.4.2 =
+= 3.4.3 =
 * 29 Apr 2014
 * Add tinymce UI for shortcode
+* Fix plugin version
+* Reorganize plugin files and delete admin option page UI
+* Add confirmation message when settings are saved in option page 
+* Fix PHP notice for installation running php under 5.3 because global connection is hooked on init so before admin_notices
+* Add test in admin so you can see if tweet are ok before using shortcodes in posts
 
 = 3.4.1 =
 * 16 Mar 2014
