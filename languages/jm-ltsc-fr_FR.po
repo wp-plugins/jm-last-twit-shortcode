@@ -309,3 +309,31 @@ msgstr "Effacer le cache"
 #. Text in echo
 msgid "Delete cache now!"
 msgstr "Vider le cache maintenant!"
+
+#. Text in echo
+msgid "Cache has been deleted."
+msgstr "Le cache a bien été vidé."
+
+#. Text in echo
+msgid "Twitter account (without @)"
+msgstr "Votre compte Twitter (sans @)"
+
+#. Text in echo
+msgid "Insert Twitter Shortcode"
+msgstr "Insérer le shortcode Twitter"
+
+#. Text in echo
+msgid "How many Tweets?"
+msgstr "Combien de tweets?"
+
+#. Text in echo
+msgid "Cache duration (hours)"
+msgstr "Durée du cache (heures)"
+
+#. Text in echo
+msgid "Include RTs?"
+msgstr "Inclure les RTs?"
+
+#. Text in echo
+msgid "Exclude replies?"
+msgstr "Exclure les réponses"

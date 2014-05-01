@@ -9,7 +9,7 @@ if(!function_exists('jm_ltsc_output')) {
 	function jm_ltsc_output( $atts ) {
 		extract(shortcode_atts(array(
 		'username'     	     => '',
-		'cache'         	 => 1800,
+		'cache'         	 => 1,
 		'count'       	     => 1,
 		'include_rts'  		 => 'true',	
 		'exclude_replies'	 => 'false'	

@@ -4,7 +4,7 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.4.4
+Version: 3.4.5
 License: GPL2++
 */
 
@@ -15,16 +15,16 @@ License: GPL2++
 
 
 
-
 defined( 'ABSPATH' ) or	die( 'No !' );
 
-define( 'JM_LTSC_VERSION', '3.4.4' );
+define( 'JM_LTSC_VERSION', '3.4.5' );
 define( 'JM_LTSC_DIR', plugin_dir_path( __FILE__ )  );
 define( 'JM_LTSC_INC_DIR', trailingslashit( JM_LTSC_DIR . 'inc') );
 define( 'JM_LTSC_LIB_DIR', trailingslashit( JM_LTSC_DIR . 'admin/libs') );
 define( 'JM_LTSC_CSS_URL', trailingslashit( plugin_dir_url( __FILE__ ). 'admin/css' ) );
 define( 'JM_LTSC_JS_URL', trailingslashit( plugin_dir_url( __FILE__ ). 'admin/js' ) );
 define( 'JM_LTSC_IMG_URL', trailingslashit( plugin_dir_url( __FILE__ ). 'admin/img' ) );
+define( 'JM_LTSC_LANG_DIR', dirname( plugin_basename(__FILE__) ) . '/languages/');
 
 //Call modules 
 add_action('plugins_loaded','jm_ltsc_init');
@@ -50,7 +50,7 @@ function jm_ltsc_init() {
 // Language support
 add_action( 'init', 'jm_ltsc_lang_init' );// replace admin_init with init to get translation on front-end 
 function jm_ltsc_lang_init() {
-	load_plugin_textdomain( 'jm-ltsc', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+	load_plugin_textdomain( 'jm-ltsc', false, JM_LTSC_LANG_DIR );
 }
 
 // Plugin activation: create default values if they don't exist

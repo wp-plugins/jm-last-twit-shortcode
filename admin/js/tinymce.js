@@ -1,23 +1,23 @@
 (function() {
 	tinymce.PluginManager.add('jm_ltsc_mce_button', function( editor, url ) {
 		editor.addButton( 'jm_ltsc_mce_button', {
-			icon: false,
+			icon: 'icon dashicons-before dashicons-twitter',
 			type: 'button',
 			text: 'JMLTSC',
 			onclick: function() {
 				editor.windowManager.open( {
-					title: 'Insert Twitter Shortcode',
+					title: editor.getLang('jm_ltsc_tinymce_plugin.popup_title'),
 					body: [	
 						{
 							type: 'textbox',
 							name: 'userValue',
-							label: 'Twitter account (without @)',
+							label: editor.getLang('jm_ltsc_tinymce_plugin.account_input'),
 							value: 'twitterapi'
 						},
 						{	
 							type: 'listbox',
 							name: 'countValue',
-							label: 'Count',
+							label: editor.getLang('jm_ltsc_tinymce_plugin.count_input'),
 							'values': [
 								{text: '1', value: '1'},
 								{text: '2', value: '2'},
@@ -44,9 +44,9 @@
 						{	
 							type: 'listbox',
 							name: 'cacheValue',
-							label: 'Count',
+							label: editor.getLang('jm_ltsc_tinymce_plugin.cache_input'),
 							'values': [
-								{text: '30min', value: '1800'},
+								{text: '30 min', value: '1800'},
 								{text: '1h', value: '3600'},
 								{text: '3h', value: '10800'},
 								{text: '4h', value: '14400'},
@@ -61,13 +61,13 @@
 						{
 							type: 'textbox',
 							name: 'incValue',
-							label: 'Include RTs?',
+							label: editor.getLang('jm_ltsc_tinymce_plugin.inc_input'),
 							value: 'false'
 						},
 						{
 							type: 'textbox',
 							name: 'excValue',
-							label: 'Exclude replies?',
+							label: editor.getLang('jm_ltsc_tinymce_plugin.exc_input'),
 							value: 'true'
 						}
 

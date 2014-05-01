@@ -58,21 +58,21 @@ function jm_ltsc_options_page() {
 	?>
 	<div class="wrap jm_ltsc" id="pluginwrapper">
 	
-	<? // Confirmation mess ?>
+	<?php $nonce_key = '_delete_jm_ltsc_cache'; ?>
 	<?php if ( isset( $_GET['settings-updated'] ) ) echo "<div class='updated'><p>".__('Settings saved.')."</p></div>"; ?>
-	<?php if ( isset( $_POST['_delete_jm_ltsc_cache'] ) ) echo "<div class='updated'><p>".__('Cache has been deleted.')."</p></div>"; ?>
 	<?php
 	
 	// Delete cache
-	 if( isset( $_POST['_delete_jm_ltsc_cache'] ) ) {
+	 if( !isset($_POST[$nonce_key]) || wp_verify_nonce( $_POST[$nonce_key], basename(__FILE__) )  ) {
+		echo '<!-- Silence is gold -->';
+	 } else {
 		global $wpdb;
 		$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '%_last_twit_shortcode'");
-	 
+		 echo "<div class='updated'><p>".__('Cache has been deleted.')."</p></div>";
 	 }
 	?>
 		<h2 class="dashicons-before dashicons-twitter"><?php _e('JM Last Twit Shortcode', 'jm-ltsc'); ?></h2>
-		
-		<div class="postbox">
+
 	
 				<p><?php _e('Get your last tweets <br />the Twitter 1.1 way</br> with a simple shortcode','jm-ltsc');?></p>
 				<p><?php _e('To grab your feed you need to authenticate in the new version of Twitter API 1.1', 'jm-ltsc'); ?></p>
@@ -122,14 +122,11 @@ function jm_ltsc_options_page() {
 			
 			<form class="jm-ltsc-form" method="post" action="">
 				
-				<?php submit_button( __('Delete cache now!', 'jm-ltsc'), 'large', '_delete_jm_ltsc_cache', true); ?>
+				<?php wp_nonce_field( basename(__FILE__), $nonce_key ); ?>
+				<?php submit_button( __('Delete cache now!', 'jm-ltsc'), 'large', $nonce_key, true); ?>
 			
 			</form>
-			
-
-		</div>
-		
-		<div class="item postbox">
+	
 		
 							
 			<h3><?php _e('Test', 'jm-ltsc'); ?></h3>	
@@ -189,8 +186,6 @@ function jm_ltsc_options_page() {
 					<li class="inbl"><a class="button normal" target="_blank" href="https://twitter.com/intent/user?screen_name=TweetPressFr"><?php _e('follow me on Twitter', 'jm-ltsc'); ?></a></li>       
 				</ul>
 
-		</div>
-	
 	
 	</div>
 

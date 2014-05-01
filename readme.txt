@@ -180,13 +180,21 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 3.4.5 =
+* 02 May 2014
+* Add icon near from the tinymce button
+* Fix wrong label & value for cache in tinymce.js
+* Delete wrong UI (msitake error versionning sorry )
+* Localize popup tinymce button
+* Add nonce to second form
+
 = 3.4.4 =
 * 01 May 2014
 * Fix a wrong callback (typo) 
 * Add a delete button for cache
 * Add uninstall and delete cache on uninstall
 * Fix small bug and update translation
-* Delete default option for twitter account, this allows to quickly get tweet in admin for test!
+* Delete default option for twitter account, this allows to get admin tweet quick!
 
 = 3.4.3 =
 * 29 Apr 2014
