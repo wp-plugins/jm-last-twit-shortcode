@@ -5,10 +5,11 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: jmlapam <contact@tweetpress.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.4\n"
+"Language: fr_FR\n"
 
 #. Text in function
 #: jm-ltsc.php:1
@@ -41,8 +42,8 @@ msgstr ""
 #. Text in echo
 #: jm-ltsc.php:343
 msgid ""
-"Different username => whether it is in a post or in a Text widget use: <code>"
-"[jmlt username=\"rihanna\"]</code>"
+"Different username => whether it is in a post or in a Text widget use: "
+"<code>[jmlt username=\"rihanna\"]</code>"
 msgstr ""
 "Autre nom d'utilisateur, autre timeline =>que ce soit dans un post ou un "
 "widget text utlisez: <code>[jmlt username=\"rihanna\"]</code>"
@@ -53,14 +54,14 @@ msgid ""
 "Exclude RTs => whether it is in a post or in a Text widget use: <code>[jmlt "
 "include_rts=\"false\"]</code>"
 msgstr ""
-"Exclure les RTs => que ce soit dans un post ou un widget text utlisez: <code>"
-"[jmlt include_rts=\"false\"]</code>"
+"Exclure les RTs => que ce soit dans un post ou un widget text utlisez: "
+"<code>[jmlt include_rts=\"false\"]</code>"
 
 #. Text in echo
 #: jm-ltsc.php:345
 msgid ""
-"Exclude replies => whether it is in a post or in a Text widget use: <code>"
-"[jmlt exclude_replies=\"true\"]</code>"
+"Exclude replies => whether it is in a post or in a Text widget use: "
+"<code>[jmlt exclude_replies=\"true\"]</code>"
 msgstr ""
 "Exclure les réponses => que ce soit dans un post ou un widget text utlisez: "
 "<code>[jmlt exclude_replies=\"true\"]</code>"
@@ -199,8 +200,8 @@ msgstr "Retweeter"
 
 #. Text in echo
 msgid ""
-"Set cache duration => whether it is in a post or in a Text widget use: <code>"
-"[jmlt cache=\"3600\"]</code> to put tweets in cache for 1 hour"
+"Set cache duration => whether it is in a post or in a Text widget use: "
+"<code>[jmlt cache=\"3600\"]</code> to put tweets in cache for 1 hour"
 msgstr ""
 "Définir la durée du cache  => que ce soit dans un post ou un widget text "
 "utlisez:  <code>[jmlt cache=\"3600\"]</code>pour mettre les tweets en cache "
@@ -300,3 +301,11 @@ msgstr "Oui"
 #. Text in echo
 msgid "No"
 msgstr "Non"
+
+#. Text in echo
+msgid "Delete cache"
+msgstr "Effacer le cache"
+
+#. Text in echo
+msgid "Delete cache now!"
+msgstr "Vider le cache maintenant!"

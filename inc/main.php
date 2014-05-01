@@ -129,19 +129,19 @@ if(!function_exists('jm_ltsc_output')) {
 			case '404':
 			case '406':
 				
-				$output = '<div class="large pa1 error">'.__('Your credentials might be unset or incorrect or username is wrong. In any case this error is not due to Twitter API.','jm-ltsc').'</div>';
+				$output = '<div class="error"><p>'.__('Your credentials might be unset or incorrect or username is wrong. In any case this error is not due to Twitter API.','jm-ltsc').'</p></div>';
 				break;
 				
 			case '429':
 				
-				$output = '<div class="large pa1 error">'.__('Rate limits are exceed!','jm-ltsc').'</div>';
+				$output = '<div class="error"><p>'.__('Rate limits are exceed!','jm-ltsc').'</p></div>';
 				break;
 				
 			case '500':
 			case '502':
 			case '503':
 				
-				$output = '<div class="large pa1 error">'.__('Twitter is overwhelmed or something bad happened with its API.','jm-ltsc').'</div>';
+				$output = '<div class="error"><p>'.__('Twitter is overwhelmed or something bad happened with its API.','jm-ltsc').'</p></div>';
 				break;
 			default:
 				$output = __('Something is wrong or missing. ','jm-ltsc');

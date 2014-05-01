@@ -17,7 +17,7 @@
 }
 
 .jm_ltsc .inbl  { display:inline-block; }
-ul.tweetfeed { margin: 0 auto 0 1em; width:70%; border:1px solid #eee; padding:1em;  }
+ ul.tweetfeed { margin: 0 auto 0 2em; width:70%; border:1px solid #eee; padding:1em;  }
 .tweet-username,.tweet-screen-name,
 .tweet-reply,.tweet-favorite,.tweet-retweet{ float:right; margin-right: .5em; }
 .tweet-content{margin: 1em 0; display:block; width:100%; }
@@ -26,8 +26,13 @@ ul.tweetfeed { margin: 0 auto 0 1em; width:70%; border:1px solid #eee; padding:1
 .tweetfeed { padding:1em 0; }
 .tweet-content,.time-date { margin-left: 1em; }
 
+.clear { clear:both; }
 
-
+.jm_ltsc img.profile {
+	float:left;
+	margin-top:-10px;
+	margin-right:10px;
+}
 
 @media only screen 
 and (min-width : 1224px) {

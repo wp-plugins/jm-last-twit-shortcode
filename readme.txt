@@ -180,6 +180,14 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 3.4.4 =
+* 01 May 2014
+* Fix a wrong callback (typo) 
+* Add a delete button for cache
+* Add uninstall and delete cache on uninstall
+* Fix small bug and update translation
+* Delete default option for twitter account, this allows to quickly get tweet in admin for test!
+
 = 3.4.3 =
 * 29 Apr 2014
 * Add tinymce UI for shortcode

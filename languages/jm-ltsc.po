@@ -190,3 +190,12 @@ msgstr ""
 #. Text in echo
 msgid "No"
 msgstr ""
+
+
+#. Text in echo
+msgid "Delete cache"
+msgstr ""
+
+#. Text in echo
+msgid "Delete cache now!"
+msgstr ""
