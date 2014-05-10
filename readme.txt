@@ -180,6 +180,11 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 3.4.6 =
+* 10 May 2014
+* Fix stupid use of nonce
+* Add tabs to admin
+
 = 3.4.5 =
 * 02 May 2014
 * Add icon near from the tinymce button
