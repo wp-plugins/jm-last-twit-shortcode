@@ -7,22 +7,22 @@ defined( 'ABSPATH' ) or	die( 'No !' );
 
 if(!function_exists('jm_ltsc_output')) {
 	function jm_ltsc_output( $atts ) {
-		extract(shortcode_atts(array(
+		$args = shortcode_atts(array(
 		'username'     	     => '',
 		'cache'         	 => 1,
 		'count'       	     => 1,
 		'include_rts'  		 => 'true',	
 		'exclude_replies'	 => 'false'	
-		), $atts, 'ltsc'));
+		), $atts, 'ltsc');
 
 		
 		//add some flexibility, you can add whatever account
 		$opts = jm_ltsc_get_options(); 
-		if ($username == '') $username = $opts['twitAccount'];
+		if ($args['username'] == '') $args['username'] = $opts['twitAccount'];
 
 		
 		//set our transient if there's no recent copy
-		$transient = $username."_last_twit_shortcode";
+		$transient = $args['username']."_last_twit_shortcode";
 		$i = 1;
 		$incache = get_site_transient( $transient );
 		
@@ -35,10 +35,10 @@ if(!function_exists('jm_ltsc_output')) {
 			$code = $tcTmhOAuth->request('GET', $tcTmhOAuth->url('1.1/statuses/user_timeline'), 
 			array(
 			'include_entities' => '1',//actually entities are always loaded with tweets in API 1.1 ;)
-			'screen_name'      => $username,
-			'count'			   => $count,
-			'include_rts'	   => $include_rts,
-			'exclude_replies'  => $exclude_replies				
+			'screen_name'      => $args['username'],
+			'count'			   => $args['count'],
+			'include_rts'	   => $args['include_rts'],
+			'exclude_replies'  => $args['exclude_replies']				
 			));    
 			
 			

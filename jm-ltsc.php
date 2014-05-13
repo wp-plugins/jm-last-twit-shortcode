@@ -4,20 +4,21 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.4.6
+Version: 3.4.7
 License: GPL2++
 */
 
 // New sources => http://clark-technet.com/2013/03/updated-wordpress-twitter-functions#comment-148551 (slightly modified)
 // and https://dev.twitter.com/docs/platform-objects/entities
-// https://github.com/BoiteAWeb/ActivationTester/blob/master/index.php
-// http://www.wpexplorer.com/wordpress-tinymce-tweaks
+// and https://github.com/BoiteAWeb/ActivationTester/blob/master/index.php
+// and http://www.wpexplorer.com/wordpress-tinymce-tweaks
+// and https://core.trac.wordpress.org/ticket/22400
 
 
 
 defined( 'ABSPATH' ) or	die( 'No !' );
 
-define( 'JM_LTSC_VERSION', '3.4.6' );
+define( 'JM_LTSC_VERSION', '3.4.7' );
 define( 'JM_LTSC_DIR', plugin_dir_path( __FILE__ )  );
 define( 'JM_LTSC_INC_DIR', trailingslashit( JM_LTSC_DIR . 'inc') );
 define( 'JM_LTSC_LIB_DIR', trailingslashit( JM_LTSC_DIR . 'admin/libs') );

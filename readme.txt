@@ -1,8 +1,8 @@
 ﻿=== JM Last Twit Shortcode ===
 Contributors: jmlapam
 Tags: twitter, tweet, API 1.1, shortcode
-Requires at least: 3.9
-Tested up to: 3.9
+Requires at least: 3.9.1
+Tested up to: 3.9.1
 License: GPLv2 or later
 Stable tag: trunk
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -179,6 +179,10 @@ function test_filter_jmltsc($output){
 
 
 == Changelog ==
+
+= 3.4.7 =
+* 13 May 2014
+* Remove extract from shortcode callback according to this trac : https://core.trac.wordpress.org/ticket/22400
 
 = 3.4.6 =
 * 10 May 2014
