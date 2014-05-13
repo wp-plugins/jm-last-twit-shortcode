@@ -48,7 +48,7 @@ if(!function_exists('jm_ltsc_output')) {
 			case '304':				
 				$data = json_decode( $tcTmhOAuth->response['response'] );
 				$output = '<ul class="tweetfeed">';
-				while ( $i <= $count ) {
+				while ( $i <= $args['count'] ) {
 					//Assign feed to $feed
 					if ( isset( $data[$i - 1] ) ) {
 						$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
