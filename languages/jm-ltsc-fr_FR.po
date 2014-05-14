@@ -337,3 +337,7 @@ msgstr "Inclure les RTs?"
 #. Text in echo
 msgid "Exclude replies?"
 msgstr "Exclure les réponses"
+
+#. Text in echo
+msgid "Size of Twittar?"
+msgstr "Taille du Twittar?"

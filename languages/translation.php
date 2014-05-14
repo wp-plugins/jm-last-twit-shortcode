@@ -15,6 +15,7 @@ function jm_ltsc_tinymce_plugin_translation() {
 		'cache_input'	=> esc_js( __('Cache duration (hours)', 'jm-ltsc' ) ) ,
 		'inc_input' 	=> esc_js( __('Include RTs?', 'jm-ltsc' ) ) ,
 		'exc_input' 	=> esc_js( __('Exclude replies?', 'jm-ltsc' ) ) ,
+		'size_input' 	=> esc_js( __('Size of Twittar?', 'jm-ltsc' ) ) ,
 	
 	);
 

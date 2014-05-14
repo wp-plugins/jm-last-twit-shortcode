@@ -69,11 +69,17 @@
 							name: 'excValue',
 							label: editor.getLang('jm_ltsc_tinymce_plugin.exc_input'),
 							value: 'true'
-						}
+						},
+						{
+							type: 'textbox',
+							name: 'sizeValue',
+							label: editor.getLang('jm_ltsc_tinymce_plugin.size_input'),
+							value: '36'
+						},
 
 					],
 					onsubmit: function( e ) {
-						editor.insertContent( '[jmlt username="' + e.data.userValue + '" count="' + e.data.countValue + '" cache="' + e.data.cacheValue + '" include_rts="' + e.data.incValue + '" exclude_replies="' + e.data.excValue + '"]');
+						editor.insertContent( '[jmlt username="' + e.data.userValue + '" count="' + e.data.countValue + '" cache="' + e.data.cacheValue + '" include_rts="' + e.data.incValue + '" exclude_replies="' + e.data.excValue + '" size="' + e.data.sizeValue + '"]');
 					}
 				});
 			}

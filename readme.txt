@@ -180,6 +180,11 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 3.4.8 =
+* 14 May 2014
+* Fix missing changes (array)
+* Add a param to allow you to change size oftwittar
+
 = 3.4.7 =
 * 13 May 2014
 * Remove extract from shortcode callback according to this trac : https://core.trac.wordpress.org/ticket/22400

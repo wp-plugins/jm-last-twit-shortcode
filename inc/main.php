@@ -9,6 +9,7 @@ if(!function_exists('jm_ltsc_output')) {
 	function jm_ltsc_output( $atts ) {
 		$args = shortcode_atts(array(
 		'username'     	     => '',
+		'size'				 => 36,
 		'cache'         	 => 1,
 		'count'       	     => 1,
 		'include_rts'  		 => 'true',	
@@ -67,7 +68,6 @@ if(!function_exists('jm_ltsc_output')) {
 						$class_retweet			= 'tweet-retweet';
 						$class_favorite			= 'tweet-favorite';
 						$class_intent_container = 'intent-meta';
-						$size 	 				= '36';
 						$class_screen_name		= 'tweet-screen-name';
 						$class_username		    = 'tweet-username';
 						$class_content			= 'tweet-content';
@@ -77,14 +77,14 @@ if(!function_exists('jm_ltsc_output')) {
 					
 						//header			
 						$output .= '<li class="'.apply_filters('jmltsc_li_class', $class_li).'">';						
-						$output .= '<a href="https://twitter.com/'.$screen_name.'">';
-						$output .= '<img class="'.apply_filters('jmltsc_twittar_class', $class_twittar).'" width="'.apply_filters('jmltsc_twittar_size', $size).'" height="'.apply_filters('jmltsc_twittar_size', $size).'" src="'.$profile_image_url.'" alt="@'.$screen_name .'" />'; 				
+						$output .= '<a href="https://twitter.com/'.$args['username'].'">';
+						$output .= '<img class="'.apply_filters('jmltsc_twittar_class', $class_twittar).'" width="'.apply_filters('jmltsc_twittar_size', $args['size'] ).'" height="'.apply_filters('jmltsc_twittar_size', $args['size']).'" src="'.$profile_image_url.'" alt="@'.$screen_name .'" />'; 				
 						$output .= '</a>'; 
 						$output .= '<span class="'.apply_filters('jmltsc_screen_name_class', $class_screen_name) .'">';
-						$output .= '@<a href="https://twitter.com/'.$screen_name.'">'.$screen_name.'</a>';
+						$output .= '@<a href="https://twitter.com/'.$args['username'].'">'.$screen_name.'</a>';
 						$output .= '</span>';
 						$output .= '<span class="'.apply_filters('jmltsc_username_class', $class_username) .'">';
-						$output .= '<a href="https://twitter.com/'.$screen_name.'">'.$name.'</a>';
+						$output .= '<a href="https://twitter.com/'.$args['username'].'">'.$name.'</a>';
 						$output .= '</span>';	
 						
 						
@@ -97,7 +97,7 @@ if(!function_exists('jm_ltsc_output')) {
 						//timestamp
 						$output .= '<span class="'.apply_filters('jmltsc_timestamp_class', $class_timestamp) .'">';
 							$output .= '<span class="'.apply_filters('jmltsc_timedate_class', $class_timedate) .'">';
-								$output .= '<a href="https://twitter.com/'.$username.'/status/'.$id_str.'">'. date( $date_format, strtotime($date) ) .'</a>';
+								$output .= '<a href="https://twitter.com/'.$args['username'].'/status/'.$id_str.'">'. date( $date_format, strtotime($date) ) .'</a>';
 							$output .= '</span>';
 							
 							/*$output .= '<span class="'.apply_filters('jmltsc_timediff_class', $class_timediff) .'">';
@@ -147,7 +147,7 @@ if(!function_exists('jm_ltsc_output')) {
 				$output = __('Something is wrong or missing. ','jm-ltsc');
 			}
 			
-			set_site_transient( $transient, $output, $cache );
+			set_site_transient( $transient, $output, $args['cache']);
 			
 		} else {
 			return $incache . '<!--'. __('JM Last Twit Shortcode - cache','jm-ltsc') .'-->';
