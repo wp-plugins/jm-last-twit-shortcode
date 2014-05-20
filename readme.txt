@@ -180,7 +180,7 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
-= 3.4.8 =
+= 3.4.9 =
 * 20 May 2014
 * Add possibiity to display image posted with tweet
 
