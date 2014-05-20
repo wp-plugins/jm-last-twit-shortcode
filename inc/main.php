@@ -12,8 +12,9 @@ if(!function_exists('jm_ltsc_output')) {
 		'size'				 => 36,
 		'cache'         	 => 1,
 		'count'       	     => 1,
-		'include_rts'  		 => 'true',	
-		'exclude_replies'	 => 'false'	
+		'include_rts'  		 => true,	
+		'exclude_replies'	 => false,
+		'display_media'		 => false
 		), $atts, 'ltsc');
 
 		
@@ -35,7 +36,7 @@ if(!function_exists('jm_ltsc_output')) {
 
 			$code = $tcTmhOAuth->request('GET', $tcTmhOAuth->url('1.1/statuses/user_timeline'), 
 			array(
-			'include_entities' => '1',//actually entities are always loaded with tweets in API 1.1 ;)
+			'include_entities' => true,
 			'screen_name'      => $args['username'],
 			'count'			   => $args['count'],
 			'include_rts'	   => $args['include_rts'],
@@ -52,13 +53,20 @@ if(!function_exists('jm_ltsc_output')) {
 				while ( $i <= $args['count'] ) {
 					//Assign feed to $feed
 					if ( isset( $data[$i - 1] ) ) {
-						$feed = jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
-						$id_str = $data[$i - 1]->id_str;
-						$screen_name = $data[$i - 1]->user->screen_name;
-						$name = $data[$i - 1]->user->name;
-						$date = $data[$i - 1]->created_at;
-						$date_format = 'j/m/y - '.get_option('time_format');
-						$profile_image_url = $data[$i - 1]->user->profile_image_url;
+						$feed 					= jc_twitter_format( $data[$i - 1]->text, $data[$i - 1] );
+						$id_str 				= $data[$i - 1]->id_str;
+						$screen_name 			= $data[$i - 1]->user->screen_name;
+						$name 					= $data[$i - 1]->user->name;
+						$date 					= $data[$i - 1]->created_at;
+						$date_format 			= 'j/m/y - '.get_option('time_format');
+						$profile_image_url 		= $data[$i - 1]->user->profile_image_url;
+						$pic_twitter 			= '';
+						
+						if( $args['display_media'] && $data[$i - 1]->entities->media ) {
+							foreach ($data[$i - 1]->entities->media as $media) {
+								$pic_twitter = '<img src="'.$media->media_url_https.'" alt="" />';
+							}
+						}
 						
 						
 						//class for markup
@@ -91,6 +99,7 @@ if(!function_exists('jm_ltsc_output')) {
 						//main content
 						$output .= '<div class="'.apply_filters('jmltsc_content_class', $class_content) .'">';
 						$output .= $feed;
+						$output .= $pic_twitter;
 						$output .= '</div>';
 						
 						

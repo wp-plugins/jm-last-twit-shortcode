@@ -227,7 +227,12 @@ msgstr ""
 
 #. Text in echo
 msgid "Exclude replies?"
+msgstr ""
 
 #. Text in echo
 msgid "Size of Twittar?"
+msgstr ""
+
+#. Text in echo
+msgid "Display attached pic?"
 msgstr ""

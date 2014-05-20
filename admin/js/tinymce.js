@@ -59,16 +59,22 @@
 								]
 						},
 						{
-							type: 'textbox',
+							type: 'listbox',
 							name: 'incValue',
 							label: editor.getLang('jm_ltsc_tinymce_plugin.inc_input'),
-							value: 'false'
+							'values': [
+								{text: editor.getLang('jm_ltsc_tinymce_plugin.no_input'), value: 'false'},
+								{text: editor.getLang('jm_ltsc_tinymce_plugin.yes_input'), value: 'true'},						
+								]
 						},
 						{
-							type: 'textbox',
+							type: 'listbox',
 							name: 'excValue',
 							label: editor.getLang('jm_ltsc_tinymce_plugin.exc_input'),
-							value: 'true'
+							'values': [
+								{text: editor.getLang('jm_ltsc_tinymce_plugin.yes_input'), value: 'true'},
+								{text: editor.getLang('jm_ltsc_tinymce_plugin.no_input'), value: 'false'},						
+								]
 						},
 						{
 							type: 'textbox',
@@ -76,10 +82,19 @@
 							label: editor.getLang('jm_ltsc_tinymce_plugin.size_input'),
 							value: '36'
 						},
+						{	
+							type: 'listbox',
+							name: 'displayMediaValue',
+							label: editor.getLang('jm_ltsc_tinymce_plugin.display_media_input'),
+							'values': [
+								{text: editor.getLang('jm_ltsc_tinymce_plugin.no_input'), value: 'false'},
+								{text: editor.getLang('jm_ltsc_tinymce_plugin.yes_input'), value: 'true'},						
+								]
+						},
 
 					],
 					onsubmit: function( e ) {
-						editor.insertContent( '[jmlt username="' + e.data.userValue + '" count="' + e.data.countValue + '" cache="' + e.data.cacheValue + '" include_rts="' + e.data.incValue + '" exclude_replies="' + e.data.excValue + '" size="' + e.data.sizeValue + '"]');
+						editor.insertContent( '[jmlt username="' + e.data.userValue + '" count="' + e.data.countValue + '" cache="' + e.data.cacheValue + '" include_rts="' + e.data.incValue + '" exclude_replies="' + e.data.excValue + '" size="' + e.data.sizeValue + '" display_media="' + e.data.displayMediaValue + '"]');
 					}
 				});
 			}

@@ -341,3 +341,7 @@ msgstr "Exclure les réponses"
 #. Text in echo
 msgid "Size of Twittar?"
 msgstr "Taille du Twittar?"
+
+#. Text in echo
+msgid "Display attached pic?"
+msgstr "Afficher l'image associée au tweet?"

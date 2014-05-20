@@ -4,7 +4,7 @@ Plugin URI: http://support.tweetPress.fr
 Description: Meant to add your last tweet with the lattest API way
 Author: Julien Maury
 Author URI: http://tweetPress.fr
-Version: 3.4.8
+Version: 3.4.9
 License: GPL2++
 */
 
@@ -18,7 +18,7 @@ License: GPL2++
 
 defined( 'ABSPATH' ) or	die( 'No !' );
 
-define( 'JM_LTSC_VERSION', '3.4.7' );
+define( 'JM_LTSC_VERSION', '3.4.9' );
 define( 'JM_LTSC_DIR', plugin_dir_path( __FILE__ )  );
 define( 'JM_LTSC_INC_DIR', trailingslashit( JM_LTSC_DIR . 'inc') );
 define( 'JM_LTSC_LIB_DIR', trailingslashit( JM_LTSC_DIR . 'admin/libs') );

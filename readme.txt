@@ -181,6 +181,10 @@ function test_filter_jmltsc($output){
 == Changelog ==
 
 = 3.4.8 =
+* 20 May 2014
+* Add possibiity to display image posted with tweet
+
+= 3.4.8 =
 * 14 May 2014
 * Fix missing changes (array)
 * Add a param to allow you to change size oftwittar
