@@ -180,6 +180,10 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 3.5.0 =
+* 21 May 2014
+* Improve multisite compatibility
+
 = 3.4.9 =
 * 20 May 2014
 * Add possibiity to display image posted with tweet
