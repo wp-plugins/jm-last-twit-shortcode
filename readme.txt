@@ -180,6 +180,11 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 3.5.1 =
+* 01 June 2014
+* replace double switch_to_blog() with appropriate function restore_current_blog()
+* could trigger some bugs sometimes
+
 = 3.5.0 =
 * 21 May 2014
 * Improve multisite compatibility
