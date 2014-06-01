@@ -23,7 +23,8 @@ if( !is_multisite() ) {
     {
         switch_to_blog( $blog_id );
 		jm_ltsc_on_delete();
+		restore_current_blog();
     }
 	
-    restore_current_blog();
+    
 }

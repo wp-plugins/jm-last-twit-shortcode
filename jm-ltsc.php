@@ -78,9 +78,8 @@ function jm_ltsc_activate() {
 		{
 			switch_to_blog( $blog_id );
 			jm_ltsc_on_activation();
+			restore_current_blog();
 		}
-		
-		restore_current_blog();
 	
 	}
 	
