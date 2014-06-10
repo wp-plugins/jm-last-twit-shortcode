@@ -165,6 +165,7 @@ function test_filter_jmltsc($output){
 
 Par défaut le plugin force l'exécution des shortcodes dans les widgets textes.
 Dans ce cas très très particulier d'afficherun shortcode dans un widget texte sans l'exécuter il y a un tricks efficace: mettre le shortcode entre double [] comme ça :
+
 `
 [[monshorcode]]
 `
