@@ -101,6 +101,15 @@ function test_filter_jmltsc($output){
 }
 `
 
+= I want to write a shortcode in a widget text but not to execute it =
+
+The plugin activates shortcodes in widget text.
+In this very very particular case, you can use this great trick : put the shortcode in double [] like that :
+`
+[[myshorcode]]
+
+<a href="http://www.geekpress.fr/wordpress/astuce/execution-shortcode-article-1864/">Source</a>
+
 ----
 En Français
 –––––––––––––––––––––––––––––––––––
@@ -151,6 +160,16 @@ function test_filter_jmltsc($output){
 	 return '<div class="extra_extra_markup">' . $output . '</div>';
 }
 `
+
+= Je veux écrire un shortcode dans un widget text  mais pas l'exécuter =
+
+Par défaut le plugin force l'exécution des shortcodes dans les widgets textes.
+Dans ce cas très très particulier d'afficherun shortcode dans un widget texte sans l'exécuter il y a un tricks efficace: mettre le shortcode entre double [] comme ça :
+`
+[[monshorcode]]
+`
+
+<a href="http://www.geekpress.fr/wordpress/astuce/execution-shortcode-article-1864/">Source</a>
 
 == Screenshots ==
 1. front-end result with default styles
