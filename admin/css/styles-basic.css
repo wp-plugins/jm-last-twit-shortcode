@@ -1,0 +1,57 @@
+/* Twitter Flat UI */
+
+/*
+This plugin is a free plugin that help developers and users to enjoy Twitter API
+This UI is not available for commercial use, especially rosettaicons font.
+*/
+@font-face {
+    font-family: 'rosettaicons';
+    font-style: normal;
+    font-weight: normal;
+    src: url('fonts/rosetta-icons-Regular.eot');
+    src: url('fonts/rosetta-icons-Regular.eot?#iefix') format('eot'),
+    url('fonts/rosetta-icons-Regular.woff') format('woff'),
+    url('fonts/rosetta-icons-Regular.ttf') format('truetype');
+}
+
+.Icon{
+    background:transparent;
+    float:right;
+    display:inline-block;
+    font-style:normal;
+    vertical-align:baseline;
+    margin-right: .3em;
+    text-decoration: none!important;
+}
+
+.Icon:before{ 
+    margin-right:.4em; 
+    font-family:"rosettaicons";
+    font-weight:normal;
+    font-style:normal;
+    text-align:center;
+    vertical-align: text-bottom;
+    -webkit-font-smoothing:antialiased;
+}
+.Icon--smallest{font-size:12px;line-height:12px}.Icon--small{font-size:16px;line-height:15px}.Icon--medium{font-size:18px;line-height:18px}.Icon--large{font-size:21px;line-height:1}.Icon--add:before{content:"\f183"}.Icon--arrowUp:before{content:"\f188"}.Icon--bird:before{content:"\f179"}.Icon--camera:before{content:"\f027"}.Icon--cameraPlus:before{content:"\f111"}.Icon--caretDown:before{content:"\f181"}.Icon--caretLeft:before{content:"\f172"}.Icon--caretRight:before{content:"\f173"}.Icon--caretUp:before{content:"\f181";-webkit-transform:scaleY(-1);-ms-transform:scaleY(-1);transform:scaleY(-1);-ms-filter:FlipV}.Icon--cvv:before{content:"\f402"}.Icon--check:before{content:"\f170"}.Icon--clock:before{content:"\f177"}.Icon--close:before{content:"\f045"}.Icon--cog:before{content:"\f059"}.Icon--cogWithCaret:before{content:"\f124"}.Icon--collapseTweets:before{content:"\f051"}.Icon--collections:before{content:"\f008"}.Icon--connect:before{content:"\f050"}.Icon--conversation:before{content:"\f157"}.Icon--creditCard:before{content:"\f401"}.Icon--delete:before{content:"\f154"}.Icon--dm:before{content:"\f054"}.Icon--dmCompose:before{content:"\f035"}.Icon--discover:before{content:"\f052"}.Icon--dots:before{content:"\f150"}.Icon--download:before{content:"\f185"}.Icon--editPencil:before{content:"\f112"}.Icon--envelope:before{content:"\f187"}.Icon--fail:before{content:"\f000"}.Icon--favorite:before{content:"\f147"}.Icon--favorited:before{content:"\f001"}.Icon--filter:before{content:"\f138"}.Icon--follow:before{content:"\f175"}.Icon--follower:before{content:"\f002"}.Icon--following:before{content:"\f176"}.Icon--geo:before{content:"\f031"}.Icon--geoBadge:before{content:"\f010"}.Icon--grid:before{content:"\f046"}.Icon--home:before{content:"\f053"}.Icon--lifeline:before{content:"\f026"}.Icon--lifelineBadge:before{content:"\f000"}.Icon--list:before{content:"\f094"}.Icon--logo:before{content:"\f179"}.Icon--markAllRead:before{content:"\f036"}.Icon--me:before{content:"\f056"}.Icon--media:before{content:"\f159"}.Icon--mediaplay:before{content:"\f040"}.Icon--message:before{content:"\f054"}.Icon--muted:before{content:"\f101"}.Icon--notifications:before{content:"\f055"}.Icon--newsBadge:before{content:"\f009"}.Icon--person:before{content:"\f056"}.Icon--photo:before{content:"\f158"}.Icon--pinned:before{content:"\f003"}.Icon--political:before{content:"\f004"}.Icon--promoted:before{content:"\f004"}.Icon--protected:before{content:"\f096"}.Icon--refresh:before{content:"\f189"}.Icon--reply:before{content:"\f151"}.Icon--retweet:before{content:"\f152"}.Icon--retweeted:before{content:"\f006"}.Icon--search:before{content:"\f058"}.Icon--share:before{content:"\f185"}.Icon--summary:before{content:"\f156"}.Icon--top:before{content:"\f007"}.Icon--translator:before{content:"\f089"}.Icon--truck:before{content:"\f400"}.Icon--tweet:before{content:"\f029"}.Icon--unfollow:before{content:"\f097"}.Icon--unmuted:before{content:"\f101"}.Icon--url:before{content:"\f098"}.Icon--verified:before{content:"\f099"}.Icon--fail{color:red}.Icon--favorited{color:#ffac33}.Icon--follower{color:#55acee}.Icon--lifeline,.Icon--lifelineBadge{color:#e95f28}.Icon--mediaplay{color:#fff}.Icon--muted{color:#dd2e44}.Icon--political{color:#9266cc}.Icon--promoted{color:#ffcc4d}.Icon--protected{color:#8899a6}.Icon--retweeted{color:#77b255}.Icon--top{color:#55acee}.Icon--translator{color:#88c9f9}.Icon--unmuted{color:#ccd6dd}.Icon--verified{color:#88c9f9}
+/* /Twitter Flat UI */
+
+ul.ttm-container{
+    margin: 0 auto 0 2em;
+    width: 500px;
+    float:left;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 1em;
+}
+
+.ttm-user-timeline.text{
+    display:block;
+    margin:.8em auto;
+}
+
+.ttm-user-timeline.twittar{
+    float:left;
+    margin: 0;
+    margin-right: 1em;
+}
