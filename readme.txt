@@ -135,6 +135,12 @@ function test_filter_jmltsc($output){
 
 == Changelog ==
 
+= 4.2 =
+* 23 Nov 2014
+* A lot of bugfixes (admin / main)
+* MVC 
+* use now classes 
+
 = 4.0 =
 * 18 July 2014
 * Use its own class to get Twitter object
@@ -152,7 +158,6 @@ function _use_twitter_ui_for_tweets(){
 
 * You'll get layout and icons for intents (reply, favorite, retweets)
 		
-
 = 1.1.4 =
 * 25 jan 2013
 * Adds transient (thanks for the comment Juliobox)

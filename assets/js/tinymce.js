@@ -76,12 +76,6 @@
 								{text: editor.getLang('jm_ltsc_tinymce_plugin.no_input'), value: 'false'},						
 								]
 						},
-						{
-							type: 'textbox',
-							name: 'sizeValue',
-							label: editor.getLang('jm_ltsc_tinymce_plugin.size_input'),
-							value: '36'
-						},
 						{	
 							type: 'listbox',
 							name: 'displayMediaValue',
@@ -94,7 +88,7 @@
 
 					],
 					onsubmit: function( e ) {
-						editor.insertContent( '[jmlt username="' + e.data.userValue + '" count="' + e.data.countValue + '" cache="' + e.data.cacheValue + '" include_rts="' + e.data.incValue + '" exclude_replies="' + e.data.excValue + '" size="' + e.data.sizeValue + '" display_media="' + e.data.displayMediaValue + '"]');
+						editor.insertContent( '[jmlt username="' + e.data.userValue + '" count="' + e.data.countValue + '" cache="' + e.data.cacheValue + '" include_rts="' + e.data.incValue + '" exclude_replies="' + e.data.excValue + '" display_media="' + e.data.displayMediaValue + '"]');
 					}
 				});
 			}

@@ -10,16 +10,23 @@ if (!class_exists('TokenToMe'))
 		public $params = array();
 		public $cache;
 		public $display_media;
-		public $textdomain = 'jm-ltsc';
+		public $textdomain = JM_LTSC_SLUG_NAME;
 
-		public function __construct($Consumer_key = false, $Consumer_secret = false, $Request = 'users/show', $Params = array(), $Cache = 900, $Display_media = false)
+		public function __construct(
+			$Consumer_key = false, 
+			$Consumer_secret = false, 
+			$Request = 'users/show', 
+			$Params = array(), 
+			$Cache = 900, 
+			$Display_media = false
+		)
 			{
-			$this->consumer_key = $Consumer_key;
-			$this->consumer_secret = $Consumer_secret;
+			$this->consumer_key = (string) $Consumer_key;
+			$this->consumer_secret = (string) $Consumer_secret;
 			$this->request = (string) $Request;
-			$this->params = $Params;
-			$this->cache = $Cache;
-			$this->display_media = $Display_media;
+			$this->params = (array) $Params;
+			$this->cache = (int) $Cache;
+			$this->display_media =  (bool) $Display_media;
 
 			if (   !$Consumer_key 
 				|| !$Consumer_secret 
@@ -116,32 +123,29 @@ if (!class_exists('TokenToMe'))
 		* Get object from Twitter API 1.1 with the $access_token
 		* returns $obj from Twitter
 		*/
-		protected function get_obj()
+		 protected function get_obj()
 			{
 			$this->get_access_token();
 			$access_token = get_option( md5($this->consumer_key.$this->consumer_secret ).'_twitter_access_token');
 
 			$args = array(
 				'httpversion' => '1.1',
-				'timeout'	=> 120,
+				'timeout'	=> 90,
 				'headers' => array(
 					'Authorization' => "Bearer {$access_token}"
 				)
-			);
-
-			$defaults = array(
-				'count' => 1
-			);
+			); 
 
 			$q = "https://api.twitter.com/1.1/{$this->request}.json";
-			$sets = wp_parse_args( $this->params, $defaults );
+			$sets = wp_parse_args( $this->params, array() );
 			$query = add_query_arg( $sets, $q);
 
 			$call = wp_remote_get($query, $args);
 
 			if( !is_wp_error($call) 
-			  && isset( $call['response']['code'] )
-			  && 200 == $call['response']['code'] )
+     			&& 'OK' == wp_remote_retrieve_response_message( $call )
+                && 200 == wp_remote_retrieve_response_code( $call )
+			)
 				{
 				$obj = json_decode(wp_remote_retrieve_body($call));
 				}
@@ -156,19 +160,18 @@ if (!class_exists('TokenToMe'))
 
 
 		/*
-		* Get infos but make sure there's some cache
-		* returns (object) $infos from Twitter
-		*/
-		public function get_infos()
+		* Allows you to do what you want with display
+		* returns $display
+		*/	
+		public function display_infos()
 			{
 
-			$set_cache = isset($this->params) ? implode(',',$this->params) . $this->request : $this->request;
-
+			$set_cache = isset($this->params) ? implode(',', $this->params) . $this->request : $this->request;
 			$cached = get_site_transient(md5($set_cache));
 
 			if( false === $cached ) 
 				{
-				$cached = $this->get_obj();
+				$cached = apply_filters( 'the_twitter_display', $this->get_infos() );
 				set_site_transient(md5($set_cache), $cached, $this->cache);//900 by default because Twitter says every 15 minutes in its doc
 				}
 
@@ -232,12 +235,12 @@ if (!class_exists('TokenToMe'))
 
 
 		/*
-		* Allows you to do what you want with display
-		* returns $display
-		*/		
-		public function display_infos()
+		* Get infos but make sure there's some cache
+		* returns (object) $infos from Twitter
+		*/	
+		protected function get_infos()
 			{
-			$data = $this->get_infos();
+			$data = $this->get_obj();
 			$request = $this->request;
 			$i = 1;
 
@@ -248,7 +251,7 @@ if (!class_exists('TokenToMe'))
 					{
 
 					case 'users/show':
-						$display  = '<img src="'.$data->profile_image_url.'" width="36" height="36" alt="@.'.$data->screen_name.'" />';
+						$display  = '<img src="'.$data->profile_image_url.'" width="48" height="48" alt="@.'.$data->screen_name.'" />';
 						$display .= '<ul class="ttm-container">';
 						$display .= '<li><span class="ttm-users-show label">'.__('name', $this->textdomain).'</span>'.' '.'<span class="ttm-users-show user-name"><a href="https://twitter.com/'.$data->screen_name.'">'.$data->name.'</a></span></li>';
 						$display .= '<li><span class="ttm-users-show label">'.__('screen name', $this->textdomain).'</span>'.' '.'<span class="ttm-users-show screen-name"><a href="https://twitter.com/'.$data->screen_name.'">'.$data->screen_name.'</a></span></li>';
@@ -268,7 +271,7 @@ if (!class_exists('TokenToMe'))
 						while( $i <= $count ) // the tricky part here, you have to give the right offset
 							{
 							$display .= '<li class="ttm-users-lookup">';
-							$display .= '<img src="'. $data[$i - 1]->profile_image_url.'" width="36" height="36" alt="@'.$data[$i - 1]->screen_name.'" />';
+							$display .= '<img src="'. $data[$i - 1]->profile_image_url.'" width="48" height="48" alt="@'.$data[$i - 1]->screen_name.'" />';
 							$display .= '<ul>';
 							$display .= '<li><span class="ttm-users-lookup label">'.__('name', $this->textdomain).'</span>'.' '.'<span class="ttm-users-show user-name"><a href="https://twitter.com/'.$data[$i - 1]->screen_name.'">'. $data[$i - 1]->name.'</a></span></li>';
 							$display .= '<li><span class="ttm-users-lookup label">'.__('screen name', $this->textdomain).'</span>'.' '.'<span class="ttm-users-show screen-name"><a href="https://twitter.com/'.$data[$i - 1]->screen_name.'">'. $data[$i - 1]->screen_name.'</a></span></li>';
@@ -300,7 +303,7 @@ if (!class_exists('TokenToMe'))
 								$class = 'ttm-user-timeline';
 							}	
 
-						while( $i <= $count ) 
+							for($i = 1; $i <= $count; $i++)  
 							{
 							if ( isset( $data[$i - 1] ) ) 
 								{
@@ -311,12 +314,13 @@ if (!class_exists('TokenToMe'))
 								$date = $data[$i - 1]->created_at;
 								$date_format = 'j/m/y - '.get_option('time_format');
 								$profile_image_url = $data[$i - 1]->user->profile_image_url;
-								$pic_twitter = '';
-
-								if( $this->display_media && property_exists($data[$i - 1]->entities, 'media') ) {
+		
+								if( $this->display_media == true && property_exists($data[$i - 1]->entities, 'media') ) {
 									foreach ($data[$i - 1]->entities->media as $pic) {
 										$pic_twitter = '<img width="100%" src="'.$pic->media_url_https.'" alt="" />';
-									}
+									} 
+								} else {
+									$pic_twitter = '';
 								}
 								
 								$display .= '<li class="'.$class.' tweets">';
@@ -330,8 +334,6 @@ if (!class_exists('TokenToMe'))
 								$display .= '<span class="'.$class.' retweet"><a class="Icon Icon--retweet" href="https://twitter.com/intent/retweet?tweet_id='.$id_str.'">'. __( 'Retweet', $this->textdomain ) .'</a> </span>'."\t";
 								$display .= '<span class="'.$class.' favorite"><a class="Icon Icon--favorite" href="https://twitter.com/intent/favorite?tweet_id='.$id_str.'">'. __( 'Favorite', $this->textdomain ) .'</a></span>'."\t";
 								$display .= '</li>';
-
-								$i++;
 								}
 							}
 						$display .= '</ul>';
@@ -348,7 +350,7 @@ if (!class_exists('TokenToMe'))
 				$display = $data;
 				}
 
-			return apply_filters('the_twitter_display', $display);
+			return apply_filters('the_twitter_infos', $display);
 
 			}
 
@@ -359,7 +361,7 @@ if (!class_exists('TokenToMe'))
 		*/
 		protected function delete_cache()
 			{
-				$set_cache = isset($this->params) ? implode(',',$this->params) . $this->request : $this->request;
+				$set_cache = isset($this->params) ? implode(',', $this->params) . $this->request : $this->request;
 				delete_site_transient(md5($set_cache));
 			}
 
