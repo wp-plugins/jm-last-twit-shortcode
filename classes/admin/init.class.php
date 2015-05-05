@@ -1,61 +1,67 @@
 <?php
-defined( 'ABSPATH' ) 
-	or	die( 'No !' );
+namespace TokenToMe\wp_shortcodes;
 
-	class JM_LTSC_Init {
+defined( 'ABSPATH' )
+or die( 'No !' );
 
-
-    	protected $JM_LTSC_Init;
-        protected static $instance;
+class Init {
 
 
-        public static function GetInstance(){
-          
-            if (!isset(self::$instance))
-            {
-              self::$instance = new self();
-            }
+	protected $JM_LTSC_Init;
+	protected static $instance;
 
-            return self::$instance;
-        }
+	private function __construct(){}
 
-		public static function init(){
+	public static function _get_instance() {
 
-			// Add a "Settings" link in the plugins list
-			add_filter( 'plugin_action_links_'.plugin_basename(__FILE__), array(__CLASS__, 'settings_action_links'), 10, 2 );
-
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		public static function settings_action_links( $links, $file ) {
-			$settings_link = '<a href="' . admin_url( 'admin.php?page=jm_ltsc_options' ) . '">' . __("Settings") . '</a>';
-			array_unshift( $links, $settings_link );
-			return $links;
-		}
+		return self::$instance;
+	}
 
-		public static function on_activation() {
-			$opts = get_option( 'jm_ltsc' );
-			if ( !is_array($opts) )
-			update_option( 'jm_ltsc', JM_LTSC_Init::get_default_options() );
-		}
+	public static function init() {
 
-		public static function activate() {
-			if( !is_multisite() ) {
-				
+		// Add a "Settings" link in the plugins list
+		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array(
+			__CLASS__,
+			'settings_action_links',
+		), 10, 2 );
+
+	}
+
+	public static function settings_action_links( $links, $file ) {
+		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=jm_ltsc_options' ) ) . '">' . __( "Settings" ) . '</a>';
+		array_unshift( $links, $settings_link );
+
+		return $links;
+	}
+
+	public static function on_activation() {
+		$opts = get_option( 'jm_ltsc' );
+		if ( ! is_array( $opts ) ) {
+			update_option( 'jm_ltsc', Options::get_default_options() );
+		}
+	}
+
+	public static function activate() {
+		if ( ! is_multisite() ) {
+
+			self::on_activation();
+
+		} else {
+			// For regular options.
+			global $wpdb;
+			$blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}" );
+			foreach ( $blog_ids as $blog_id ) {
+				switch_to_blog( $blog_id );
 				self::on_activation();
-			
-			} else {
-			    // For regular options.
-				global $wpdb;
-				$blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}" );
-				foreach ( $blog_ids as $blog_id ) 
-				{
-					switch_to_blog( $blog_id );
-					self::on_activation();
-					restore_current_blog();
-				}
-			
+				restore_current_blog();
 			}
-			
+
 		}
 
 	}
+
+}

@@ -1,2 +1,2 @@
 //quicktags for plugin JM Last Twit Shortcode
-QTags.addButton( 'eg_jmltsc_all', 'jmlt all', '[jmlt username="twitterapi" count="5" cache="1800" include_rts="false" exclude_replies="true" size="36" display_media="false"]', '', 'q', 'Last Twit Shortcode all parameters', 130 );
+QTags.addButton('eg_jmltsc_all', 'jmlt all', '[jmlt username="twitterapi" count="5" cache="1800" include_rts="false" exclude_replies="true" size="36" display_media="false"]', '', 'q', 'Last Twit Shortcode all parameters', 130);
